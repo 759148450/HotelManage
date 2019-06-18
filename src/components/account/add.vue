@@ -1,0 +1,121 @@
+<!--zyp 2019-6-18  添加附加消费信息-->
+<template>
+  <div style="margin-top: 15px;" >
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="客房编号" prop="roomId">
+            <el-input v-model="ruleForm.roomId" ></el-input>
+        </el-form-item>
+        <el-form-item label="商品名" prop="goodName">
+          <el-input v-model="ruleForm.goodName"  disabled></el-input>
+        </el-form-item>
+        <el-input v-model="ruleForm.goodId"  type="hidden"></el-input>
+        <el-form-item label="数量" prop="num">
+          <el-input v-model.number="ruleForm.num" :min="0"  size="medium" type="number"  @keyup.native="getConsumePrice"></el-input>
+        </el-form-item>
+        <el-form-item label="单价" prop="price">
+          <el-input v-model="ruleForm.price"  disabled></el-input>
+        </el-form-item>
+        <el-form-item label="消费金额" prop="consumePrice">
+          <el-input v-model="ruleForm.consumePrice" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="折扣率" prop="discount">
+          <el-input v-model="ruleForm.discount" :min="1" :max="10" size="medium"  @keyup.native="getDcPrice"></el-input>
+        </el-form-item>
+        <el-form-item label="折后金额" prop="dcPrice">
+          <el-input v-model="ruleForm.dcPrice" disabled></el-input>
+        </el-form-item>
+        <!--<el-form-item label="合计" prop="totalPrice">-->
+          <!--<el-input v-model="ruleForm.totalPrice"></el-input>-->
+        <!--</el-form-item>-->
+        <el-form-item label="操作员" prop="user">
+          <el-input v-model="ruleForm.user"></el-input>
+        </el-form-item>
+        <el-form-item label="消费时间" prop="consumeTime">
+          <el-date-picker
+            v-model="ruleForm.consumeTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm"
+            placeholder="选择时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="备注" prop="remarks">
+          <el-input type="textarea" v-model="ruleForm.remarks"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">附加消费入账</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+        </el-form>
+  </div>
+</template>
+
+<script>
+  export default {
+    inject:['reload'],
+    props:["goodId","goodsName","goodsPrice"],//获取父组件的字段
+    data () {
+      name:"consumeedit"
+      return {
+        ruleForm:{
+          id:"",
+          goodId:this.goodId,
+          roomId:"",
+          goodTypeid:"",
+          goodName:this.goodsName,
+          num:"",
+          price:this.goodsPrice,
+          consumePrice:"",
+          discount:"",
+          dcPrice:"",
+          totalPrice:"",
+          user:"",
+          consumeTime:"",
+          remarks:""
+        },
+        rules: {
+          roomId: [
+                { required: true, message: '请输入客房编号', trigger: 'blur' },
+            ],
+          num: [
+            { required: true,type: 'number',message: '请填写数量,只能输入数字', trigger: 'blur' },
+          ]
+        },
+        buttonText:"创建"
+
+      }
+    },
+
+    components: {
+
+    },
+    methods:{
+      //  实现实时计算
+      getConsumePrice(){
+         //   实现计算
+        let consumePrice = this.ruleForm.num * this.ruleForm.price;
+        console.log(consumePrice);
+        this.ruleForm.consumePrice = consumePrice;
+      },
+      getDcPrice(){
+        let dcPrice =(this.ruleForm.discount/100) * this.ruleForm.consumePrice;
+        this.ruleForm.dcPrice = dcPrice;
+      },
+      resetForm(formName){
+        this.$refs[formName].resetFields();
+      },
+      submitForm(formName){
+        let url="";
+        url="consume/add";
+        this.post(formName,url,this.ruleForm);
+        //跳转页面
+        this.$router.push({path:'consume'});
+      }
+
+    }
+  }
+</script>
+
+<style scoped>
+
+
+</style>

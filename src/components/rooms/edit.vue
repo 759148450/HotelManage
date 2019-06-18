@@ -19,16 +19,16 @@
         </el-select>
       </el-form-item>
       <el-form-item label="标准价格" prop="normalPrice">
-        <el-input  v-model.number="ruleForm.normalPrice" v-model="normalPrice" size="medium" type="number"></el-input>
+        <el-input  v-model.number="ruleForm.normalPrice" :min="0"  size="medium" type="number" @keyup.native="getNormalPrice"></el-input>
       </el-form-item>
       <el-form-item label="折后价" prop="discountPrice">
-        <el-input   v-model.number="ruleForm.discountPrice" v-model="discountPrice" size="medium" type="number"></el-input>
+        <el-input   v-model.number="ruleForm.discountPrice" :min="0"  size="medium" type="number"></el-input>
       </el-form-item>
       <el-form-item label="普通会员价" prop="gvipPrice">
-        <el-input   v-model.number="ruleForm.gvipPrice" size="medium" type="number"></el-input>
+        <el-input   v-model.number="ruleForm.gvipPrice" :min="0"  size="medium" type="number"></el-input>
       </el-form-item>
       <el-form-item label="Vip会员价" prop="svipPrice">
-        <el-input   v-model.number="ruleForm.svipPrice" size="medium" type="number"></el-input>
+        <el-input   v-model.number="ruleForm.svipPrice" :min="0"  size="medium" type="number"></el-input>
       </el-form-item>
       <el-form-item label="备注" prop="remarks">
         <el-input type="textarea"  v-model="ruleForm.remarks"></el-input>
@@ -74,15 +74,15 @@
           normalPrice: [
             { required: true,type: 'number',message: '请填写标准价格,只能输入数字', trigger: 'blur' },
           ],
-//            discountPrice: [
-//              { required: true,type: 'number',message: '请填写折后价,只能输入数字', trigger: 'blur' },
-//            ],
-//            gvipPrice: [
-//              { required: true,type: 'number', message: '请填写普通会员价,只能输入数字', trigger: 'blur' },
-//            ],
-//            svipPrice: [
-//              { required: true,type: 'number', message: '请填写VIP会员价,只能输入数字', trigger: 'blur' },
-//            ],
+          discountPrice: [
+            { required: true,type: 'number',message: '请填写折后价,只能输入数字', trigger: 'blur' },
+          ],
+          gvipPrice: [
+            { required: true,type: 'number', message: '请填写普通会员价,只能输入数字', trigger: 'blur' },
+          ],
+          svipPrice: [
+            { required: true,type: 'number', message: '请填写VIP会员价,只能输入数字', trigger: 'blur' },
+          ],
         },
         buttonText:"创建"
 
@@ -106,17 +106,15 @@
     components: {
 
     },
-//   双向绑定
-    watch : {
-      normalPrice:function(val) {
-        this.ruleForm.normalPrice = val;
-        this.ruleForm.discountPrice = this.ruleForm.normalPrice
-      },
-      discountPrice : function (val) {
-        this.ruleForm.discountPrice = val;
-      }
-    },
     methods:{
+      //实时价格数据监控
+      getNormalPrice(){
+        let normalPrice = this.ruleForm.normalPrice;
+        console.log(normalPrice);
+        this.ruleForm.discountPrice = normalPrice;
+        this.ruleForm.gvipPrice = normalPrice;
+        this.ruleForm.svipPrice = normalPrice;
+      },
       resetForm(formName){
         this.$refs[formName].resetFields();
       },
@@ -131,12 +129,6 @@
           this.post(formName,url,this.ruleForm);
         }
       },
-//        price(){
-//          let str=document.getElementById("normalPrice").value;
-//          document.getElementById("discountPrice").value = str;
-//          document.getElementById("gvipPrice").value = str;
-//          document.getElementById("svipPrice").value = str;
-//        }
 
     }
   }

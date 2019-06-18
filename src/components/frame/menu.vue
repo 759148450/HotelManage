@@ -60,7 +60,8 @@
                 <template slot="title"><p style="color:#ffffff;font-size: 14px; ">
                   <img src="../../assets/consume.png" style="width: 19px;height: 19px"/>&nbsp;&nbsp;消费管理</p>
                 </template>
-                <el-menu-item index="附加消费入账">附加消费入账</el-menu-item>
+                <el-menu-item index="附加消费入账" route="account">附加消费入账</el-menu-item>
+                <el-menu-item index="消费信息" route="consume">消费信息</el-menu-item>
               </el-submenu>
 
             </el-menu>
