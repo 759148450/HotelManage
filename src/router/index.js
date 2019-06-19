@@ -14,6 +14,8 @@ import ReservedTransfer from '@/components/reservedTransfer/list'
 import Account from '@/components/account/list'
 import Consume from '@/components/consume/list'
 import RoomsList from '@/components/orderManage/rooms_list'
+import Checkout from '@/components/checkout/list'
+import LivedList from '@/components/checkout/livedlist'
 
 Vue.use(Router)
 
@@ -89,6 +91,16 @@ export default new Router({
           path:'/roomslist',
           name:'roomslist',
           component:RoomsList
+        },
+        {
+          path:'/checkout',
+          name:'checkout',
+          component:Checkout
+        },
+        {
+          path:'/livedList',
+          name:'livedList',
+          component:LivedList
         }
       ]
     }

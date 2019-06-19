@@ -46,7 +46,8 @@
                 <el-menu-item index="预订转入住" route="reservedTransfer">预订转入住</el-menu-item>
                 <el-menu-item index="入住登记管理" route="orderlist">入住登记管理</el-menu-item>
                 <el-menu-item index="换房管理">换房管理</el-menu-item>
-                <el-menu-item index="结账管理">结账管理</el-menu-item>
+                <el-menu-item index="结账管理" route="checkout">结账管理</el-menu-item>
+                <el-menu-item index="结账管理" route="livedList">已结账信息</el-menu-item>
               </el-submenu>
               <el-submenu index="报表管理" style="background-color: #42485b">
                 <template slot="title"><p style="color:#ffffff;font-size: 14px; ">
