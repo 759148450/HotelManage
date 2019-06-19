@@ -171,12 +171,10 @@
             this.get("consume/list",(data)=>{
                 this.tableData=data;
             },this.queryParams);
-          this.get("consume/getAllGoods",(data)=>{
-            this.goodss=data;
+          this.get("consume/getAllGoodsAndRooms",(data)=>{
+            this.goodss=data.goodss;
+            this.goodsTypes=data.goodsTypes;
           });
-//          this.get("consume/getAllGoodsType",(data)=>{
-//            this.goodsTypes=data;
-//          });
         },
         changePageNo(i){
             this.queryParams.pageNo=i;

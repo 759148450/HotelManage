@@ -84,8 +84,8 @@
       }
     },
     created(){
-        this.get("consume/getAllGoods",(data)=>{
-          this.goodss=data;
+        this.get("consume/getAllGoodsAndRooms",(data)=>{
+          this.goodss=data.goodss;
         });
         if(this.id){
              this.get("consume/getOne",(data)=>{

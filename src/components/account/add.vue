@@ -3,7 +3,14 @@
   <div style="margin-top: 15px;" >
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="客房编号" prop="roomId">
-            <el-input v-model="ruleForm.roomId" ></el-input>
+          <el-select v-model="ruleForm.roomId" filterable placeholder="请选择客房编号" >
+            <el-option
+              v-for="item in rooms"
+              :key="item.id"
+              :label="item.id"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="商品名" prop="goodName">
           <el-input v-model="ruleForm.goodName"  disabled></el-input>
@@ -56,6 +63,7 @@
     data () {
       name:"consumeedit"
       return {
+        rooms:[],
         ruleForm:{
           id:"",
           goodId:this.goodId,
@@ -85,12 +93,20 @@
       }
     },
 
+    created(){
+      /*获取所有的房间编号*/
+      this.get("orderManage/getAllRoomsAndLeaguers",(data)=>{
+        this.rooms=data.rooms;
+      });
+    },
+
     components: {
 
     },
     methods:{
       //  实现实时计算
-      getConsumePrice(){
+      getConsumePrice(value){
+        console.log(value);
          //   实现计算
         let consumePrice = this.ruleForm.num * this.ruleForm.price;
         console.log(consumePrice);
