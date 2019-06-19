@@ -1,6 +1,9 @@
 <template>
   <div style="margin-top: 15px;">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="房间号" prop="roomId">
+        <el-input  v-model="ruleForm.roomId" disabled></el-input>
+      </el-form-item>
       <el-form-item label="客房类型" prop="roomTypeid">
         <el-select v-model="ruleForm.roomTypeid" placeholder="客房类型" disabled>
           <el-option v-for="entry in guestTypes" :label="entry.typeName" :value="entry.id" :key="entry.id"></el-option>
@@ -44,6 +47,7 @@
         guestTypes:[],
         ruleForm:{
           id:"",
+          roomId:"",
           roomTypeid:"",
           status:"",
           floorId:"",
@@ -52,6 +56,8 @@
           gvipPrice:"",
           svipPrice:null,
           remarks:""
+        },
+        rules: {
         },
 
       }

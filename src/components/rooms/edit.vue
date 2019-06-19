@@ -1,6 +1,9 @@
 <template>
   <div style="margin-top: 15px;">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="房间号" prop="roomId">
+        <el-input  v-model="ruleForm.roomId" ></el-input>
+      </el-form-item>
       <el-form-item label="客房类型" prop="roomTypeid">
         <el-select v-model="ruleForm.roomTypeid" filterable placeholder="客房类型">
           <el-option v-for="entry in guestTypes" :label="entry.typeName" :value="entry.id" :key="entry.id"></el-option>
@@ -52,6 +55,7 @@
         guestTypes:[],
         ruleForm:{
           id:"",
+          roomId:"",
           roomTypeid:"",
           status:"",
           floorId:"",
@@ -62,6 +66,9 @@
           remarks:""
         },
         rules: {
+          roomId: [
+            { required: true, message: '请输入房间号', trigger: 'blur' },
+          ],
           roomTypeid: [
             { required: true, message: '请选择客房类型', trigger: 'blur' },
           ],
