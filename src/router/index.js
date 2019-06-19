@@ -10,6 +10,7 @@ import GoodsType from '@/components/goodsType/list'
 import Rooms from '@/components/rooms/list'
 import Orderlist from '@/components/orderlist/list'
 import OrderManage from '@/components/orderManage/list'
+import ReservedTransfer from '@/components/reservedTransfer/list'
 import Account from '@/components/account/list'
 import Consume from '@/components/consume/list'
 
@@ -67,6 +68,11 @@ export default new Router({
           path:'/orderlist',
           name:'orderlist',
           component:Orderlist
+        },
+        {
+          path:'/reservedTransfer',
+          name:'reservedTransfer',
+          component:ReservedTransfer
         },
         {
           path:'/account',
