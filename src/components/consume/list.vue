@@ -4,7 +4,7 @@
           <el-row>
               <el-col :span="22">
                 <el-input placeholder="请输入客房编号" v-model="search.roomId" class="input-with-select" style="width: 350px">
-                  <el-select v-model="search.goodId" slot="prepend" placeholder="请选择商品名" style="width: 140px" >
+                  <el-select v-model="search.goodId" slot="prepend" filterable placeholder="请选择商品名" style="width: 140px" >
                     <el-option
                       v-for="item in goodss"
                       :key="item.id"

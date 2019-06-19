@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="22">
           <el-input placeholder="请输入商品名称" v-model="search.goodsName" class="input-with-select" style="width: 400px">
-            <el-select v-model="search.goodsTypeid" slot="prepend" placeholder="请选择商品类型" style="width: 170px" >
+            <el-select v-model="search.goodsTypeid" slot="prepend" filterable placeholder="请选择商品类型" style="width: 170px" >
               <el-option
                 v-for="item in goodsTypes"
                 :key="item.id"

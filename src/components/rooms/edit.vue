@@ -2,19 +2,19 @@
   <div style="margin-top: 15px;">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="客房类型" prop="roomTypeid">
-        <el-select v-model="ruleForm.roomTypeid" placeholder="客房类型">
+        <el-select v-model="ruleForm.roomTypeid" filterable placeholder="客房类型">
           <el-option v-for="entry in guestTypes" :label="entry.typeName" :value="entry.id" :key="entry.id"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="客房状态" prop="status">
-        <el-select v-model="ruleForm.status" placeholder="请选择状态">
+        <el-select v-model="ruleForm.status" filterable placeholder="请选择状态">
           <el-option label="空房" :value="0"></el-option>
           <el-option label="已预订" :value="1"></el-option>
           <el-option label="入住" :value="2"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="楼层" prop="floorId">
-        <el-select v-model="ruleForm.floorId" placeholder="请选择楼层信息">
+        <el-select v-model="ruleForm.floorId" filterable placeholder="请选择楼层信息">
           <el-option v-for="entry in floors" :label="entry.floorName" :value="entry.id" :key="entry.id"></el-option>
         </el-select>
       </el-form-item>
