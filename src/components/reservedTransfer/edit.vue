@@ -7,14 +7,14 @@
       <el-form-item label="入住房间编号" prop="originalRoomId">
         <el-input  v-model="ruleForm.originalRoomId" disabled></el-input>
       </el-form-item>
-      <el-form-item label="房间类型" prop="rooms.guestType.typeName">
-        <el-input  v-model="ruleForm.rooms.guestType.typeName" disabled></el-input>
+      <el-form-item label="房间类型" prop="roomsTypeName">
+        <el-input  v-model="ruleForm.roomsTypeName" disabled></el-input>
       </el-form-item>
-      <el-form-item label="标准价" prop="rooms.normalPrice">
-        <el-input  v-model="ruleForm.rooms.normalPrice" disabled></el-input>
+      <el-form-item label="标准价" prop="normalPrice">
+        <el-input  v-model="ruleForm.normalPrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="折后价" prop="rooms.discountPrice">
-        <el-input  v-model="ruleForm.rooms.discountPrice" disabled></el-input>
+      <el-form-item label="折后价" prop="discountPrice">
+        <el-input  v-model="ruleForm.discountPrice" disabled></el-input>
       </el-form-item>
       <el-form-item label="押金" prop="deposit">
         <el-input   v-model.number="ruleForm.deposit" size="medium" type="number" :max="99999999" ></el-input>
@@ -63,9 +63,9 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="会员价" prop="rooms.gvipPrice">
-        <el-input v-model.number="ruleForm.rooms.gvipPrice" size="medium" type="number" :max="9999" ></el-input>
-      </el-form-item>
+      <!--<el-form-item label="会员价" prop="rooms.gvipPrice">-->
+        <!--<el-input v-model.number="ruleForm.rooms.gvipPrice" size="medium" type="number" :max="9999" ></el-input>-->
+      <!--</el-form-item>-->
       <el-form-item label="备注" prop="remarks">
         <el-input  v-model="ruleForm.remarks"></el-input>
       </el-form-item>

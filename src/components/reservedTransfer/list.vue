@@ -8,7 +8,7 @@
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
 
-          <el-select v-model="search.roomTypeId" filterable placeholder="请选择客房类型" style="width: 200px"  @change="findData">
+          <el-select v-model="search.roomTypeid" filterable placeholder="请选择类型信息" style="width: 200px"  @change="findData">
             <el-option
               v-for="item in guestTypes"
               :key="item.id"
@@ -41,15 +41,15 @@
         label="入住房间编号">
       </el-table-column>
       <el-table-column
-        prop="rooms.guestType.typeName"
-        label="房间类型">
+        prop="roomsTypeName"
+        label="客房类型">
       </el-table-column>
       <el-table-column
-        prop="rooms.normalPrice"
-        label="标准价">
+        prop="normalPrice"
+        label="标准价格">
       </el-table-column>
       <el-table-column
-        prop="rooms.discountPrice"
+        prop="discountPrice"
         label="折后价">
       </el-table-column>
       <el-table-column
@@ -76,19 +76,23 @@
         prop="memberId"
         label="会员编号">
       </el-table-column>
-      <el-table-column
-        prop="rooms.gvipPrice"
-        label="会员价">
-      </el-table-column>
+      <!--<el-table-column-->
+        <!--prop="bookStatus"-->
+        <!--label="登记入住"-->
+        <!--:formatter="bookStatusformat">-->
+      <!--</el-table-column>-->
 
-      <el-table-column
-        prop="bookStatus"
-        label="登记入住"
-        :formatter="bookStatusformat">
+      <el-table-column label="登记入住">
+
+        <template slot-scope="scope">
+
+          <el-button id="fff" type="text" formatter="bookStatusformat" prop="bookStatus" size="small">按钮</el-button>
+        </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button @click="edit(scope.row)" type="text" size="small">详细信息</el-button>
+
           <el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>
         </template>
       </el-table-column>
@@ -140,6 +144,7 @@
         deep:true
       }
     },
+
     mounted(){},
     methods:{
       getData(){
@@ -152,14 +157,14 @@
       },
 
       bookStatusformat(row, column, cellValue, index){
-        if(cellValue==0)
-          return "已入住";
-        else if(cellValue==1)
+        if(cellValue==1)
           return "已取消";
         else if(cellValue==2)
-          return "已换房";
-        else if(cellValue==3)
+          return "已入住";
+        else if(cellValue==2)
           return "已退房";
+        else if(cellValue==3)
+          return "已还房";
       },
 
       changePageNo(i){
@@ -169,19 +174,19 @@
         this.queryParams.pageNo=1;
         this.merge(this.search,this.queryParams);
       },
-      add(){
-        this.$layer.iframe({
-          content: {
-            content: EditReservedTransfer, //传递的组件对象
-            parent: this,//当前的vue对象
-            data:{}//props
-          },
-          area:['800px','600px'],
-          title: '添加预定信息',
-          shadeClose: false,
-          shade :true
-        });
-      },
+      // add(){
+      //   this.$layer.iframe({
+      //     content: {
+      //       content: EditReservedTransfer, //传递的组件对象
+      //       parent: this,//当前的vue对象
+      //       data:{}//props
+      //     },
+      //     area:['800px','600px'],
+      //     title: '添加预定信息',
+      //     shadeClose: false,
+      //     shade :true
+      //   });
+      // },
       edit(row){
         this.$layer.iframe({
           content: {
