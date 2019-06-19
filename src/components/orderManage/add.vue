@@ -2,18 +2,10 @@
   <div style="margin-top: 15px;">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="预定房间编号" prop="originalRoomId">
-          <el-input   v-model.number="ruleForm.originalRoomId" size="medium" type="number" :max="99999999" disabled></el-input>
-         <!-- <el-select v-model="ruleForm.originalRoomId" filterable placeholder="请选择预定房间号" style="width: 200px"  >
-            <el-option
-              v-for="item in rooms"
-              :key="item.id"
-              :label="item.id"
-              :value="item.id">
-            </el-option>
-          </el-select>-->
+          <el-input  v-model="ruleForm.originalRoomId" disabled></el-input>
         </el-form-item>
         <el-form-item label="房间类型" prop="roomsTypeName">
-          <el-input  v-model="ruleForm.roomsTypeName"  disabled></el-input>
+          <el-input  v-model="ruleForm.roomsTypeName" disabled></el-input>
         </el-form-item>
         <el-form-item label="标准价" prop="normalPrice">
           <el-input  v-model="ruleForm.normalPrice"  disabled></el-input>
@@ -22,23 +14,22 @@
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
         <el-form-item label="押金" prop="deposit">
-          <el-input   v-model.number="ruleForm.deposit" size="medium" type="number" :max="99999999" disabled ></el-input>
+          <el-input   v-model.number="ruleForm.deposit" size="medium" type="number" :max="99999999" ></el-input>
         </el-form-item>
         <el-form-item label="预定人" prop="residents">
             <el-input  v-model="ruleForm.residents"></el-input>
         </el-form-item>
-        <el-form-item label="证件类型:" prop="credentialsType">
+
+        <el-form-item label="证件类型" prop="credentialsType">
           <el-radio-group v-model="ruleForm.credentialsType">
             <el-radio  label="0">身份证</el-radio>
             <el-radio label="1">护照</el-radio>
           </el-radio-group>
-        </el-form-item>
-<!--        <el-form-item label="证件类型" prop="credentialsType">-->
 <!--          <el-select v-model="ruleForm.credentialsType" placeholder="请选择证件类型">-->
 <!--            <el-option label="身份证" :value="0"></el-option>-->
 <!--            <el-option label="护照" :value="1"></el-option>-->
 <!--          </el-select>-->
-<!--        </el-form-item>-->
+        </el-form-item>
         <el-form-item label="证件号" prop="credentialsNum">
             <el-input  v-model="ruleForm.credentialsNum"></el-input>
         </el-form-item>
@@ -67,18 +58,24 @@
           <el-input   v-model.number="ruleForm.personNum" size="medium" type="number" :max="9999" ></el-input>
         </el-form-item>
         <el-form-item label="会员编号" prop="memberId">
-          <el-input  v-model="ruleForm.remarks"  disabled></el-input>
-<!--          <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px"  >-->
-<!--            <el-option-->
-<!--              v-for="item in leaguers"-->
-<!--              :key="item.id"-->
-<!--              :label="item.id"-->
-<!--              :value="item.id">-->
-<!--            </el-option>-->
-<!--          </el-select>-->
+          <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px"  >
+            <el-option
+              v-for="item in leaguers"
+              :key="item.id"
+              :label="item.id"
+              :value="item.id">
+            </el-option>
+          </el-select>
+          <!--<el-select v-model="ruleForm.memberId" placeholder="请选择会员编号">
+            <el-option v-for="entry in leaguers" :label="entry.id" :value="entry.id" :key="entry.id"></el-option>
+          </el-select>-->
+            <!--<el-input  v-model="ruleForm.memberId"></el-input>-->
         </el-form-item>
+<!--        <el-form-item label="预定状态" prop="bookStatus">-->
+<!--            <el-input  v-model="ruleForm.bookStatus"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="会员价" prop="memberPrice">
-          <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
+            <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
         </el-form-item>
         <el-form-item label="备注" prop="remarks">
             <el-input  v-model="ruleForm.remarks"></el-input>
@@ -94,9 +91,15 @@
 <script>
   export default {
       inject:['reload'],
-      props:["id"],
+      props:["roomsid",
+        "rooms_normalPrice",
+        "rooms_discountPrice",
+        "rooms_gvipPrice",
+        "rooms_svipPrice",
+        "rooms_typeName",
+      ],
     data () {
-        name:"orderManageedit"
+        name:"orderManageadd"
       /*验证手机号*/
       let checkPhone = (rule, value, callback) => {
         const phoneReg = /^1[3|4|5|7|8][0-9]{9}$/
@@ -140,25 +143,24 @@
             return callback(new Error("护照编号不能为空"))
           }
           setTimeout(() => {
-
               if (passportNumReg.test(value)) {
                 callback()
               } else {
                 callback(new Error("护照编号格式不正确"))
               }
-
           }, 100)
         }
 
       };
       return {
-        rooms:[],
+        // rooms:[],
+
         leaguers:[],
           ruleForm:{
             id:"",
-            originalRoomId:"",
-            normalPrice:"",
-            discountPrice:"",
+            originalRoomId:this.roomsid,
+            normalPrice:this.rooms_normalPrice,
+            discountPrice:this.rooms_discountPrice,
             deposit:"",
             residents:"",
             credentialsType:"",
@@ -169,10 +171,15 @@
             personNum:"",
             memberId:"",
             bookStatus:"",
-            memberPrice:"",
-            roomsTypeName:"",
+            memberPrice:this.rooms_gvipPrice,
+            roomsTypeName:this.rooms_typeName,
             remarks:""
           },
+        rooms:{
+          id:"",
+          normalPrice:"",
+          discountPrice:"",
+        },
         /*时间选择 */
         // pickerOptions0: {
         //   disabledDate(time) {
@@ -213,20 +220,23 @@
       }
     },
     created(){
+
         /*获取所有的房间编号*/
-      this.get("orderManage/getAllRoomsAndLeaguers",(data)=>{
-        this.rooms=data.rooms;
-        this.leaguers=data.leaguers;
-      });
-        if(this.id){
-             this.get("orderManage/getOne",(data)=>{
-                this.ruleForm=data;
-                console.log(this.ruleForm);
-            },{id:this.id});
-            this.buttonText="修改"
+        this.get("orderManage/getAllRoomsAndLeaguers", (data) => {
+          // this.rooms=data.rooms;
+          this.leaguers = data.leaguers;
+        });
+        if (this.id) {
+          console.log(this.id);
+          this.get("rooms/getOne", (data) => {
+            this.rooms = data;
+            console.log(this.rooms);
+          }, {id: this.id});
         }
 
+
     },
+
     components: {
 
     },
@@ -235,19 +245,11 @@
              this.$refs[formName].resetFields();
         },
         submitForm(formName){
-            let url="";
-            if(this.id)
-                url="orderManage/update";
-            else
-                url="orderManage/add";
+            let url="orderManage/add";
             this.post(formName,url,this.ruleForm);
         }
-
     }
   }
 </script>
-
 <style scoped>
-
-
 </style>

@@ -31,7 +31,6 @@
         <el-form-item label="最后一次预定时间" prop="timeLastorder">
           <el-input   v-model="ruleForm.timeLastorder" disabled></el-input>
         </el-form-item>
-
         <el-form-item label="备注" prop="remarks">
           <el-input type="textarea" v-model="ruleForm.remarks" disabled></el-input>
         </el-form-item>

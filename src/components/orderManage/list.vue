@@ -2,8 +2,17 @@
   <div>
     <div style="margin-top: 15px;">
       <el-row>
-        <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
+        <el-col :span="2">
+<!--          <el-button type="primary" @click="add">添加</el-button>-->
+        </el-col>
         <el-col :span="22">
+          <el-select v-model="search.bookStatus" filterable placeholder="请选择预定状态" style="width: 200px"  @change="findData">
+            <el-option label="全部" value=""></el-option>
+            <el-option  label="已预定" value="0">已预定</el-option>
+            <el-option  label="已取消" value="1">已取消</el-option>
+            <el-option  label="已入住" value="2">已入住</el-option>
+            <el-option  label="已退房" value="3">已退房</el-option>
+          </el-select>
           <el-input placeholder="请输入预定编号" v-model="search.id" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
@@ -13,20 +22,10 @@
           <el-input placeholder="请输入预定人姓名" v-model="search.residents" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
-<!--          <el-select v-model="search.roomTypeid" filterable placeholder="请选择客房类型" style="width: 200px"  @change="findData">-->
-<!--            <el-option-->
-<!--              v-for="item in guestTypes"-->
-<!--              :key="item.id"-->
-<!--              :label="item.typeName"-->
-<!--              :value="item.id">-->
-<!--            </el-option>-->
-<!--          </el-select>-->
-          <el-select v-model="search.originalRoomId" filterable placeholder="请选择预定状态" style="width: 200px"  @change="findData">
-            <el-option  label="已预定" value="0">已预定</el-option>
-            <el-option  label="已取消" value="1">已取消</el-option>
-            <el-option  label="已入住" value="2">已入住</el-option>
-            <el-option  label="已退房" value="3">已退房</el-option>
-          </el-select>
+          <el-input placeholder="请输入客房类型名称" v-model="search.roomsTypeName" class="input-with-select" style="width: 200px">
+            <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
+          </el-input>
+
         </el-col>
       </el-row>
 
@@ -45,17 +44,17 @@
         label="预定房间编号">
       </el-table-column>
       <el-table-column
-        prop="rooms.guestType.typeName"
+        prop="roomsTypeName"
         label="房间类型">
       </el-table-column>
-      <el-table-column
-        prop="rooms.normalPrice"
-        label="标准价">
-      </el-table-column>
-      <el-table-column
-        prop="rooms.discountPrice"
-        label="折后价">
-      </el-table-column>
+<!--      <el-table-column-->
+<!--        prop="rooms.normalPrice"-->
+<!--        label="标准价">-->
+<!--      </el-table-column>-->
+<!--      <el-table-column-->
+<!--        prop="rooms.discountPrice"-->
+<!--        label="折后价">-->
+<!--      </el-table-column>-->
       <el-table-column
         prop="deposit"
         label="押金">
@@ -99,10 +98,19 @@
 <!--        prop="会员价"-->
 <!--        label="memberId">-->
 <!--      </el-table-column>-->
+
       <el-table-column
         prop="bookStatus"
-        label="预定状态"
-      :formatter="bookStatusformat">
+        label="预定状态">
+        <template slot-scope="scope">
+          <span v-if="scope.row.bookStatus==0 " style="color: green" >
+            已预定
+<!--            <el-button @click="cancel(scope.row)" type="text" size="small" v-model="scope.row.bookStatus" >取消</el-button>-->
+          </span>
+          <span v-if="scope.row.bookStatus==1 " style="color: red">已取消</span>
+          <span v-if="scope.row.bookStatus==2 " style="color: orange">已入住</span>
+          <span v-if="scope.row.bookStatus==3 " style="color: gray">已退房</span>
+        </template>
       </el-table-column>
 <!--      <el-table-column-->
 <!--        prop="remarks"-->
@@ -115,9 +123,9 @@
       <!--</el-table-column>-->
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>
-          <el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>
+          <el-button @click="edit(scope.row)" type="text" size="small">{{edittext(scope.row.bookStatus)}}</el-button>
           <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
+          <!--<el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.bookStatus)}}</el-button>-->
         </template>
       </el-table-column>
     </el-table>
@@ -145,7 +153,8 @@
           id:"",
           originalRoomId:"",
           bookStatus:"",
-          residents:""
+          residents:"",
+          roomsTypeName:""
         },
         queryParams:{
           pageNo:1,
@@ -153,7 +162,8 @@
           id:"",
           originalRoomId:"",
           bookStatus:"",
-          residents:""
+          residents:"",
+          roomsTypeName:""
         },
         tableData:{},
         guestTypes:{}
@@ -180,19 +190,17 @@
           this.guestTypes=data;
         });
       },
-      bookStatusformat(row, column, cellValue, index){
-        if(cellValue==0)
-          return "已预定";
-        else if(cellValue==1)
-          return "已取消";
-        else if(cellValue==2)
-          return "已入住";
-        else if(cellValue==1)
-          return "已退房";
-      },
-//        activeformat(row, column, cellValue, index){
-//          return cellValue==0?"失效":"有效";
-//        },
+      // bookStatusformat(row, column, cellValue, index){
+      //   if(cellValue==0)
+      //     return "已预定";
+      //   else if(cellValue==1)
+      //     return "已取消";
+      //   else if(cellValue==2)
+      //     return "已入住";
+      //   else if(cellValue==1)
+      //     return "已退房";
+      // },
+
       changePageNo(i){
         this.queryParams.pageNo=i;
       },
@@ -200,19 +208,19 @@
         this.queryParams.pageNo=1;
         this.merge(this.search,this.queryParams);
       },
-      add(){
-        this.$layer.iframe({
-          content: {
-            content: EditOrderManage, //传递的组件对象
-            parent: this,//当前的vue对象
-            data:{}//props
-          },
-          area:['800px','600px'],
-          title: '添加预定信息',
-          shadeClose: false,
-          shade :true
-        });
-      },
+      // add(){
+      //   this.$layer.iframe({
+      //     content: {
+      //       content: EditOrderManage, //传递的组件对象
+      //       parent: this,//当前的vue对象
+      //       data:{}//props
+      //     },
+      //     area:['800px','600px'],
+      //     title: '添加预定信息',
+      //     shadeClose: false,
+      //     shade :true
+      //   });
+      // },
       edit(row){
         this.$layer.iframe({
           content: {
@@ -242,8 +250,17 @@
       del(row){
         this.delete("orderManage/del",row.id,row.active);
       },
-      deltext(active){
-        return active==1?"删除":"恢复"
+      // cancel(row){
+      //   row.bookStatus=1;
+      //   this.post("orderManage/update",row.id,row.bookStatus);
+      // },
+      // deltext(bookstatus){
+      //   if(bookstatus==1)
+      //   return "删除";
+      // },
+      edittext(bookstatus){
+        if(bookstatus==0||bookstatus==2)
+        return "修改";
       }
 
     }

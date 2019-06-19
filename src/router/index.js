@@ -13,6 +13,7 @@ import OrderManage from '@/components/orderManage/list'
 import ReservedTransfer from '@/components/reservedTransfer/list'
 import Account from '@/components/account/list'
 import Consume from '@/components/consume/list'
+import RoomsList from '@/components/orderManage/rooms_list'
 
 Vue.use(Router)
 
@@ -83,6 +84,11 @@ export default new Router({
           path:'/consume',
           name:'consume',
           component:Consume
+        },
+        {
+          path:'/roomslist',
+          name:'roomslist',
+          component:RoomsList
         }
       ]
     }
