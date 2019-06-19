@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
         <el-col :span="22">
-          <el-input placeholder="请输入客房编号" v-model="search.id" class="input-with-select" style="width: 340px">
+          <el-input placeholder="请输入客房编号" v-model="search.roomId" class="input-with-select" style="width: 340px">
             <!--根据客房状态查询-->
             <el-select v-model="search.status" style="width:120px" slot="prepend" placeholder="请选择状态">
               <el-option label="全部" value=""></el-option>
@@ -42,9 +42,9 @@
       border
       style="width: 100%;">
       <el-table-column
-        prop="id"
+        prop="roomId"
         width="70"
-        label="编号">
+        label="房间号">
       </el-table-column>
       <el-table-column
         prop="guestType.typeName"
@@ -109,7 +109,7 @@
     data () {
       return {
         search:{
-          id:"",
+          roomId:"",
           floorId:"",
           roomTypeid:"",
           normalPrice:"",
