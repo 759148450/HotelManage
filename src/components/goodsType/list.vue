@@ -33,16 +33,19 @@
         prop="goodsTypenotes"
         label="备注">
       </el-table-column>
+      <el-table-column
+        prop="counts"
+        label="商品个数">
+      </el-table-column>
       <!--<el-table-column-->
       <!--prop="active"-->
       <!--label="是否有效"-->
       <!--:formatter="activeformat">-->
       <!--</el-table-column>-->
-
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>
-          <el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>
+          <el-button @click="edit(scope.row)" type="text" size="small" >修改</el-button>
+          <el-button type="text" size="small" @click="del(scope.row)" v-if="scope.row.counts==0">{{deltext(scope.row.active)}}</el-button>
         </template>
       </el-table-column>
     </el-table>
