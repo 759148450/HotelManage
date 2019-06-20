@@ -16,9 +16,7 @@
         <el-form-item label="折扣价" prop="discountPrice">
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
-        <el-form-item label="押金" prop="deposit">
-          <el-input   v-model.number="ruleForm.deposit" size="medium" type="number" :max="99999999" ></el-input>
-        </el-form-item>
+
         <el-form-item label="预定人" prop="residents">
             <el-input  v-model="ruleForm.residents"></el-input>
         </el-form-item>
@@ -76,6 +74,9 @@
         </el-form-item>
         <el-form-item label="会员价" prop="memberPrice" >
             <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="押金" prop="deposit">
+          <el-input   v-model.number="ruleForm.deposit"  disabled></el-input>
         </el-form-item>
 <!--        <el-form-item label="会员等级" prop="leaguerRank">-->
 <!--            <el-input  v-model="leaguer1.leaguerRank" disabled></el-input>-->
@@ -265,8 +266,10 @@
                 },{id:this.ruleForm.memberId});
                 if(this.leaguer1.leaguerRank==0){
                   this.ruleForm.memberPrice=this.rooms_gvipPrice;
+                  this.ruleForm.deposit=this.rooms_gvipPrice*0.5;
                 }else{
                   this.ruleForm.memberPrice=this.rooms_svipPrice;
+                  this.ruleForm.deposit=this.rooms_svipPrice*0.5;
                 }
               }
             },
