@@ -16,7 +16,7 @@
           <el-input placeholder="请输入预定编号" v-model="search.id" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
-          <el-input placeholder="请输入房间编号" v-model="search.originalRoomId" class="input-with-select" style="width: 200px">
+          <el-input placeholder="请输入房间号" v-model="search.currentRoomName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
           <el-input placeholder="请输入预定人姓名" v-model="search.residents" class="input-with-select" style="width: 200px">
@@ -25,11 +25,8 @@
           <el-input placeholder="请输入客房类型名称" v-model="search.roomsTypeName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
-
         </el-col>
       </el-row>
-
-
     </div>
     <el-table
       :data="tableData.list"
@@ -40,7 +37,7 @@
         label="编号">
       </el-table-column>
       <el-table-column
-        prop="originalRoomId"
+        prop="currentRoomName"
         label="预定房间编号">
       </el-table-column>
       <el-table-column
@@ -105,7 +102,7 @@
         <template slot-scope="scope">
           <span v-if="scope.row.bookStatus==0 " style="color: green" >
             已预定
-<!--            <el-button @click="cancel(scope.row)" type="text" size="small" v-model="scope.row.bookStatus" >取消</el-button>-->
+            <el-button @click="cancel(scope.row)" type="text" size="small" >取消</el-button>
           </span>
           <span v-if="scope.row.bookStatus==1 " style="color: red">已取消</span>
           <span v-if="scope.row.bookStatus==2 " style="color: orange">已入住</span>
@@ -151,19 +148,19 @@
       return {
         search:{
           id:"",
-          originalRoomId:"",
           bookStatus:"",
           residents:"",
-          roomsTypeName:""
+          roomsTypeName:"",
+          currentRoomName:""
         },
         queryParams:{
           pageNo:1,
           pageSize:10,
           id:"",
-          originalRoomId:"",
           bookStatus:"",
           residents:"",
-          roomsTypeName:""
+          roomsTypeName:"",
+          currentRoomName:""
         },
         tableData:{},
         guestTypes:{}
@@ -250,14 +247,29 @@
       del(row){
         this.delete("orderManage/del",row.id,row.active);
       },
-      // cancel(row){
-      //   row.bookStatus=1;
-      //   this.post("orderManage/update",row.id,row.bookStatus);
-      // },
-      // deltext(bookstatus){
-      //   if(bookstatus==1)
-      //   return "删除";
-      // },
+      cancel(row){
+        this.$confirm('确定要取消码?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          row.bookStatus=1;
+          this.get("orderManage/updateBookStutas",(data)=>{
+            if(data>0){
+              this.$message({
+                type: 'success',
+                message: '取消成功!'
+              });
+            }
+          },{id:row.id,bookStatus: 1});
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '在预定中'
+          });
+        });
+      },
       edittext(bookstatus){
         if(bookstatus==0||bookstatus==2)
         return "修改";

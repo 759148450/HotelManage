@@ -4,8 +4,11 @@
         <el-form-item label="预定编号" prop="id">
            <el-input  v-model="ruleForm.id" disabled></el-input>
         </el-form-item>
-        <el-form-item label="预定房间编号" prop="originalRoomId">
-           <el-input  v-model="ruleForm.originalRoomId" disabled></el-input>
+        <el-form-item label="预定房间编号" prop="currentRoomId" hidden>
+          <el-input  v-model="ruleForm.currentRoomId" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="预定房间名" prop="currentRoomName">
+          <el-input  v-model="ruleForm.currentRoomName" disabled></el-input>
         </el-form-item>
         <el-form-item label="房间类型" prop="roomsTypeName">
           <el-input  v-model="ruleForm.roomsTypeName"  disabled></el-input>
@@ -77,7 +80,8 @@
           disabled: true,
           ruleForm:{
             id:"",
-            originalRoomId:"",
+            currentRoomId:"",
+            currentRoomName:"",
             normalPrice:"",
             discountPrice:"",
             deposit:"",

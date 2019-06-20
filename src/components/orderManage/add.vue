@@ -1,8 +1,11 @@
 <template>
   <div style="margin-top: 15px;">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="预定房间编号" prop="originalRoomId">
-          <el-input  v-model="ruleForm.originalRoomId" disabled></el-input>
+        <el-form-item label="预定房间id" prop="currentRoomId">
+          <el-input  v-model="ruleForm.currentRoomId" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="预定房间名" prop="currentRoomName">
+          <el-input  v-model="ruleForm.currentRoomName" disabled></el-input>
         </el-form-item>
         <el-form-item label="房间类型" prop="roomsTypeName">
           <el-input  v-model="ruleForm.roomsTypeName" disabled></el-input>
@@ -66,17 +69,13 @@
               :value="item.id">
             </el-option>
           </el-select>
-          <!--<el-select v-model="ruleForm.memberId" placeholder="请选择会员编号">
-            <el-option v-for="entry in leaguers" :label="entry.id" :value="entry.id" :key="entry.id"></el-option>
-          </el-select>-->
-            <!--<el-input  v-model="ruleForm.memberId"></el-input>-->
         </el-form-item>
-<!--        <el-form-item label="预定状态" prop="bookStatus">-->
-<!--            <el-input  v-model="ruleForm.bookStatus"></el-input>-->
-<!--        </el-form-item>-->
-        <el-form-item label="会员价" prop="memberPrice">
+        <el-form-item label="会员价" prop="memberPrice" >
             <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
         </el-form-item>
+<!--        <el-form-item label="会员等级" prop="leaguerRank">-->
+<!--            <el-input  v-model="leaguer1.leaguerRank" disabled></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="备注" prop="remarks">
             <el-input  v-model="ruleForm.remarks"></el-input>
         </el-form-item>
@@ -97,6 +96,7 @@
         "rooms_gvipPrice",
         "rooms_svipPrice",
         "rooms_typeName",
+        "rooms_currentRoomName"
       ],
     data () {
         name:"orderManageadd"
@@ -126,14 +126,14 @@
         const passportNumReg = /(^[EeKkGgDdSsPpHh]\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\d{7}$)/
         if(this.ruleForm.credentialsType==0){
           if (!value) {
-            return callback(new Error("护照编号不能为空"))
+            return callback(new Error("身份证编号不能为空"))
           }
           setTimeout(() => {
 
             if (credentialsNumReg.test(value)) {
               callback()
             } else {
-              callback(new Error("护照编号格式不正确"))
+              callback(new Error("身份证编号格式不正确"))
             }
 
           }, 100)
@@ -158,7 +158,8 @@
         leaguers:[],
           ruleForm:{
             id:"",
-            originalRoomId:this.roomsid,
+            currentRoomId:this.roomsid,
+            currentRoomName:this.rooms_currentRoomName,
             normalPrice:this.rooms_normalPrice,
             discountPrice:this.rooms_discountPrice,
             deposit:"",
@@ -171,7 +172,7 @@
             personNum:"",
             memberId:"",
             bookStatus:"",
-            memberPrice:this.rooms_gvipPrice,
+            memberPrice:"",
             roomsTypeName:this.rooms_typeName,
             remarks:""
           },
@@ -179,6 +180,20 @@
           id:"",
           normalPrice:"",
           discountPrice:"",
+        },
+        leaguer1:{
+          id:"",
+          leaguerName:"",
+          leaguerSex:"",
+          leaguerPwd:"",
+          leaguerTel:"",
+          leaguerAddress:"",
+          leaguerEmail:"",
+          leaguerScore:"",
+          leaguerRank:"",
+          timeLastlive:"",
+          timeLastorder:"",
+          remarks:"",
         },
         /*时间选择 */
         // pickerOptions0: {
@@ -236,7 +251,26 @@
 
 
     },
+    watch:{
+      ruleForm: {
+            handler:function(){
+              if(this.ruleForm.memberId!=""){
+                this.get("leaguer/getOne",(data)=>{
+                  this.leaguer1=data;
+                  console.log(this.leaguer1);
+                },{id:this.ruleForm.memberId});
+                if(this.leaguer1.leaguerRank==0){
+                  this.ruleForm.memberPrice=this.rooms_gvipPrice;
+                }else{
+                  this.ruleForm.memberPrice=this.rooms_svipPrice;
+                }
+              }
+            },
+            deep:true
+          }
 
+
+    },
     components: {
 
     },
@@ -247,7 +281,7 @@
         submitForm(formName){
             let url="orderManage/add";
             this.post(formName,url,this.ruleForm);
-        }
+        },
     }
   }
 </script>

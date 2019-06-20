@@ -1,16 +1,11 @@
 <template>
   <div style="margin-top: 15px;">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="预定房间编号" prop="originalRoomId">
-          <el-input   v-model.number="ruleForm.originalRoomId" size="medium" type="number" :max="99999999" disabled></el-input>
-         <!-- <el-select v-model="ruleForm.originalRoomId" filterable placeholder="请选择预定房间号" style="width: 200px"  >
-            <el-option
-              v-for="item in rooms"
-              :key="item.id"
-              :label="item.id"
-              :value="item.id">
-            </el-option>
-          </el-select>-->
+        <el-form-item label="预定房间编号" prop="currentRoomId" hidden>
+          <el-input  v-model="ruleForm.currentRoomId" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="预定房间名" prop="currentRoomName">
+          <el-input  v-model="ruleForm.currentRoomName" disabled></el-input>
         </el-form-item>
         <el-form-item label="房间类型" prop="roomsTypeName">
           <el-input  v-model="ruleForm.roomsTypeName"  disabled></el-input>
@@ -33,12 +28,6 @@
             <el-radio label="1">护照</el-radio>
           </el-radio-group>
         </el-form-item>
-<!--        <el-form-item label="证件类型" prop="credentialsType">-->
-<!--          <el-select v-model="ruleForm.credentialsType" placeholder="请选择证件类型">-->
-<!--            <el-option label="身份证" :value="0"></el-option>-->
-<!--            <el-option label="护照" :value="1"></el-option>-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
         <el-form-item label="证件号" prop="credentialsNum">
             <el-input  v-model="ruleForm.credentialsNum"></el-input>
         </el-form-item>
@@ -156,7 +145,8 @@
         leaguers:[],
           ruleForm:{
             id:"",
-            originalRoomId:"",
+            currentRoomName:"",
+            currentRoomId:"",
             normalPrice:"",
             discountPrice:"",
             deposit:"",

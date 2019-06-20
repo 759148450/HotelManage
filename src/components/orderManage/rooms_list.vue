@@ -12,11 +12,12 @@
             <el-option label="已预订" value="1"></el-option>
             <el-option label="入住" value="2"></el-option>
           </el-select>
-          <el-input placeholder="请输入客房编号" v-model="search.id" class="input-with-select" style="width: 340px">
+          <el-input placeholder="请输入客房号" v-model="search.roomId" class="input-with-select" style="width: 340px">
             <!--根据客房状态查询-->
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
           <el-select v-model="search.floorId" filterable placeholder="请选择楼层信息" style="width: 200px"  @change="findData">
+            <el-option label="" value=""></el-option>
             <el-option
               v-for="item in floors"
               :key="item.id"
@@ -25,6 +26,7 @@
             </el-option>
           </el-select>
           <el-select v-model="search.roomTypeid" filterable placeholder="请选择类型信息" style="width: 200px"  @change="findData">
+            <el-option label="" value=""></el-option>
             <el-option
               v-for="item in guestTypes"
               :key="item.id"
@@ -43,9 +45,8 @@
       border
       style="width: 100%;">
       <el-table-column
-        prop="id"
-        width="70"
-        label="编号">
+        prop="roomId"
+        label="房间号">
       </el-table-column>
       <el-table-column
         prop="guestType.typeName"
@@ -111,6 +112,7 @@
         search:{
           id:"",
           floorId:"",
+          roomId:"",
           roomTypeid:"",
           normalPrice:"",
           status:""
@@ -119,10 +121,11 @@
           pageNo:1,
           pageSize:10,
           id:"",
+          roomId:"",
           floorId:"",
           roomTypeid:"",
           normalPrice:"",
-          status:""
+          status:"",
         },
         tableData:{},
         floors:{},
@@ -187,6 +190,7 @@
             content: AddOrders, //传递的组件对象
             parent: this,//当前的vue对象
             data:{roomsid:row.id,
+              rooms_currentRoomName:row.roomId,
               rooms_normalPrice:row.normalPrice,
               rooms_discountPrice:row.discountPrice,
               rooms_gvipPrice:row.gvipPrice,
