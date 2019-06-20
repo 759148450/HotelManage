@@ -76,11 +76,8 @@
             <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
         </el-form-item>
         <el-form-item label="押金" prop="deposit">
-          <el-input   v-model.number="ruleForm.deposit"  disabled></el-input>
+          <el-input   v-model.number="ruleForm.deposit" placeholder="会员价1/2" disabled></el-input>
         </el-form-item>
-<!--        <el-form-item label="会员等级" prop="leaguerRank">-->
-<!--            <el-input  v-model="leaguer1.leaguerRank" disabled></el-input>-->
-<!--        </el-form-item>-->
         <el-form-item label="备注" prop="remarks">
             <el-input  v-model="ruleForm.remarks"></el-input>
         </el-form-item>

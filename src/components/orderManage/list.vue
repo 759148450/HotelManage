@@ -32,10 +32,10 @@
       :data="tableData.list"
       border
       style="width: 100%;">
-      <el-table-column
-        prop="id"
-        label="编号">
-      </el-table-column>
+<!--      <el-table-column-->
+<!--        prop="id"-->
+<!--        label="编号">-->
+<!--      </el-table-column>-->
       <el-table-column
         prop="currentRoomName"
         label="预定房间编号">
@@ -101,8 +101,8 @@
         label="预定状态">
         <template slot-scope="scope">
           <span v-if="scope.row.bookStatus==0 " style="color: green" >
-            已预定
-            <el-button @click="cancel(scope.row)" type="text" size="small" >取消</el-button>
+              已预定
+             <el-button type="primary" @click="cancel(scope.row)" round size="mini">取消</el-button>
           </span>
           <span v-if="scope.row.bookStatus==1 " style="color: red">已取消</span>
           <span v-if="scope.row.bookStatus==2 " style="color: orange">已入住</span>
