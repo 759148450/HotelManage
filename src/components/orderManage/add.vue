@@ -57,9 +57,13 @@
               placeholder="选择日期">
             </el-date-picker>
         </el-form-item>
-        <el-form-item label="入住人数" prop="personNum">
-          <el-input   v-model.number="ruleForm.personNum" size="medium" type="number" :max="9999" ></el-input>
+        <el-form-item label="入住人数" >
+          <el-input-number v-model="ruleForm.personNum"  :min="1" :max="10">
+          </el-input-number>
         </el-form-item>
+<!--        <el-form-item label="入住人数" prop="personNum">-->
+<!--          <el-input   v-model.number="ruleForm.personNum" size="medium" type="number" :max="9999" ></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="会员编号" prop="memberId">
           <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px"  >
             <el-option

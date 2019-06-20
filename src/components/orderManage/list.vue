@@ -261,7 +261,7 @@
                 message: '取消成功!'
               });
             }
-          },{id:row.id,bookStatus: 1});
+          },{id:row.id,bookStatus: 1,currentRoomId:row.currentRoomId});
 
         }).catch(() => {
           this.$message({
