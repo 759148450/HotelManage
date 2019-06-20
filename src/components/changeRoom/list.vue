@@ -2,29 +2,21 @@
   <div>
     <div style="margin-top: 15px;">
       <el-row>
-        <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
         <el-col :span="22">
-          <el-input placeholder="请输入房间编号" v-model="search.currentRoomId" class="input-with-select" style="width: 200px">
+          <el-input placeholder="请输入原房间编号" v-model="search.originalRoomId" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
+
+          <el-input placeholder="请输入现房间编号" v-model="search.currentRoomId" class="input-with-select" style="width: 200px">
+            <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
+          </el-input>
+
           <el-input placeholder="请输入住人姓名" v-model="search.residents" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
-
-
-          <el-select v-model="search.bookStatus" filterable placeholder="请选择状态" style="width: 200px"  @change="findData">
-            <el-option  label="请选择状态" value="">请选择状态</el-option>
-            <el-option  label="已预定" value="0">已预定</el-option>
-            <el-option  label="已取消" value="1">已取消</el-option>
-            <el-option  label="已入住" value="2">已入住</el-option>
-            <el-option  label="已退房" value="3">已退房</el-option>
-          </el-select>
-
-
         </el-col>
       </el-row>
     </div>
-
     <el-table
       :data="tableData.list"
       border
@@ -33,10 +25,16 @@
         prop="id"
         label="入住单号">
       </el-table-column>
+
+      <el-table-column
+        prop="originalRoomId"
+        label="房间编号">
+      </el-table-column>
       <el-table-column
         prop="currentRoomId"
         label="房间编号">
       </el-table-column>
+
       <el-table-column
         prop="bookStatus"
         label="状态"
@@ -49,35 +47,35 @@
         :formatter="guestTypeformat">
       </el-table-column>
 
-<!--      <el-table-column-->
-<!--        prop="normalPrice"-->
-<!--        label="标准价">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="discountPrice"-->
-<!--        label="折后价">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="deposit"-->
-<!--        label="押金">-->
-<!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="normalPrice"-->
+      <!--        label="标准价">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="discountPrice"-->
+      <!--        label="折后价">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="deposit"-->
+      <!--        label="押金">-->
+      <!--      </el-table-column>-->
       <el-table-column
         prop="residents"
         label="入住人">
       </el-table-column>
-<!--      <el-table-column-->
-<!--        prop="credentialsType"-->
-<!--        label="证件类别"-->
-<!--        :formatter="credentialsTypeformat">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="credentialsNum"-->
-<!--        label="证件号码">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="phone"-->
-<!--        label="联系电话">-->
-<!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="credentialsType"-->
+      <!--        label="证件类别"-->
+      <!--        :formatter="credentialsTypeformat">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="credentialsNum"-->
+      <!--        label="证件号码">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="phone"-->
+      <!--        label="联系电话">-->
+      <!--      </el-table-column>-->
       <el-table-column
         prop="arrivalTime"
         label="抵店时间">
@@ -90,35 +88,35 @@
         prop="personNum"
         label="入住人数">
       </el-table-column>
-<!--      <el-table-column-->
-<!--        prop="userId"-->
-<!--        label="操作员">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="memberId"-->
-<!--        label="会员编号">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="memberPrice"-->
-<!--        label="会员价">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="breakfast"-->
-<!--        label="提供早餐"-->
-<!--      :formatter="breakfastStatusformat">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="timedWakeup"-->
-<!--        label="定时叫醒">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="remarks"-->
-<!--        label="备注">-->
-<!--      </el-table-column>-->
-<!--      <el-table-column-->
-<!--        prop="active"-->
-<!--        label="删除状态">-->
-<!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="userId"-->
+      <!--        label="操作员">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="memberId"-->
+      <!--        label="会员编号">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="memberPrice"-->
+      <!--        label="会员价">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="breakfast"-->
+      <!--        label="提供早餐"-->
+      <!--      :formatter="breakfastStatusformat">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="timedWakeup"-->
+      <!--        label="定时叫醒">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="remarks"-->
+      <!--        label="备注">-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column-->
+      <!--        prop="active"-->
+      <!--        label="删除状态">-->
+      <!--      </el-table-column>-->
       <el-table-column
         prop="createDate"
         label="创建时间">
@@ -126,8 +124,7 @@
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>
-          <el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>
+          <el-button @click="edit(scope.row)" type="text" size="small">换房</el-button>
           <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
         </template>
       </el-table-column>
@@ -144,18 +141,18 @@
 </template>
 
 <script>
-  import EditOrderlist from '@/components/orderlist/edit'
-  import DetailOrderlist from '@/components/orderlist/details'
+  import EditChangeroom from '@/components/changeroom/edit'
+  import DetailChangeRoom from '@/components/changeroom/details'
   export default {
     inject:['reload'],
-    name:"orderlist",
+    name:"changeroom",
     data () {
       return {
         search:{
           id:"",
           originalRoomId:"",
           currentRoomId:"",
-          bookStatus:"",
+          bookStatus:2,
           roomTypeId:"",
           normalPrice:"",
           discountPrice:"",
@@ -225,10 +222,11 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/list",(data)=>{
+        this.get("orderManage/listLiving",(data)=>{
           console.log(data.list.roomTypeId)
           this.tableData=data;
         },this.queryParams);
+
         // this.get("orderManage/getAll",(data)=>{
         //   this.goodsTypes=data;
         // });
@@ -236,6 +234,11 @@
           console.log(data)
           this.guestTypes=data;
         });
+      },
+      Statusformat(row, column, cellValue, index){
+        let i=0;
+        if(cellValue==null)return "无";
+        else  return cellValue;
       },
       guestTypeformat(row, column, cellValue, index){
         console.log(cellValue)
@@ -247,6 +250,10 @@
 
           }
         }
+      },
+      findData(){
+        this.queryParams.pageNo=1;
+        this.merge(this.search,this.queryParams);
       },
       bookStatusformat(row, column, cellValue, index){
         if(cellValue==0)
@@ -287,10 +294,7 @@
       changePageNo(i){
         this.queryParams.pageNo=i;
       },
-      findData(){
-        this.queryParams.pageNo=1;
-        this.merge(this.search,this.queryParams);
-      },
+
       add(){
         this.$layer.iframe({
           content: {
@@ -304,28 +308,28 @@
           shade :true
         });
       },
-      edit(row){
-        this.$layer.iframe({
-          content: {
-            content: EditOrderlist, //传递的组件对象
-            parent: this,//当前的vue对象
-            data:{id:row.id}//props
-          },
-          area:['800px','600px'],
-          title: '修改登记信息',
-          shadeClose: false,
-          shade :true
-        });
-      },
       detail(row){
         this.$layer.iframe({
           content: {
-            content: DetailOrderlist, //传递的组件对象
+            content: DetailChangeRoom, //传递的组件对象
             parent: this,//当前的vue对象
             data:{id:row.id}//props
           },
           area:['800px','600px'],
           title: '入住信息详情',
+          shadeClose: false,
+          shade :true
+        });
+      },
+      edit(row){
+        this.$layer.iframe({
+          content: {
+            content: EditChangeroom, //传递的组件对象
+            parent: this,//当前的vue对象
+            data:{id:row.id}//props
+          },
+          area:['800px','600px'],
+          title: '修改登记信息',
           shadeClose: false,
           shade :true
         });
