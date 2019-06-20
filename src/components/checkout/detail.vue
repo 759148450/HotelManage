@@ -48,7 +48,7 @@
       </el-form-item>
 
       <el-form-item label="备注" prop="remarks">
-        <el-input type="textarea"  v-model="ruleForm.remarks"></el-input>
+        <el-input type="textarea"  v-model="ruleForm.remarks" disabled></el-input>
       </el-form-item>
 
     </el-form>

@@ -3,10 +3,10 @@
     <div style="margin-top: 15px;">
       <el-row>
         <el-col :span="22">
-          <el-input placeholder="请输入房间号" v-model="search.currentRoomId" class="input-with-select" style="width: 200px">
+          <el-input placeholder="请输入入住单号" v-model="search.id" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
-          <el-input placeholder="请输入入住单号" v-model="search.id" class="input-with-select" style="width: 200px">
+          <el-input placeholder="请输入房间号" v-model="search.currentRoomName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
           <el-input placeholder="请输入入住人" v-model="search.residents" class="input-with-select" style="width: 200px">
@@ -26,11 +26,11 @@
         label="入住单号">
       </el-table-column>
       <el-table-column
-        prop="currentRoomId"
+        prop="currentRoomName"
         label="房间号">
       </el-table-column>
       <el-table-column
-        prop="roomTypeId"
+        prop="roomsTypeName"
         label="客房类型">
       </el-table-column>
 
@@ -84,6 +84,7 @@
         search:{
           id:"",
           residents:"",
+          currentRoomName:""
 
         },
         queryParams:{
@@ -91,6 +92,7 @@
           pageSize:10,
           id:"",
           residents:"",
+          currentRoomName:""
 
         },
         tableData:{}
@@ -110,7 +112,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/listLiving",(data)=>{
+        this.get("orderManage/listLived",(data)=>{
           this.tableData=data;
         },this.queryParams);
       },
@@ -128,7 +130,8 @@
             parent: this,//当前的vue对象
             data:{
               id:row.id,
-              currentRoomId:row.currentRoomId,
+              currentRoomId:row.currentRoomId,//用来更改房间状态
+              currentRoomName:row.currentRoomName,
               discountPrice:row.discountPrice,
               deposit:row.deposit,
             }//props
