@@ -110,7 +110,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/livedlist",(data)=>{
+        this.get("orderManage/listLiving",(data)=>{
           this.tableData=data;
         },this.queryParams);
       },
