@@ -3,15 +3,16 @@
     <div style="margin-top: 15px;">
       <el-row>
         <el-col :span="22">
-          <el-input placeholder="请输入商品名称" v-model="search.goodsName" class="input-with-select" style="width: 400px">
-            <el-select v-model="search.goodsTypeid" slot="prepend" filterable placeholder="请选择商品类型" style="width: 170px" >
-              <el-option
-                v-for="item in goodsTypes"
-                :key="item.id"
-                :label="item.goodsTypename"
-                :value="item.id">
-              </el-option>
-            </el-select>
+          <el-select v-model="search.goodsTypeid" filterable placeholder="请选择商品类型" style="width: 200px"  @change="findData">
+            <el-option label="" value="">全部</el-option>
+            <el-option
+              v-for="item in goodsTypes"
+              :key="item.id"
+              :label="item.goodsTypename"
+              :value="item.id">
+            </el-option>
+          </el-select>
+          <el-input placeholder="请输入商品名称" v-model="search.goodsName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
         </el-col>
