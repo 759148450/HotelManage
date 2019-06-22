@@ -2,15 +2,18 @@
 <template>
   <div style="margin-top: 15px;" >
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="客房编号" prop="roomId">
-        <el-select v-model="ruleForm.roomId" filterable placeholder="请选择客房编号" >
+      <el-form-item label="入住单号" prop="liveId">
+        <el-select v-model="ruleForm.liveId" filterable placeholder="请选择入住单号" @change="getRoomId($event)">
           <el-option
-            v-for="item in rooms"
+            v-for="item in orderManage"
             :key="item.id"
-            :label="item.roomId"
-            :value="item.roomId">
+            :label="item.id"
+            :value="item.id">
           </el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item label="客房编号" prop="roomId">
+        <el-input v-model="ruleForm.roomId" disabled></el-input>
       </el-form-item>
       <el-form-item label="商品名" prop="goodName">
         <el-input v-model="ruleForm.goodName"  disabled></el-input>
@@ -64,8 +67,10 @@
       name:"consumeedit"
       return {
         rooms:[],
+        orderManage:[],//获取订单的订单号
         ruleForm:{
           id:"",
+          liveId:"",
           goodId:this.goodId,
           roomId:"",
           goodTypeid:"",
@@ -94,9 +99,10 @@
     },
 
     created(){
-      /*获取所有的房间编号*/
-      this.get("orderManage/getAllRoomsAndLeaguers",(data)=>{
-        this.rooms=data.rooms;
+      //获取所有订单号（状态为已入住2和已换房4）
+      this.get("orderManage/listLived",(data)=>{
+        console.log(data);
+        this.orderManage=data.list;
       });
     },
 
@@ -115,6 +121,15 @@
       getDcPrice(){
         let dcPrice =(this.ruleForm.discount/100) * this.ruleForm.consumePrice;
         this.ruleForm.dcPrice = dcPrice;
+      },
+      //关联查询不同订单号对应的房间号
+      getRoomId (prov) {
+        console.log(this.orderManage);
+        for (let val of this.orderManage) {
+          if (prov===val.id) {
+            this.ruleForm.roomId = val.currentRoomName
+          }
+        }
       },
       resetForm(formName){
         this.$refs[formName].resetFields();

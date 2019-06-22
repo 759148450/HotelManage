@@ -20,7 +20,7 @@
         <el-input  v-model="ruleForm.livedPrice" @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="店内消费" prop="roomBill">
-        <el-input  v-model="ruleForm.roomBill"  @keyup.native="getTotalBill"></el-input>
+        <el-input  v-model="ruleForm.roomBill"  disabled @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="餐费" prop="foodBill">
         <el-input  v-model="ruleForm.foodBill"  @keyup.native="getTotalBill"></el-input>
@@ -71,6 +71,7 @@
     data () {
       name:"checkoutadd"
       return {
+        consume:[],
         ruleForm:{
           id:this.id,
           currentRoomId:this.currentRoomId,
@@ -103,7 +104,9 @@
       }
     },
     created(){
-
+      this.get("consume/list",(data)=>{
+        this.consume=data;
+      });
     },
 
     components: {
