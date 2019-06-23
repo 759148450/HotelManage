@@ -17,6 +17,9 @@ import RoomsList from '@/components/orderManage/rooms_list'
 import Checkout from '@/components/checkout/list'
 import LivedList from '@/components/checkout/livedlist'
 import ChangeRoom from '@/components/ChangeRoom/list'
+import Financial from '@/components/financial/list'
+import ReservationList from '@/components/reservation_list/list'
+import LivingList from '@/components/living_list/list'
 
 Vue.use(Router)
 
@@ -107,6 +110,21 @@ export default new Router({
           path:'/ChangeRoom',
           name:'ChangeRoom',
           component:ChangeRoom
+        },
+        {
+          path:'/financial',
+          name:'financial',
+          component:Financial
+        },
+        {
+          path:'/reservation_list',
+          name:'reservation_list',
+          component:ReservationList
+        },
+        {
+          path:'/living_list',
+          name:'living_list',
+          component:LivingList
         }
       ]
     }
