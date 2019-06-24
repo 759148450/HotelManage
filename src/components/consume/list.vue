@@ -4,16 +4,27 @@
           <el-row>
               <el-col :span="22">
                 <el-input placeholder="请输入客房编号" v-model="search.roomId" class="input-with-select" style="width: 350px">
-                  <el-select v-model="search.goodId" slot="prepend" filterable placeholder="请选择商品名" style="width: 140px" >
+                  <el-select v-model="search.liveId" slot="prepend" filterable placeholder="请选择入住单号" style="width: 160px" @change="findData" >
+                    <el-option label="" value="">全部</el-option>
                     <el-option
-                      v-for="item in goodss"
+                      v-for="item in tableData.list"
                       :key="item.id"
-                      :label="item.goodsName"
-                      :value="item.id">
+                      :label="item.liveId"
+                      :value="item.liveId">
                     </el-option>
                   </el-select>
                     <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
                 </el-input>
+
+                <el-select v-model="search.goodId" filterable placeholder="请选择商品名" style="width: 140px" @change="findData">
+                  <el-option label="" value="">全部</el-option>
+                  <el-option
+                    v-for="item in goodss"
+                    :key="item.id"
+                    :label="item.goodsName"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
                 <!--<el-select v-model="search.goodTypeid" filterable placeholder="请选择商品类型" style="width: 200px"  @click="findData">-->
                   <!--<el-option-->
                     <!--v-for="item in goodsTypes"-->
@@ -35,7 +46,7 @@
         show-summary
         style="width: 100%;">
         <el-table-column
-        prop="id"
+        prop="liveId"
         width="80"
         label="入住单号">
         </el-table-column>
@@ -98,6 +109,7 @@
     data () {
       return {
           search:{
+              liveId:"",
               roomId:"",
               goodId:""
 //              goodTypeid:""
@@ -105,6 +117,7 @@
           queryParams:{
               pageNo:1,
               pageSize:10,
+              liveId:"",
               roomId:"",
               goodId:""
 //              goodTypeid:""

@@ -1,0 +1,122 @@
+<template>
+  <div>
+    <div style="margin-top: 15px;">
+      <el-row>
+        <el-col :span="2">
+        </el-col>
+        <el-col :span="22">
+          <el-input placeholder="请输入房间号" v-model="search.currentRoomName" class="input-with-select" style="width: 200px">
+            <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
+          </el-input>
+        </el-col>
+      </el-row>
+    </div>
+    <el-table
+      :data="tableData.list"
+      border
+      style="width: 100%;">
+      <el-table-column
+        prop="id"
+        width="100"
+        label="预订单号">
+      </el-table-column>
+      <el-table-column
+        prop="currentRoomName"
+        label="客房编号">
+      </el-table-column>
+      <el-table-column
+        prop="roomsTypeName"
+        label="客房类型">
+      </el-table-column>
+      <el-table-column
+        prop="residents"
+        label="预定人姓名">
+      </el-table-column>
+      <el-table-column
+        prop="memberId"
+        label="会员编号">
+      </el-table-column>
+      <el-table-column
+        prop="arrivalTime"
+        width="200"
+        label="抵店时间">
+      </el-table-column>
+      <el-table-column
+        prop="leaveTime"
+        width="200"
+        label="离店时间">
+      </el-table-column>
+      <el-table-column
+        prop="phone"
+        label="联系人电话">
+      </el-table-column>
+
+    </el-table>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="tableData.total"
+      :current-page="this.queryParams.pageNo"
+      :page-size="this.queryParams.pageSize"
+      @current-change="changePageNo">
+    </el-pagination>
+  </div>
+</template>
+
+<script>
+  import EditOrderManage from '@/components/orderManage/edit'
+  import DetailOrderManage from '@/components/orderManage/details'
+
+  export default {
+    inject:['reload'],
+    name:"orderManage",
+    data () {
+      return {
+        search:{
+          currentRoomName:""
+        },
+        queryParams:{
+          pageNo:1,
+          pageSize:10,
+          currentRoomName:""
+        },
+        tableData:{}
+      }
+    },
+    created(){
+      this.getData();
+    },
+    watch:{
+      queryParams:{
+        handler:function(){
+          this.getData();
+        },
+        deep:true
+      }
+    },
+    mounted(){},
+    methods:{
+      getData(){
+        this.get("orderManage/OrderAndCanacel",(data)=>{
+          this.tableData=data;
+        },this.queryParams);
+      },
+
+      changePageNo(i){
+        this.queryParams.pageNo=i;
+      },
+      findData(){
+        this.queryParams.pageNo=1;
+        this.merge(this.search,this.queryParams);
+      },
+
+
+    }
+  }
+</script>
+
+<style>
+  .el-table .cell {
+    text-align: center;
+  }
+</style>

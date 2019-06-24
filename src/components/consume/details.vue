@@ -1,6 +1,9 @@
 <template>
   <div style="margin-top: 15px;">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="订单号" prop="liveId">
+        <el-input v-model="ruleForm.liveId" disabled></el-input>
+      </el-form-item>
       <el-form-item label="客房编号" prop="roomId">
         <el-input v-model="ruleForm.roomId" disabled></el-input>
       </el-form-item>
@@ -53,6 +56,7 @@
         goodss:[],
         ruleForm:{
           id:"",
+          liveId:"",
           roomId:"",
           goodTypeid:"",
           goodId:"",

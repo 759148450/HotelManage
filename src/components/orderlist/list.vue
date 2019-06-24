@@ -294,7 +294,7 @@
             parent: this,//当前的vue对象
             data:{}//props
           },
-          area:['800px','1000px'],
+          area:['800px','600px'],
           title: '添加登记信息',
           shadeClose: false,
           shade :true
