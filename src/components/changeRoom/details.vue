@@ -4,7 +4,10 @@
       <el-form-item label="房间类型" prop="roomTypeId" >
         <el-input   v-model="ruleForm.roomsTypeName" disabled></el-input>
       </el-form-item>
-      <el-form-item label="房间编号" prop="currentRoomName">
+      <el-form-item label="原房间编号" prop="originalRoomName">
+        <el-input   v-model="ruleForm.originalRoomName" disabled></el-input>
+      </el-form-item>
+      <el-form-item label="现房间编号" prop="currentRoomName">
         <el-input   v-model="ruleForm.currentRoomName" disabled></el-input>
       </el-form-item>
       <el-form-item label="标准价" prop="normalPrice">
@@ -92,6 +95,7 @@
         ruleForm:{
           id:"",
           originalRoomId:"",
+          originalRoomName:"",
           currentRoomName:"",
           bookStatus:2,
           roomTypeId:"",

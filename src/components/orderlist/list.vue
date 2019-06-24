@@ -45,7 +45,7 @@
 
       <el-table-column
         prop="roomsTypeName"
-        label="客房类型">
+        label="房间类型">
       </el-table-column>
 
 <!--      <el-table-column-->
@@ -126,7 +126,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>
-          <el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>
+<!--          <el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>-->
           <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
         </template>
       </el-table-column>
@@ -239,11 +239,22 @@
         //   this.goodsTypes=data;
         // });
         this.get("rooms/getAllGuestType",(data)=>{
+          console.log("l1213213")
           console.log(data)
           this.guestTypes=data;
         });
       },
-
+      // guestTypeformat(row, column, cellValue, index){
+      //   console.log(cellValue)
+      //   let i=0;
+      //   for (i;i<this.guestTypes.length;i++){
+      //
+      //     if(cellValue==this.guestTypes[i].id){
+      //       return this.guestTypes[i].typeName;
+      //
+      //     }
+      //   }
+      // },
       bookStatusformat(row, column, cellValue, index){
         if(cellValue==0)
           return "已预定";
@@ -294,7 +305,7 @@
             parent: this,//当前的vue对象
             data:{}//props
           },
-          area:['800px','600px'],
+          area:['800px','1000px'],
           title: '添加登记信息',
           shadeClose: false,
           shade :true
@@ -327,7 +338,7 @@
         });
       },
       del(row){
-        this.delete("orderManage/del",row.id,row.active);
+        this.delete("orderManage/updateBookStutas",row.id,row.active);
       },
       deltext(active){
         return active==1?"删除":"恢复"

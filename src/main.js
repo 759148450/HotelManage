@@ -8,6 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import mypublic from '@/public/mypublicjs'
 import axios from 'axios'
 import layer from 'vue-layer'
+// import store from './vuex/store.js'
+
 
 axios.defaults.baseURL="http://127.0.0.1/";
 Vue.prototype.axios=axios;
@@ -51,6 +53,7 @@ Vue.prototype.delete=function(url,id,status){
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  // store,
   router,
   components: { App },
   template: '<App/>'

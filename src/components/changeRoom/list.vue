@@ -28,11 +28,11 @@
 
       <el-table-column
         prop="originalRoomName"
-        label="房间编号">
+        label="原房间编号">
       </el-table-column>
       <el-table-column
         prop="currentRoomName"
-        label="房间编号">
+        label="现房间编号">
       </el-table-column>
 
       <el-table-column
@@ -43,8 +43,7 @@
 
       <el-table-column
         prop="roomsTypeName"
-        label="客房类型"
-        :formatter="guestTypeformat">
+        label="客房类型">
       </el-table-column>
 
       <!--      <el-table-column-->
@@ -85,7 +84,7 @@
         label="离店时间">
       </el-table-column>
       <el-table-column
-        prop="personNum"
+        prop="bookStatus"
         label="入住人数">
       </el-table-column>
       <!--      <el-table-column-->
@@ -124,7 +123,7 @@
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small">换房</el-button>
+          <el-button @click="edit(scope.row)" type="text" size="small" v-if="scope.row.bookStatus==2">换房</el-button>
           <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
         </template>
       </el-table-column>
@@ -152,7 +151,7 @@
           id:"",
           originalRoomName:"",
           currentRoomName:"",
-          bookStatus:2,
+          bookStatus:"",
           roomTypeId:"",
           normalPrice:"",
           discountPrice:"",
@@ -222,7 +221,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/listLiving",(data)=>{
+        this.get("orderManage/listLived",(data)=>{
           console.log(data.list.roomTypeId)
           this.tableData=data;
         },this.queryParams);
@@ -264,6 +263,8 @@
           return "已入住";
         else if(cellValue==3)
           return "已退房";
+        else if(cellValue==4)
+          return "已换房";
       },
       credentialsTypeformat(row, column, cellValue, index){
         if(cellValue==1)
@@ -329,7 +330,7 @@
             data:{id:row.id}//props
           },
           area:['800px','600px'],
-          title: '换房登记',
+          title: '换房管理',
           shadeClose: false,
           shade :true
         });

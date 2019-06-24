@@ -4,40 +4,45 @@
         <el-form-item label="原房间编号" prop="originalRoomName">
           <el-input   v-model="ruleForm.originalRoomName" disabled=""></el-input>
         </el-form-item>
-        <el-form-item label="现房间类型" prop="roomTypeId">
-          <el-select v-model="ruleForm.roomTypeId" placeholder="请选择" disabled>
-            <el-option v-for="entry in guestTypes" :label="entry.typeName" :value="entry.id" :key="entry.id"></el-option>
-          </el-select>
+        <el-form-item label="现房间类型" prop="roomsTypeName">
+          <el-input   v-model="ruleForm.roomsTypeName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="现房间编号" prop="currentRoomName">
-          <el-input   v-model="ruleForm.currentRoomName"></el-input>
+
+        <el-form-item label="现房间id" prop="originalRoomId" hidden>
+          <el-input   v-model="ruleForm.originalRoomId"></el-input>
+        </el-form-item>
+
+        <el-form-item label="房间编号" prop="currentRoomName" >
+          <!--          <el-input   v-model="ruleForm.currentRoomName"></el-input>-->
+          <el-select v-model="ruleForm.currentRoomName" placeholder="请选择" @change="getList($event)">
+            <el-option
+              v-for="item in allrole"
+              :key="item.roomId"
+              :label="item.roomId"
+              :value="item.roomId">
+            </el-option>
+          </el-select>
+
         </el-form-item>
         <el-form-item label="标准价" prop="normalPrice">
-          <el-input   v-model="ruleForm.normalPrice"></el-input>
+          <el-input   v-model="ruleForm.normalPrice" disabled></el-input>
         </el-form-item>
         <el-form-item label="折后价" prop="discountPrice">
-          <el-input   v-model="ruleForm.discountPrice"></el-input>
+          <el-input   v-model="ruleForm.discountPrice" disabled></el-input>
         </el-form-item>
         <el-form-item label="押金" prop="deposit">
-          <el-input  v-model="ruleForm.deposit"></el-input>
+          <el-input  v-model="ruleForm.deposit" disabled> </el-input>
+        </el-form-item>
+        <el-form-item label="会员编号" prop="memberId">
+          <el-input  v-model="ruleForm.memberId"></el-input>
+        </el-form-item>
+        <el-form-item label="会员价" prop="memberPrice">
+          <el-input   v-model="ruleForm.memberPrice"></el-input>
         </el-form-item>
         <el-form-item label="入住人" prop="residents">
           <el-input   v-model="ruleForm.residents"></el-input>
         </el-form-item>
-<!--        <el-form-item label="证件类别" prop="credentialsType">-->
-<!--          <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==0">-->
-<!--            <el-input value="身份证" disabled></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==1">-->
-<!--            <el-input value="护照" disabled></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-select v-model="ruleForm.credentialsType" placeholder="请选择">-->
-<!--            <el-option label="居民身份证" :value="1"></el-option>-->
-<!--            <el-option label="士官证" :value="2"></el-option>-->
-<!--            <el-option label="护照" :value="3"></el-option>-->
-<!--            <el-option label="港澳通行证" :value="4"></el-option>-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
+
         <el-form-item label="证件类型:" prop="credentialsType" >
           <el-radio-group v-model="ruleForm.credentialsType" disabled>
             <el-radio  label="1">身份证</el-radio>
@@ -50,7 +55,7 @@
           <el-input  v-model="ruleForm.credentialsNum" disabled></el-input>
         </el-form-item>
         <el-form-item label="联系电话" prop="phone">
-          <el-input   v-model="ruleForm.phone" disabled></el-input>
+          <el-input   v-model="ruleForm.phone"></el-input>
         </el-form-item>
         <el-form-item label="抵店时间" prop="arrivalTime">
           <el-date-picker
@@ -77,12 +82,7 @@
         <el-form-item label="操作员" prop="userId">
           <el-input   v-model="ruleForm.userId"></el-input>
         </el-form-item>
-        <el-form-item label="会员编号" prop="memberId">
-          <el-input  v-model="ruleForm.memberId"></el-input>
-        </el-form-item>
-        <el-form-item label="会员价" prop="memberPrice">
-          <el-input   v-model="ruleForm.memberPrice"></el-input>
-        </el-form-item>
+
         <el-form-item label="提供早餐" prop="breakfast">
           <el-select v-model="ruleForm.breakfast" placeholder="请选择" >
             <el-option label="是" :value="1"></el-option>
@@ -150,9 +150,14 @@
         }, 100)
       };
       return {
+        select2:[],
         guestTypes:[],
+        allrole:[],
+        leaguers:[],
           ruleForm:{
             id:"",
+            originalRoomId:"",
+            currentRoomId:"",
             originalRoomName:"",
             currentRoomName:"",
             bookStatus:2,
@@ -174,7 +179,8 @@
             timedWakeup:"",
             remarks:"",
             active:"",
-            createDate:""
+            createDate:"",
+            roomsTypeName:""
           },
         buttonText:"创建",
         pickerOptions0: {
@@ -202,33 +208,93 @@
           ],
           credentialsNum: [
             { required: true, trigger: 'blur',validator: checkcredentialsNum }]
-
-
         }
-
       }
     },
     created(){
+      /*获取所有的房间编号*/
+      this.get("orderManage/getAllRoomsAndLeaguers", (data) => {
+        // this.rooms=data.rooms;
+        this.leaguers = data.leaguers;
+      });
         this.get("rooms/getAllGuestType",(data)=>{
           this.guestTypes=data;
         });
         // this.get("orderManage/getAllGoodsType",(data)=>{
         //   this.goodsTypes=data;
         // });
+      this.get("rooms/getUsefulAll",(data)=>{
+        this.allrole=data;
+      });
         if(this.id){
              this.get("orderManage/getOne",(data)=>{
+               let roles = [];
+               this.select2= [];
+               data.originalRoomId=data.currentRoomId;
                data.originalRoomName=data.currentRoomName;
                data.currentRoomName="";
+               data.currentRoomId="";
                 this.ruleForm=data;
-                console.log(this.ruleForm);
+               let j;
+               for (var val of this.guestTypes) {
+                 // console.log("类型比较");
+                 // console.log(val.id);
+                 // console.log(data.roomsTypeName);
+                  j= parseInt(data.roomsTypeName);
+                 if (j==val.id) {
+                   // console.log("成功了");
+                   // console.log(val);
+                   console.log(j);
+                   this.ruleForm.roomsTypeName=val.typeName;
+                   // console.log(this.ruleForm.roomsTypeName);
+                 }
+                 console.log(j);
+               }
+               //找房间
+               for (var val of this.allrole) {
+                 console.log(val.roomTypeid);
+                 console.log(val.roomId);
+                 console.log(j);
+                 if (j===val.roomTypeid) {
+                   roles.push({roomId: val.roomId,normalPrice:val.normalPrice,gvipPrice:val.gvipPrice})
+                 }
+                 this.select2 = roles
+               }
             },{id:this.id});
             this.buttonText="提交"
-        }
+        };
+
     },
     components: {
 
     },
     methods:{
+        getList (opt) {
+        for (var val of this.allrole) {
+          if (opt===val.roomId) {
+            this.ruleForm.normalPrice=val.normalPrice;
+            this.ruleForm.discountPrice=val.discountPrice;
+            this.ruleForm.gvipPrice=val.gvipPrice;
+            this.ruleForm.svipPrice=val.svipPrice;
+            this.ruleForm.deposit=val.normalPrice*0.5;
+            this.ruleForm.currentRoomId=val.id;
+          }
+        }
+          for (var val of this.leaguers) {
+            if (this.ruleForm.memberId===val.id) {
+              console.log("找到会员");
+              console.log(val.id);
+              //小于5000积分，普通会员，大于等于500积分vip会员
+              if(val.leaguerScore<5000){
+                this.ruleForm.memberPrice=this.ruleForm.gvipPrice;
+              }else{
+                this.ruleForm.memberPrice=this.ruleForm.svipPrice;
+              }
+            }
+          }
+
+
+      },
         handleChange(value) {
           console.log(value);
         },

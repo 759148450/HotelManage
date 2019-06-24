@@ -2,7 +2,7 @@
   <div style="margin-top: 15px;">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="预定房间id" prop="currentRoomId">
-          <el-input  v-model="ruleForm.currentRoomId" disabled></el-input>
+          <el-input  v-model="ruleForm.currentRoomId" disabled hidden></el-input>
         </el-form-item>
         <el-form-item label="预定房间名" prop="currentRoomName">
           <el-input  v-model="ruleForm.currentRoomName" disabled></el-input>
@@ -131,7 +131,6 @@
             return callback(new Error("身份证编号不能为空"))
           }
           setTimeout(() => {
-
             if (credentialsNumReg.test(value)) {
               callback()
             } else {

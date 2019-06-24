@@ -3,33 +3,12 @@
 
   <div style="margin-top: 15px;">
     <el-form :inline="true" :model="filters">
-<!--表格联动-->
-<!--      <el-form-item>-->
-<!--        <el-select v-model="filters.value1" clearable placeholder="请选择" @change="getRole($event)">-->
-<!--          <el-option-->
-<!--            v-for="item in select1"-->
-<!--            :key="item.id"-->
-<!--            :label="item.typeName"-->
-<!--            :value="item.id">-->
-<!--          </el-option>-->
-<!--        </el-select>-->
-
-<!--        <el-select v-model="filters.value2" filterable-->
-<!--                   placeholder="请输入查询内容" :loading="loading" @change="getList($event)">-->
-<!--          <el-option-->
-<!--            v-for="item in select2"-->
-<!--            :key="item.roomId"-->
-<!--            :label="item.roomId"-->
-<!--            :value="item.roomId"></el-option>-->
-<!--        </el-select>-->
-<!--      </el-form-item>-->
-
-
 <!--      <el-form-item>-->
 <!--        <el-button type="primary" size="medium" @click="fetchData('filters')"  icon="el-icon-search">查询</el-button>-->
 <!--      </el-form-item>-->
     </el-form>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
         <el-form-item label="房间类型" prop="roomTypeId">
           <el-select v-model="ruleForm.roomsTypeName" placeholder="请选择" @change="getRole($event)">
 <!--            <el-option v-for="entry in guestTypes" :label="entry.typeName" :value="entry.id" :key="entry.id"></el-option>-->
@@ -74,6 +53,20 @@
         </el-form-item>
         <el-form-item label="入住人" prop="residents">
           <el-input   v-model="ruleForm.residents"></el-input>
+        </el-form-item>
+
+        <el-form-item label="会员编号" prop="memberId">
+          <el-select v-model="ruleForm.memberId" filterable placeholder="请选择会员编号" style="width: 200px" @change="getMemberPrice($event)" >
+            <el-option
+              v-for="item in leaguers"
+              :key="item.id"
+              :label="item.id"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="会员价" prop="memberPrice" >
+          <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
         </el-form-item>
 <!--        <el-form-item label="证件类别" prop="credentialsType">-->
 <!--          <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==0">-->
@@ -128,18 +121,28 @@
         <el-form-item label="操作员" prop="userId">
           <el-input   v-model="ruleForm.userId"></el-input>
         </el-form-item>
-        <el-form-item label="会员编号" prop="memberId">
-          <el-input  v-model="ruleForm.memberId"></el-input>
-        </el-form-item>
-        <el-form-item label="会员价" prop="memberPrice">
-          <el-input   v-model="ruleForm.memberPrice"></el-input>
-        </el-form-item>
+
+
+
+<!--        <el-form-item label="会员编号" prop="memberId">-->
+<!--          <el-input  v-model="ruleForm.memberId"></el-input>-->
+<!--        </el-form-item>-->
+
+
+
+<!--        <el-radio-group  label="提供早餐" v-model="breakfast">-->
+<!--          <el-radio  label="1">是</el-radio>-->
+<!--          <el-radio label="0">否</el-radio>-->
+<!--        </el-radio-group>-->
+
         <el-form-item label="提供早餐" prop="breakfast">
           <el-select v-model="ruleForm.breakfast" placeholder="请选择" >
             <el-option label="是" :value="1"></el-option>
             <el-option label="否" :value="0"></el-option>
           </el-select>
         </el-form-item>
+
+
         <el-form-item label="定时叫醒" prop="timedWakeup">
           <el-input  v-model="ruleForm.timedWakeup"></el-input>
         </el-form-item>
@@ -216,7 +219,7 @@
         },
         select2:[],
         allrole:allrole,
-
+        leaguers:[],
 
 
           guestTypes:{},
@@ -249,6 +252,7 @@
           },
         buttonText:"创建",
         pickerOptions0: {
+
           disabledDate: (time) => {
             if (this.ruleForm.leaveTime != "") {
               return  time.getTime() >(new Date(this.ruleForm.leaveTime).getTime())- 8.64e7||Date.now()>time.getTime() ;
@@ -280,6 +284,11 @@
       }
     },
     created(){
+      /*获取所有的房间编号*/
+      this.get("orderManage/getAllRoomsAndLeaguers", (data) => {
+        // this.rooms=data.rooms;
+        this.leaguers = data.leaguers;
+      });
         this.get("rooms/getAllGuestType",(data)=>{
           this.select1=data;
         });
@@ -335,11 +344,28 @@
             if (opt===val.roomId) {
               this.ruleForm.normalPrice=val.normalPrice;
                 this.ruleForm.discountPrice=val.discountPrice;
+              this.ruleForm.gvipPrice=val.gvipPrice;
+              this.ruleForm.svipPrice=val.svipPrice
               this.ruleForm.deposit=val.normalPrice*0.5;
               this.ruleForm.originalRoomId=val.id;
             }
           }
+        },
+      getMemberPrice(ouid) {
+
+        for (var val of this.leaguers) {
+          if (ouid===val.id) {
+            // console.log("找到会员");
+            // console.log(val.id);
+            //小于5000积分，普通会员，大于等于500积分vip会员
+            if(val.leaguerScore<5000){
+              this.ruleForm.memberPrice=this.ruleForm.gvipPrice;
+            }else{
+              this.ruleForm.memberPrice=this.ruleForm.svipPrice;
+            }
+          }
         }
+      },
     }
   }
 </script>

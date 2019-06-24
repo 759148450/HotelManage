@@ -24,9 +24,19 @@
         name:"index",
         data () {
             return {
-
+              user:[],
             }
         },
+      methods:{      //从本地的localStorage中，加载评论列表
+           loadComments(){
+             var list = JSON.parse(localStorage.getItem("user") || '[]')
+             this.user = list
+           }
+           },
+      created(){
+          this.loadComments()
+      },
+
         components: {
           Menu,
           MyBreadcrumb

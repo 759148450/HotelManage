@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 15px;">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="房间类型" prop="roomTypeId" >
+      <el-form-item label="房间类型" prop="roomsTypeName" >
         <el-input   v-model="ruleForm.roomsTypeName" disabled></el-input>
       </el-form-item>
       <el-form-item label="房间编号" prop="currentRoomName">

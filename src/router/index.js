@@ -20,12 +20,18 @@ import ChangeRoom from '@/components/ChangeRoom/list'
 import Financial from '@/components/financial/list'
 import ReservationList from '@/components/reservation_list/list'
 import LivingList from '@/components/living_list/list'
+import Login from '@/components/login'
 
 Vue.use(Router)
 
 export default new Router({
   mode:'history',
   routes: [
+    {
+      path:'/login',
+      name:'login',
+      component:Login,
+    },
     {
       path:'/index',
       name:'index',
