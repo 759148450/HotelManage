@@ -93,7 +93,7 @@
 
         <el-table-column prop="timedWakeup" label="服务唤醒" >
           <template slot-scope="scope">
-            <el-checkbox label="提供早餐" :value="1" true-label="1" v-model="scope.row.breakfast">提供早餐</el-checkbox>
+            <el-checkbox true-label="1" false-label="0" v-model="scope.row.breakfast" @change="breakfast_Edit(scope.row)">提供早餐</el-checkbox>
             <el-checkbox true-label="2" false-label="0" v-model="scope.row.timedWakeup" @change="timedWakeup_Edit(scope.row)" >定时叫醒</el-checkbox>
           </template>
         </el-table-column>
@@ -265,7 +265,7 @@
        // }
        //   },
       timedWakeup_Edit(row){
-        this.get("orderManage/updateBookStutas",(data)=>{
+        this.get("orderManage/updatetimedWakeup",(data)=>{
           if(data>0){
             this.$message({
               type: 'success',
@@ -273,6 +273,16 @@
             });
           }
         },{id:row.id,timedWakeup: row.timedWakeup});
+      },
+      breakfast_Edit(row){
+        this.get("orderManage/updatetimedWakeup",(data)=>{
+          if(data>0){
+            this.$message({
+              type: 'success',
+              message: '成功唤醒服务!'
+            });
+          }
+        },{id:row.id,breakfast: row.breakfast});
       },
 
 
