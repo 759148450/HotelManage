@@ -17,7 +17,7 @@
         <el-input  v-model="ruleForm.livedDays" @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="住宿费" prop="livedPrice">
-        <el-input  v-model="ruleForm.livedPrice" @keyup.native="getTotalBill"></el-input>
+        <el-input  v-model="ruleForm.livedPrice" readonly @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="店内消费" prop="roomBill">
         <el-input  v-model="ruleForm.roomBill"  disabled @keyup.native="getTotalBill"></el-input>
@@ -28,11 +28,11 @@
       <el-form-item label="电话费" prop="telBill">
         <el-input  v-model="ruleForm.telBill"  @keyup.native="getTotalBill"></el-input>
       </el-form-item>
+      <el-form-item label="应退押金" prop="rebackDeposit">
+        <el-input  v-model="ruleForm.rebackDeposit" disabled></el-input>
+      </el-form-item>
       <el-form-item label="实际应收" prop="totalBill">
         <el-input  v-model="ruleForm.totalBill" disabled></el-input>
-      </el-form-item>
-      <el-form-item label="应退押金" prop="rebackDeposit">
-        <el-input  v-model="ruleForm.rebackDeposit" ></el-input>
       </el-form-item>
       <el-form-item label="付款方式" prop="payStyle">
         <el-radio-group v-model="ruleForm.payStyle">
@@ -119,7 +119,7 @@
         this.ruleForm.livedPrice = livedPrice;
         //实际应收
         let totalBill = Number(this.ruleForm.roomPrice * this.ruleForm.livedDays)
-          + Number(this.ruleForm.roomBill) + Number(this.ruleForm.foodBill) + Number(this.ruleForm.telBill);
+          + Number(this.ruleForm.roomBill) + Number(this.ruleForm.foodBill) + Number(this.ruleForm.telBill)-Number(this.ruleForm.rebackDeposit);
         console.log(totalBill);
         this.ruleForm.totalBill = totalBill;
         //找零

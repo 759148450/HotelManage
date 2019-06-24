@@ -27,34 +27,34 @@
         label="房间号">
       </el-table-column>
       <!--<el-table-column-->
-        <!--prop="roomPrice"-->
-        <!--label="房价">-->
+      <!--prop="roomPrice"-->
+      <!--label="房价">-->
       <!--</el-table-column>-->
       <!--<el-table-column-->
-        <!--prop="deposit"-->
-        <!--label="押金">-->
+      <!--prop="deposit"-->
+      <!--label="押金">-->
       <!--</el-table-column>-->
       <!--<el-table-column-->
-        <!--prop="livedDays"-->
-        <!--label="住宿天数">-->
+      <!--prop="livedDays"-->
+      <!--label="住宿天数">-->
       <!--</el-table-column>-->
       <el-table-column
         prop="livedPrice"
         label="住宿费">
       </el-table-column>
       <!--<el-table-column-->
-        <!--prop="roomBill"-->
-        <!--label="店内消费">-->
+      <!--prop="roomBill"-->
+      <!--label="店内消费">-->
       <!--</el-table-column>-->
 
       <!--<el-table-column-->
-        <!--prop="foodBill"-->
-        <!--label="餐费">-->
+      <!--prop="foodBill"-->
+      <!--label="餐费">-->
       <!--</el-table-column>-->
 
       <!--<el-table-column-->
-        <!--prop="telBill"-->
-        <!--label="电话费">-->
+      <!--prop="telBill"-->
+      <!--label="电话费">-->
       <!--</el-table-column>-->
 
       <el-table-column
@@ -62,28 +62,28 @@
         label="实际应收">
       </el-table-column>
       <!--<el-table-column-->
-        <!--prop="rebackDeposit"-->
-        <!--label="应收押金">-->
+      <!--prop="rebackDeposit"-->
+      <!--label="应退押金">-->
       <!--</el-table-column>-->
       <!--<el-table-column-->
-        <!--prop="payStyle"-->
-        <!--label="付款方式">-->
+      <!--prop="payStyle"-->
+      <!--label="付款方式">-->
       <!--</el-table-column>-->
       <!--<el-table-column-->
-        <!--prop="realWages"-->
-        <!--label="实收">-->
+      <!--prop="realWages"-->
+      <!--label="实收">-->
       <!--</el-table-column>-->
       <!--<el-table-column-->
-        <!--prop="oddChange"-->
-        <!--label="找零">-->
+      <!--prop="oddChange"-->
+      <!--label="找零">-->
       <!--</el-table-column>-->
       <el-table-column
         prop="user"
         label="操作员">
       </el-table-column>
       <!--<el-table-column-->
-        <!--prop="remarks"-->
-        <!--label="备注">-->
+      <!--prop="remarks"-->
+      <!--label="备注">-->
       <!--</el-table-column>-->
 
       <el-table-column label="操作">

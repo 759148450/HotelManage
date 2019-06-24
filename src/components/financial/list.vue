@@ -37,10 +37,20 @@
         prop="memberId"
         label="会员编号">
       </el-table-column>
+      <!--暂时显示押金-->
       <el-table-column
         prop="deposit"
-        label="付款金额">
+        label="付款押金">
       </el-table-column>
+      <el-table-column
+        prop="orderForm.totalBill"
+        label="结账金额">
+      </el-table-column>
+      <el-table-column
+        prop="orderForm.payStyle"
+        label="进账方式">
+      </el-table-column>
+
       <el-table-column
         prop="bookStatus"
         label="进账类型"
@@ -68,78 +78,23 @@
 </template>
 
 <script>
-  import EditOrderlist from '@/components/orderlist/edit'
-  import DetailOrderlist from '@/components/orderlist/details'
-  import AddOrderlist from '@/components/orderlist/add'
+  import DetailFinancial from '@/components/financial/detail'
   export default {
     inject:['reload'],
     name:"orderlist",
     data () {
       return {
         search:{
-          id:"",
-          originalRoomId:"",
-          currentRoomId:"",
-          bookStatus:2,
-          roomTypeId:"",
-          normalPrice:"",
-          discountPrice:"",
-          deposit:"",
-          residents:"",
-          credentialsType:"",
-          credentialsNum:"",
-          phone:"",
-          arrivalTime:"",
-          leaveTime:"",
-          personNum:"",
-          userId:"",
-          memberId:"",
-          memberPrice:"",
-          breakfast:"",
-          timedWakeup:"",
-          remarks:"",
-          active:"",
-          createDate:"",
-          roomsTypeName:"",
-          originalRoomName:"",
-          currentRoomName:""
-          // rooms:"",
-          // leaguer:""
+          currentRoomName:"",
+
         },
         queryParams:{
           pageNo:1,
           pageSize:10,
-          id:"",
-          originalRoomId:"",
-          currentRoomId:"",
-          bookStatus:2,
-          roomTypeId:"",
-          normalPrice:"",
-          discountPrice:"",
-          deposit:"",
-          residents:"",
-          credentialsType:"",
-          credentialsNum:"",
-          phone:"",
-          arrivalTime:"",
-          roomsTypeName:"",
-          leaveTime:"",
-          personNum:"",
-          userId:"",
-          memberId:"",
-          memberPrice:"",
-          breakfast:"",
-          timedWakeup:"",
-          remarks:"",
-          active:"",
-          createDate:"",
-          originalRoomName:"",
-          currentRoomName:""
-          // rooms:"",
-          // leaguer:""
+          currentRoomName:"",
         },
         tableData:{},
-        guestTypes:{}
+        orderForm:{}
       }
     },
     created(){
@@ -156,10 +111,16 @@
     mounted(){},
     methods:{
       getData(){
+        //查询所有0、2、3、4状态的
         this.get("orderManage/financial",(data)=>{
-          console.log(data)
+          console.log("订单表所有信息",data);
           this.tableData=data;
         },this.queryParams);
+        //查询结账（只有3退房状态才会结账）信息
+        this.get("orderManage/orderForm",(data)=>{
+          console.log("结账信息",data);
+          this.orderForm=data;
+        });
       },
 
       bookStatusformat(row, column, cellValue, index){
@@ -168,6 +129,8 @@
         else if(cellValue==1)
           return "已取消";
         else if(cellValue==2)
+          return "押金";
+        else if(cellValue==4)
           return "押金";
         else if(cellValue==3)
           return "结账";
@@ -182,7 +145,7 @@
       detail(row){
         this.$layer.iframe({
           content: {
-            content: DetailOrderlist, //传递的组件对象
+            content: DetailFinancial, //传递的组件对象
             parent: this,//当前的vue对象
             data:{id:row.id}//props
           },
