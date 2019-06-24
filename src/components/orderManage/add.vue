@@ -16,20 +16,14 @@
         <el-form-item label="折扣价" prop="discountPrice">
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
-
         <el-form-item label="预定人" prop="residents">
-            <el-input  v-model="ruleForm.residents"></el-input>
+            <el-input  v-model="ruleForm.residents" ></el-input>
         </el-form-item>
-
         <el-form-item label="证件类型" prop="credentialsType">
           <el-radio-group v-model="ruleForm.credentialsType">
             <el-radio  label="0">身份证</el-radio>
             <el-radio label="1">护照</el-radio>
           </el-radio-group>
-<!--          <el-select v-model="ruleForm.credentialsType" placeholder="请选择证件类型">-->
-<!--            <el-option label="身份证" :value="0"></el-option>-->
-<!--            <el-option label="护照" :value="1"></el-option>-->
-<!--          </el-select>-->
         </el-form-item>
         <el-form-item label="证件号" prop="credentialsNum">
             <el-input  v-model="ruleForm.credentialsNum"></el-input>
@@ -47,21 +41,27 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="离店时间" prop="leaveTime">
-            <el-date-picker
-              v-model="ruleForm.leaveTime"
-              type="datetime"
-              value-format="yyyy-MM-dd HH:mm:ss"
-              :picker-options="pickerOptions1"
-              placeholder="选择日期">
-            </el-date-picker>
+        <el-date-picker
+          v-model="ruleForm.leaveTime"
+          type="datetime"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          :picker-options="pickerOptions1"
+          placeholder="选择日期">
+        </el-date-picker>
         </el-form-item>
-        <el-form-item label="入住人数" >
+          <el-form-item label="入住人数" >
           <el-input-number v-model="ruleForm.personNum"  :min="1" :max="10">
           </el-input-number>
         </el-form-item>
 <!--        <el-form-item label="入住人数" prop="personNum">-->
 <!--          <el-input   v-model.number="ruleForm.personNum" size="medium" type="number" :max="9999" ></el-input>-->
 <!--        </el-form-item>-->
+        <el-form-item label="操作人id" prop="userId" hidden>
+          <el-input  v-model="ruleForm.userId"></el-input>
+        </el-form-item>
+        <el-form-item label="操作人" prop="userName" >
+          <el-input  v-model="ruleForm.userName" disabled></el-input>
+        </el-form-item>
         <el-form-item label="会员编号" prop="memberId">
           <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px"  >
             <el-option
@@ -155,7 +155,7 @@
       };
       return {
         // rooms:[],
-
+        user:[],
         leaguers:[],
           ruleForm:{
             id:"",
@@ -175,7 +175,9 @@
             bookStatus:"",
             memberPrice:"",
             roomsTypeName:this.rooms_typeName,
-            remarks:""
+            remarks:"",
+            userId:"",
+            userName:""
           },
         rooms:{
           id:"",
@@ -236,7 +238,8 @@
       }
     },
     created(){
-
+        //获取当前用户
+      this.loadUser();
         /*获取所有的房间编号*/
         this.get("orderManage/getAllRoomsAndLeaguers", (data) => {
           // this.rooms=data.rooms;
@@ -249,18 +252,18 @@
             console.log(this.rooms);
           }, {id: this.id});
         }
-
+      
 
     },
     watch:{
       ruleForm: {
             handler:function(){
-              if(this.ruleForm.memberId!=""){
+              if(this.ruleForm.memberId!==""){
                 this.get("leaguer/getOne",(data)=>{
                   this.leaguer1=data;
                   console.log(this.leaguer1);
                 },{id:this.ruleForm.memberId});
-                if(this.leaguer1.leaguerRank==0){
+                if(this.leaguer1.leaguerRank===0){
                   this.ruleForm.memberPrice=this.rooms_gvipPrice;
                   this.ruleForm.deposit=this.rooms_gvipPrice*0.5;
                 }else{
@@ -285,6 +288,12 @@
             let url="orderManage/add";
             this.post(formName,url,this.ruleForm);
         },
+      loadUser(){
+        var list = JSON.parse(localStorage.getItem("user") || '[]');
+        this.user = list;
+        this.ruleForm.userName=list.userName;
+        this.ruleForm.userId=list.id;
+      },
     }
   }
 </script>

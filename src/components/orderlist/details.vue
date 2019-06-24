@@ -55,8 +55,11 @@
         <el-input-number v-model="ruleForm.personNum" @change="handleChange" :min="1" :max="10" disabled>
         </el-input-number>
       </el-form-item>
-      <el-form-item label="操作员" prop="userId">
-        <el-input   v-model="ruleForm.userId" disabled></el-input>
+      <el-form-item label="操作人id" prop="userId" hidden>
+        <el-input  v-model="ruleForm.userId" disabled></el-input>
+      </el-form-item>
+      <el-form-item label="操作人" prop="userName">
+        <el-input  v-model="ruleForm.userName" disabled></el-input>
       </el-form-item>
       <el-form-item label="会员编号" prop="memberId">
         <el-input  v-model="ruleForm.memberId" disabled></el-input>
@@ -101,14 +104,15 @@
           arrivalTime:"",
           leaveTime:"",
           personNum:1,
-          userId:"",
           memberId:"",
           memberPrice:"",
           breakfast:"",
           timedWakeup:"",
           remarks:"",
           active:"",
-          createDate:""
+          createDate:"",
+          userId:"",
+          userName:""
         },
         buttonText:"创建",
 

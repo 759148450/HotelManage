@@ -22,9 +22,9 @@ import ReservationList from '@/components/reservation_list/list'
 import LivingList from '@/components/living_list/list'
 import Login from '@/components/login'
 
-Vue.use(Router)
+Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode:'history',
   routes: [
     {
@@ -136,3 +136,5 @@ export default new Router({
     }
   ]
 })
+export default router;
+

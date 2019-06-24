@@ -25,6 +25,7 @@
           <el-input placeholder="请输入客房类型名称" v-model="search.roomsTypeName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
+
         </el-col>
       </el-row>
     </div>

@@ -7,7 +7,7 @@
         :router="true"
         @select="handleSelect"
         style="height:100%;">
-        <el-submenu index="基本信息管理" style="background-color: #42485b">
+        <el-submenu index="基本信息管理" style="background-color: #42485b" v-if="user.userPower==='0'">
           <template slot="title">
             <p style="color:#ffffff;font-size: 14px; ">
               <img src="../../assets/basic_msg.png" style="width: 16px;height: 16px"/>
@@ -19,7 +19,7 @@
           <el-menu-item index="商品管理" route="Goods">商品管理</el-menu-item>
           <el-menu-item index="会员管理" route="leaguer">会员管理</el-menu-item>
         </el-submenu>
-        <el-submenu index="系统管理" style="background-color: #42485b">
+        <el-submenu index="系统管理" style="background-color: #42485b" v-if="user.userPower==='0'">
           <template slot="title">
             <p style="color:#ffffff;font-size: 14px; ">
               <img src="../../assets/system.png" style="width: 16px;height: 16px"/>
@@ -28,7 +28,7 @@
           <el-menu-item index="用户管理" route="user">用户管理</el-menu-item>
           <el-menu-item index="日志管理">日志管理</el-menu-item>
         </el-submenu>
-        <el-submenu index="客房管理" style="background-color: #42485b">
+        <el-submenu index="客房管理" style="background-color: #42485b" v-if="user.userPower==='0'">
           <template slot="title">
             <p style="color:#ffffff;font-size: 14px; ">
               <img src="../../assets/hotel_msg.png" style="width: 18px;height: 18px"/>
@@ -37,7 +37,7 @@
           </template>
           <el-menu-item index="客房信息管理" route="rooms">客房信息管理</el-menu-item>
         </el-submenu>
-        <el-submenu index="房客管理" style="background-color: #42485b">
+        <el-submenu index="房客管理" style="background-color: #42485b" v-if="user.userPower!=='1'">
           <template slot="title"><p style="color:#ffffff;font-size: 14px; ">
             <img src="../../assets/people_msg.png" style="width: 16px;height: 16px"/>&nbsp;&nbsp;房客管理</p>
           </template>
@@ -49,7 +49,7 @@
           <el-menu-item index="结账管理" route="checkout">结账管理</el-menu-item>
           <el-menu-item index="已结账信息" route="livedList">已结账信息</el-menu-item>
         </el-submenu>
-        <el-submenu index="报表管理" style="background-color: #42485b">
+        <el-submenu index="报表管理" style="background-color: #42485b" v-if="user.userPower!=='2'">
           <template slot="title"><p style="color:#ffffff;font-size: 14px; ">
             <img src="../../assets/table_msg.png" style="width: 16px;height: 16px"/>&nbsp;&nbsp;报表管理</p>
           </template>
@@ -58,7 +58,7 @@
           <el-menu-item index="离店客人报表">离店客人报表</el-menu-item>
           <el-menu-item index="财务进账报表" route="financial">财务进账报表</el-menu-item>
         </el-submenu>
-        <el-submenu index="消费管理" style="background-color: #42485b">
+        <el-submenu index="消费管理" style="background-color: #42485b" v-if="user.userPower!=='1'">
           <template slot="title"><p style="color:#ffffff;font-size: 14px; ">
             <img src="../../assets/consume.png" style="width: 19px;height: 19px"/>&nbsp;&nbsp;消费管理</p>
           </template>
@@ -79,14 +79,22 @@
     name:'mymenu',
     data () {
       return {
-
+        user:[]
       }
     },
     methods: {
       ...mapMutations(['SET_MENU']),
       handleSelect(key, keyPath) {
         this.SET_MENU(keyPath);
+      },
+      //获取用户数据
+      loadComments(){
+        var list = JSON.parse(localStorage.getItem("user") || '[]');
+        this.user = list
       }
+    },
+    created(){
+      this.loadComments()
     },
     store
   }

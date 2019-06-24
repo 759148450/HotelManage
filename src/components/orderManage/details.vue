@@ -46,6 +46,12 @@
         <el-form-item label="入住人数" prop="personNum">
           <el-input  v-model="ruleForm.personNum" disabled></el-input>
         </el-form-item>
+        <el-form-item label="操作人id" prop="userId" hidden>
+          <el-input  v-model="ruleForm.userId" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="操作人" prop="userName">
+          <el-input  v-model="ruleForm.userName" disabled></el-input>
+        </el-form-item>
         <el-form-item label="会员编号" prop="memberId">
           <el-input  v-model="ruleForm.memberId" disabled></el-input>
         </el-form-item>
@@ -96,7 +102,9 @@
             bookStatus:"",
             memberPrice:"",
             roomsTypeName:"",
-            remarks:""
+            remarks:"",
+            userId:"",
+            userName:""
           },
       }
     },

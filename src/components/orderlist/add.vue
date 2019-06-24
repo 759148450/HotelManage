@@ -30,18 +30,13 @@
             :value="item.roomId">
           </el-option>
           </el-select>
-
         </el-form-item>
         <el-form-item label="id" prop="id" hidden>
           <el-input   v-model="ruleForm.id" disabled></el-input>
         </el-form-item>
-
         <el-form-item label="originalRoomId" prop="originalRoomId" hidden>
           <el-input   v-model="ruleForm.originalRoomId" disabled></el-input>
         </el-form-item>
-
-
-
         <el-form-item label="标准价" prop="normalPrice">
           <el-input   v-model="ruleForm.normalPrice" disabled></el-input>
         </el-form-item>
@@ -58,7 +53,7 @@
         <el-form-item label="会员编号" prop="memberId">
           <el-select v-model="ruleForm.memberId" filterable placeholder="请选择会员编号" style="width: 200px" @change="getMemberPrice($event)" >
             <el-option
-              v-for="item in leaguers"
+              v-for="item in allrole"
               :key="item.id"
               :label="item.id"
               :value="item.id">
@@ -118,35 +113,12 @@
         <el-input-number v-model="ruleForm.personNum" @change="handleChange" :min="1" :max="10">
         </el-input-number>
           </el-form-item>
-        <el-form-item label="操作员" prop="userId">
-          <el-input   v-model="ruleForm.userId"></el-input>
+        <el-form-item label="操作人id" prop="userId" hidden>
+          <el-input  v-model="ruleForm.userId" disabled></el-input>
         </el-form-item>
-
-
-
-<!--        <el-form-item label="会员编号" prop="memberId">-->
-<!--          <el-input  v-model="ruleForm.memberId"></el-input>-->
-<!--        </el-form-item>-->
-
-
-
-<!--        <el-radio-group  label="提供早餐" v-model="breakfast">-->
-<!--          <el-radio  label="1">是</el-radio>-->
-<!--          <el-radio label="0">否</el-radio>-->
-<!--        </el-radio-group>-->
-
-<!--        <el-form-item label="提供早餐" prop="breakfast">-->
-<!--          <el-select v-model="ruleForm.breakfast" placeholder="请选择" >-->
-<!--            <el-option label="是" :value="1"></el-option>-->
-<!--            <el-option label="否" :value="0"></el-option>-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
-
-
-<!--        <el-form-item label="定时叫醒" prop="timedWakeup">-->
-<!--          <el-input  v-model="ruleForm.timedWakeup"></el-input>-->
-<!--        </el-form-item>-->
-
+        <el-form-item label="操作人" prop="userName">
+          <el-input  v-model="ruleForm.userName" disabled></el-input>
+        </el-form-item>
         <el-form-item prop="timedWakeup" label="服务唤醒" >
           <el-checkbox true-label="1" false-label="0" v-model="ruleForm.breakfast" @change="breakfast_Edit(scope.row)">提供早餐</el-checkbox>
           <el-checkbox true-label="2" false-label="0" v-model="ruleForm.timedWakeup" @change="timedWakeup_Edit(scope.row)" >定时叫醒</el-checkbox>
@@ -246,14 +218,15 @@
             arrivalTime:"",
             leaveTime:"",
             personNum:1,
-            userId:"",
             memberId:"",
             memberPrice:"",
             breakfast:"",
             timedWakeup:"",
             remarks:"",
             active:"",
-            createDate:""
+            createDate:"",
+            userId:"",
+            userName:""
           },
         buttonText:"创建",
         pickerOptions0: {
@@ -289,6 +262,8 @@
       }
     },
     created(){
+      //获取当前操作 用户 Vanilla
+      this.loadUser();
       /*获取所有的房间编号*/
       this.get("orderManage/getAllRoomsAndLeaguers", (data) => {
         // this.rooms=data.rooms;
@@ -314,6 +289,13 @@
 
     },
     methods:{
+        //操作员信息-Vanilla
+      loadUser(){
+        var list = JSON.parse(localStorage.getItem("user") || '[]');
+        this.user = list;
+        this.ruleForm.userName=list.userName;
+        this.ruleForm.userId=list.id;
+      },
       timedWakeup_Edit(row){
         this.get("orderManage/updatetimedWakeup",(data)=>{
           if(data>0){

@@ -3,6 +3,8 @@
         <el-header class="header" style=" display: inline-block;">
             <img src="../assets/hotel.png" style="width: 26px;height: 26px;display:inline-block; vertical-align:middle"/>
             <h1  class="title" >酒店管理系统</h1>
+            <h1  class="title" >{{user.userName}}</h1>
+          <button @click="logout()">退出</button>
         </el-header>
         <el-container class="content">
             <el-aside width="200px">
@@ -28,15 +30,20 @@
             }
         },
       methods:{      //从本地的localStorage中，加载评论列表
-           loadComments(){
-             var list = JSON.parse(localStorage.getItem("user") || '[]')
+         loadUser(){
+             var list = JSON.parse(localStorage.getItem("user") || '[]');
              this.user = list
-           }
+           },
+        //用户退出，销毁localStorage
+          logout(){
+            localStorage.removeItem('user');
+            alert("退出成功");
+            this.$router.push('/login');
+          }
            },
       created(){
-          this.loadComments()
+          this.loadUser()
       },
-
         components: {
           Menu,
           MyBreadcrumb
