@@ -4,8 +4,8 @@
       <el-form-item label="入住单号" prop="id">
         <el-input  v-model="ruleForm.id" disabled></el-input>
       </el-form-item>
-      <el-form-item label="入住房间编号" prop="originalRoomId">
-        <el-input  v-model="ruleForm.originalRoomId" disabled></el-input>
+      <el-form-item label="入住房间编号" prop="currentRoomId">
+        <el-input  v-model="ruleForm.currentRoomId" disabled></el-input>
       </el-form-item>
       <el-form-item label="房间类型" prop="roomsTypeName">
         <el-input  v-model="ruleForm.roomsTypeName" disabled></el-input>
@@ -22,8 +22,11 @@
       <el-form-item label="入住人" prop="residents">
         <el-input  v-model="ruleForm.residents"></el-input>
       </el-form-item>
-      <el-form-item label="证件类型" prop="credentialsType">
-        <el-input  v-model="ruleForm.credentialsType"></el-input>
+      <el-form-item label="证件类型:" prop="credentialsType">
+        <el-radio-group v-model="ruleForm.credentialsType">
+          <el-radio  label="0">身份证</el-radio>
+          <el-radio label="1">护照</el-radio>
+        </el-radio-group>
       </el-form-item>
       <el-form-item label="证件号码" prop="credentialsNum">
         <el-input  v-model="ruleForm.credentialsNum"></el-input>
@@ -61,6 +64,9 @@
             :value="item.id">
           </el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item label="会员价" prop="memberPrice">
+        <el-input  v-model="ruleForm.memberPrice" ></el-input>
       </el-form-item>
 
       <!--<el-form-item label="会员价" prop="rooms.gvipPrice">-->
@@ -128,7 +134,7 @@
         leaguers:[],
         ruleForm:{
           id:"",
-          originalRoomId:"",
+          currentRoomId:"",
           deposit:"",
           residents:"",
           credentialsType:"",
