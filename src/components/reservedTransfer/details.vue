@@ -84,6 +84,7 @@
             currentRoomId:"",
             normalPrice:"",
             discountPrice:"",
+
             deposit:"",
             residents:"",
             credentialsType:"",
