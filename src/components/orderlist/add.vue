@@ -135,16 +135,21 @@
 <!--          <el-radio label="0">否</el-radio>-->
 <!--        </el-radio-group>-->
 
-        <el-form-item label="提供早餐" prop="breakfast">
-          <el-select v-model="ruleForm.breakfast" placeholder="请选择" >
-            <el-option label="是" :value="1"></el-option>
-            <el-option label="否" :value="0"></el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="提供早餐" prop="breakfast">-->
+<!--          <el-select v-model="ruleForm.breakfast" placeholder="请选择" >-->
+<!--            <el-option label="是" :value="1"></el-option>-->
+<!--            <el-option label="否" :value="0"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
 
 
-        <el-form-item label="定时叫醒" prop="timedWakeup">
-          <el-input  v-model="ruleForm.timedWakeup"></el-input>
+<!--        <el-form-item label="定时叫醒" prop="timedWakeup">-->
+<!--          <el-input  v-model="ruleForm.timedWakeup"></el-input>-->
+<!--        </el-form-item>-->
+
+        <el-form-item prop="timedWakeup" label="服务唤醒" >
+          <el-checkbox true-label="1" false-label="0" v-model="ruleForm.breakfast" @change="breakfast_Edit(scope.row)">提供早餐</el-checkbox>
+          <el-checkbox true-label="2" false-label="0" v-model="ruleForm.timedWakeup" @change="timedWakeup_Edit(scope.row)" >定时叫醒</el-checkbox>
         </el-form-item>
         <el-form-item label="备注" prop="remarks">
           <el-input   v-model="ruleForm.remarks"></el-input>
@@ -309,6 +314,26 @@
 
     },
     methods:{
+      timedWakeup_Edit(row){
+        this.get("orderManage/updatetimedWakeup",(data)=>{
+          if(data>0){
+            this.$message({
+              type: 'success',
+              message: '成功唤醒服务!'
+            });
+          }
+        },{id:row.id,timedWakeup: row.timedWakeup});
+      },
+      breakfast_Edit(row){
+        this.get("orderManage/updatetimedWakeup",(data)=>{
+          if(data>0){
+            this.$message({
+              type: 'success',
+              message: '成功唤醒服务!'
+            });
+          }
+        },{id:row.id,breakfast: row.breakfast});
+      },
         handleChange(value) {
           console.log(value);
         },

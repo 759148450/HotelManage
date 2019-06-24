@@ -67,14 +67,18 @@
       <el-form-item label="会员价" prop="memberPrice">
         <el-input   v-model="ruleForm.memberPrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="提供早餐" prop="breakfast">
-        <el-select v-model="ruleForm.breakfast" placeholder="请选择" disabled>
-          <el-option label="是" :value="1"></el-option>
-          <el-option label="否" :value="0"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="定时叫醒" prop="timedWakeup">
-        <el-input  v-model="ruleForm.timedWakeup" disabled></el-input>
+<!--      <el-form-item label="提供早餐" prop="breakfast">-->
+<!--        <el-select v-model="ruleForm.breakfast" placeholder="请选择" disabled>-->
+<!--          <el-option label="是" :value="1"></el-option>-->
+<!--          <el-option label="否" :value="0"></el-option>-->
+<!--        </el-select>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="定时叫醒" prop="timedWakeup">-->
+<!--        <el-input  v-model="ruleForm.timedWakeup" disabled></el-input>-->
+<!--      </el-form-item>-->
+      <el-form-item prop="timedWakeup" label="服务唤醒" disabled>
+        <el-checkbox true-label="1" false-label="0" v-model="ruleForm.breakfast" disabled>提供早餐</el-checkbox>
+        <el-checkbox true-label="2" false-label="0" v-model="ruleForm.timedWakeup" disabled>定时叫醒</el-checkbox>
       </el-form-item>
       <el-form-item label="备注" prop="remarks">
         <el-input   v-model="ruleForm.remarks" disabled></el-input>
