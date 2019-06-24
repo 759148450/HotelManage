@@ -37,14 +37,16 @@
         prop="memberId"
         label="会员编号">
       </el-table-column>
-      <!--暂时显示押金-->
+      <!--设置状态，根据不同状态显示不同数据-->
       <el-table-column
-        prop="deposit"
-        label="付款押金">
-      </el-table-column>
-      <el-table-column
-        prop="orderForm.totalBill"
-        label="结账金额">
+        prop="bookStatus"
+        label="付款金额">
+        <template slot-scope="scope">
+          <span v-if="scope.row.bookStatus==0">{{scope.row.deposit}}</span>
+          <span v-if="scope.row.bookStatus==2 ">{{scope.row.deposit}}</span>
+          <span v-if="scope.row.bookStatus==3 ">{{scope.row.orderForm.totalBill}}</span>
+          <span v-if="scope.row.bookStatus==4 ">{{scope.row.deposit}}</span>
+        </template>
       </el-table-column>
       <el-table-column
         prop="orderForm.payStyle"
