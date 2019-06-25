@@ -20,7 +20,7 @@
         <el-input  v-model="ruleForm.livedPrice" readonly @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="店内消费" prop="roomBill">
-        <el-input  v-model="roomBill"  disabled ></el-input>
+        <el-input  v-model="ruleForm.roomBill"  disabled></el-input>
       </el-form-item>
       <el-form-item label="餐费" prop="foodBill">
         <el-input  v-model="ruleForm.foodBill"  @keyup.native="getTotalBill"></el-input>
@@ -50,8 +50,9 @@
         <el-input  v-model="ruleForm.oddChange" disabled></el-input>
       </el-form-item>
       <el-form-item label="操作员" prop="user">
-        <el-input  v-model="ruleForm.user" disabled></el-input>
+        <el-input  v-model="ruleForm.user"></el-input>
       </el-form-item>
+
       <el-form-item label="备注" prop="remarks">
         <el-input type="textarea" v-model="ruleForm.remarks"></el-input>
       </el-form-item>
@@ -70,7 +71,7 @@
     data () {
       name:"checkoutadd"
       return {
-        roomBill:"",
+//        roomBill:"",
         ruleForm:{
           id:this.id,
           currentRoomId:this.currentRoomId,
@@ -103,7 +104,6 @@
       }
     },
     created(){
-      //获取当前用户
       this.loadUser();
       this.get("consume/getAllConsume",(data)=>{
         this.consume=data;
@@ -113,8 +113,8 @@
           //遍历dcPrice这个字段，并累加
           roomBill += consume.dcPrice;
         });
-        this.roomBill = roomBill; //返回
-        console.log("店内附加消费",this.roomBill)
+        this.ruleForm.roomBill = roomBill; //返回
+        console.log("店内附加消费",this.ruleForm.roomBill)
       },{liveId:this.id});
     },
 
@@ -130,16 +130,16 @@
       //实时价格数据监控
       getTotalBill(){
         let livedPrice = this.ruleForm.roomPrice * this.ruleForm.livedDays;//住宿费
-        this.ruleForm.livedPrice = livedPrice;
+        this.ruleForm.livedPrice = livedPrice.toFixed(2);
         //实际应收
         let totalBill = Number(this.ruleForm.roomPrice * this.ruleForm.livedDays)
-          + Number(this.roomBill) + Number(this.ruleForm.foodBill) + Number(this.ruleForm.telBill)-Number(this.ruleForm.rebackDeposit);
+          + Number(this.ruleForm.roomBill) + Number(this.ruleForm.foodBill) + Number(this.ruleForm.telBill)-Number(this.ruleForm.rebackDeposit);
         console.log(totalBill);
-        this.ruleForm.totalBill = totalBill;
+        this.ruleForm.totalBill = totalBill.toFixed(2);
         //找零
         let oddChange = Number(this.ruleForm.realWages) - Number(this.ruleForm.totalBill);
         console.log("找零"+oddChange);
-        this.ruleForm.oddChange = oddChange;
+        this.ruleForm.oddChange = oddChange.toFixed(2);
       },
       resetForm(formName){
         this.$refs[formName].resetFields();
