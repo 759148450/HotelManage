@@ -21,6 +21,7 @@ import Financial from '@/components/financial/list'
 import ReservationList from '@/components/reservation_list/list'
 import LivingList from '@/components/living_list/list'
 import Login from '@/components/login'
+import leavingList from '@/components/leaving_list/list'
 
 Vue.use(Router);
 
@@ -131,6 +132,11 @@ const router = new Router({
           path:'/living_list',
           name:'living_list',
           component:LivingList
+        },
+        {
+          path:'/leaving_list',
+          name:'leaving_list',
+          component:leavingList
         }
       ]
     }

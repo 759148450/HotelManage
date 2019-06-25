@@ -38,7 +38,6 @@
           v-model="ruleForm.arrivalTime"
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
-          :picker-options="pickerOptions0"
           placeholder="选择日期" disabled>
         </el-date-picker>
       </el-form-item>
@@ -47,7 +46,6 @@
           v-model="ruleForm.leaveTime"
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
-          :picker-options="pickerOptions1"
           placeholder="选择日期" disabled>
         </el-date-picker >
       </el-form-item>
@@ -114,9 +112,7 @@
           userId:"",
           userName:""
         },
-        buttonText:"创建",
-
-
+        rules:{},
       }
     },
     created(){
@@ -129,7 +125,6 @@
           this.ruleForm=data;
           console.log(this.ruleForm);
         },{id:this.id});
-        this.buttonText="修改"
       }
     },
     components: {

@@ -106,6 +106,9 @@
             userId:"",
             userName:""
           },
+        rules:{
+
+        }
       }
     },
     created(){

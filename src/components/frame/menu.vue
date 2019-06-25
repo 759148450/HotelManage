@@ -55,7 +55,7 @@
           </template>
           <el-menu-item index="预定客人报表" route="reservation_list">预定客人报表</el-menu-item>
           <el-menu-item index="在住客人报表" route="living_list">在住客人报表</el-menu-item>
-          <el-menu-item index="离店客人报表">离店客人报表</el-menu-item>
+          <el-menu-item index="离店客人报表" route="leaving_list">离店客人报表</el-menu-item>
           <el-menu-item index="财务进账报表" route="financial">财务进账报表</el-menu-item>
         </el-submenu>
         <el-submenu index="消费管理" style="background-color: #42485b" v-if="user.userPower!=='1'">
