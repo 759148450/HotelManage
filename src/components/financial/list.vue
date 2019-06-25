@@ -3,6 +3,18 @@
     <div style="margin-top: 15px;">
       <el-row>
         <el-col :span="22">
+          <el-date-picker
+            v-model="search.arrivalTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择起始日期">
+          </el-date-picker>
+          <el-date-picker
+            v-model="search.leaveTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择结束日期">
+          </el-date-picker>
           <el-input placeholder="请输入房间编号" v-model="search.currentRoomName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
@@ -96,12 +108,16 @@
       return {
         search:{
           currentRoomName:"",
+          arrivalTime:"",
+          leaveTime:""
 
         },
         queryParams:{
           pageNo:1,
           pageSize:10,
           currentRoomName:"",
+          arrivalTime:"",
+          leaveTime:""
         },
         tableData:{},
         orderForm:{}
