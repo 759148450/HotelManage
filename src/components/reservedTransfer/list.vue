@@ -258,29 +258,38 @@
        //     type: 'success',
        //     message: 'qqq!'
        // },
-       //     else if(scope.row.timedWakeup==2){
-       //     this.$message({
-       //       type: 'success',
-       //       message: '哈哈哈!'
-       // }
-       //   },
       timedWakeup_Edit(row){
         this.get("orderManage/updatetimedWakeup",(data)=>{
           if(data>0){
-            this.$message({
-              type: 'success',
-              message: '成功唤醒服务!'
-            });
+            if(row.timedWakeup==0){
+              this.$message({
+                type: 'warning',
+                message: '取消唤醒服务!'
+              });
+            }else{
+              this.$message({
+                type: 'success',
+                message: '成功唤醒服务!'
+              });
+            }
+
           }
         },{id:row.id,timedWakeup: row.timedWakeup});
       },
       breakfast_Edit(row){
         this.get("orderManage/updatetimedWakeup",(data)=>{
           if(data>0){
-            this.$message({
-              type: 'success',
-              message: '成功唤醒服务!'
-            });
+            if(row.breakfast==0){
+              this.$message({
+                type: 'warning',
+                message: '取消唤醒服务!'
+              });
+            }else{
+              this.$message({
+                type: 'success',
+                message: '成功唤醒服务!'
+              });
+            }
           }
         },{id:row.id,breakfast: row.breakfast});
       },
