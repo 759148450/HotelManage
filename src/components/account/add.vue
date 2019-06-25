@@ -38,7 +38,7 @@
       <!--<el-input v-model="ruleForm.totalPrice"></el-input>-->
       <!--</el-form-item>-->
       <el-form-item label="操作员" prop="user">
-        <el-input v-model="ruleForm.user"></el-input>
+        <el-input v-model="ruleForm.user" disabled></el-input>
       </el-form-item>
       <el-form-item label="消费时间" prop="consumeTime">
         <el-date-picker
@@ -99,6 +99,7 @@
     },
 
     created(){
+      this.loadUser();
       //获取所有订单号（状态为已入住2和已换房4）
       this.get("orderManage/listLived",(data)=>{
         console.log(data);
@@ -110,6 +111,11 @@
 
     },
     methods:{
+      //获取登录用户信息
+      loadUser(){
+        var list = JSON.parse(localStorage.getItem("user") || '[]');
+        this.ruleForm.user=list.userName;
+      },
       //  实现实时计算
       getConsumePrice(value){
         console.log(value);

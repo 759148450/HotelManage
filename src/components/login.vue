@@ -40,6 +40,7 @@
               console.log(res.data);
               this.$router.push('/index');
               localStorage.setItem('user',JSON.stringify(res.data));
+              localStorage.setItem('islogin','1');
               alert('登陆成功');
             }else{
               alert('账号不存在');

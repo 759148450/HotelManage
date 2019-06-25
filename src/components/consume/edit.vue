@@ -31,7 +31,7 @@
           <!--<el-input v-model="ruleForm.totalPrice"></el-input>-->
         <!--</el-form-item>-->
         <el-form-item label="操作员" prop="user">
-          <el-input v-model="ruleForm.user"></el-input>
+          <el-input v-model="ruleForm.user" disabled></el-input>
         </el-form-item>
         <el-form-item label="消费时间" prop="consumeTime" >
           <el-date-picker

@@ -29,24 +29,39 @@
               user:[],
             }
         },
-      methods:{      //从本地的localStorage中，加载评论列表
+
+      methods:{      //从本地的localStorage中，加载列表
          loadUser(){
              var list = JSON.parse(localStorage.getItem("user") || '[]');
-             this.user = list
+             this.user = list;
            },
         //用户退出，销毁localStorage
           logout(){
             localStorage.removeItem('user');
+            localStorage.removeItem('islogin');
             alert("退出成功");
-            this.$router.push('/login');
+            this.$router.push('/');
           }
            },
       created(){
-          this.loadUser()
+         var islogin = localStorage.getItem("islogin");
+        if(islogin!='1'){
+          this.$router.push('/');
+        }
+        this.loadUser();
+
       },
-        components: {
-          Menu,
-          MyBreadcrumb
+      watch:{
+        islogin: {
+          handler:function(){
+
+          },
+          deep:true
+        }
+      },
+      components: {
+        Menu,
+        MyBreadcrumb
       }
     }
 </script>

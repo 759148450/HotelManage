@@ -50,9 +50,8 @@
         <el-input  v-model="ruleForm.oddChange" disabled></el-input>
       </el-form-item>
       <el-form-item label="操作员" prop="user">
-        <el-input  v-model="ruleForm.user"></el-input>
+        <el-input  v-model="ruleForm.user" disabled></el-input>
       </el-form-item>
-
       <el-form-item label="备注" prop="remarks">
         <el-input type="textarea" v-model="ruleForm.remarks"></el-input>
       </el-form-item>
@@ -104,6 +103,8 @@
       }
     },
     created(){
+      //获取当前用户
+      this.loadUser();
       this.get("consume/getAllConsume",(data)=>{
         this.consume=data;
         //定义                   
@@ -121,6 +122,11 @@
 
     },
     methods:{
+      //获取登录用户信息
+      loadUser(){
+        var list = JSON.parse(localStorage.getItem("user") || '[]');
+        this.ruleForm.user=list.userName;
+      },
       //实时价格数据监控
       getTotalBill(){
         let livedPrice = this.ruleForm.roomPrice * this.ruleForm.livedDays;//住宿费
