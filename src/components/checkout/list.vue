@@ -95,7 +95,7 @@
           currentRoomName:""
 
         },
-        tableData:{}
+        tableData:{},
       }
     },
     created(){

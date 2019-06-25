@@ -58,15 +58,23 @@
         label="进账类型"
         :formatter="bookStatusformat">
       </el-table-column>
+      <!--如果是押金，显示订单创建时间、如果是结账，显示结账时间-->
       <el-table-column
-        prop="createDate"
+        prop="bookStatus"
+        width="170"
         label="进账时间">
-      </el-table-column>
-      <el-table-column label="操作" width="70">
         <template slot-scope="scope">
-          <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
+          <span v-if="scope.row.bookStatus==0">{{scope.row.createDate}}</span>
+          <span v-if="scope.row.bookStatus==2 ">{{scope.row.createDate}}</span>
+          <span v-if="scope.row.bookStatus==3 ">{{scope.row.orderForm.createDate}}</span>
+          <span v-if="scope.row.bookStatus==4 ">{{scope.row.createDate}}</span>
         </template>
       </el-table-column>
+      <!--<el-table-column label="操作" width="70">-->
+      <!--<template slot-scope="scope">-->
+      <!--<el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>-->
+      <!--</template>-->
+      <!--</el-table-column>-->
     </el-table>
     <el-pagination
       background
@@ -144,19 +152,24 @@
         this.queryParams.pageNo=1;
         this.merge(this.search,this.queryParams);
       },
-      detail(row){
-        this.$layer.iframe({
-          content: {
-            content: DetailFinancial, //传递的组件对象
-            parent: this,//当前的vue对象
-            data:{id:row.id}//props
-          },
-          area:['800px','600px'],
-          title: '入住信息详情',
-          shadeClose: false,
-          shade :true
-        });
-      },
+//      detail(row){
+//        this.$layer.iframe({
+//          content: {
+//            content: DetailFinancial, //传递的组件对象
+//            parent: this,//当前的vue对象
+//            data:{
+//              id:row.id,
+//              totalBill:row.orderForm.totalBill,
+//              createDate1:row.createDate,
+//              createDate2:row.orderForm.createDate,
+//              deposit:row.deposit}//props
+//          },
+//          area:['800px','600px'],
+//          title: '入住信息详情',
+//          shadeClose: false,
+//          shade :true
+//        });
+//      },
     }
   }
 </script>

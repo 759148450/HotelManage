@@ -20,7 +20,7 @@
         <el-input  v-model="ruleForm.livedPrice" readonly @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="店内消费" prop="roomBill">
-        <el-input  v-model="ruleForm.roomBill"  disabled @keyup.native="getTotalBill"></el-input>
+        <el-input  v-model="roomBill"  disabled ></el-input>
       </el-form-item>
       <el-form-item label="餐费" prop="foodBill">
         <el-input  v-model="ruleForm.foodBill"  @keyup.native="getTotalBill"></el-input>
@@ -29,7 +29,7 @@
         <el-input  v-model="ruleForm.telBill"  @keyup.native="getTotalBill"></el-input>
       </el-form-item>
       <el-form-item label="应退押金" prop="rebackDeposit">
-        <el-input  v-model="ruleForm.rebackDeposit" disabled></el-input>
+        <el-input  v-model="ruleForm.rebackDeposit"></el-input>
       </el-form-item>
       <el-form-item label="实际应收" prop="totalBill">
         <el-input  v-model="ruleForm.totalBill" disabled></el-input>
@@ -71,7 +71,7 @@
     data () {
       name:"checkoutadd"
       return {
-        consume:[],
+        roomBill:"",
         ruleForm:{
           id:this.id,
           currentRoomId:this.currentRoomId,
@@ -104,9 +104,17 @@
       }
     },
     created(){
-      this.get("consume/list",(data)=>{
+      this.get("consume/getAllConsume",(data)=>{
         this.consume=data;
-      });
+        //定义                   
+        let roomBill = 0;
+        this.consume.forEach((consume) => {
+          //遍历dcPrice这个字段，并累加
+          roomBill += consume.dcPrice;
+        });
+        this.roomBill = roomBill; //返回
+        console.log("店内附加消费",this.roomBill)
+      },{liveId:this.id});
     },
 
     components: {
@@ -119,7 +127,7 @@
         this.ruleForm.livedPrice = livedPrice;
         //实际应收
         let totalBill = Number(this.ruleForm.roomPrice * this.ruleForm.livedDays)
-          + Number(this.ruleForm.roomBill) + Number(this.ruleForm.foodBill) + Number(this.ruleForm.telBill)-Number(this.ruleForm.rebackDeposit);
+          + Number(this.roomBill) + Number(this.ruleForm.foodBill) + Number(this.ruleForm.telBill)-Number(this.ruleForm.rebackDeposit);
         console.log(totalBill);
         this.ruleForm.totalBill = totalBill;
         //找零
