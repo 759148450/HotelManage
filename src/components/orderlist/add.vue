@@ -34,8 +34,8 @@
         <el-form-item label="id" prop="id" hidden>
           <el-input   v-model="ruleForm.id" disabled></el-input>
         </el-form-item>
-        <el-form-item label="originalRoomId" prop="originalRoomId" hidden>
-          <el-input   v-model="ruleForm.originalRoomId" disabled></el-input>
+        <el-form-item label="房间id" prop="currentRoomId" hidden>
+          <el-input   v-model="ruleForm.currentRoomId" disabled></el-input>
         </el-form-item>
         <el-form-item label="标准价" prop="normalPrice">
           <el-input   v-model="ruleForm.normalPrice" disabled></el-input>
@@ -79,10 +79,8 @@
 <!--        </el-form-item>-->
         <el-form-item label="证件类型:" prop="credentialsType">
           <el-radio-group v-model="ruleForm.credentialsType">
-            <el-radio  label="1">身份证</el-radio>
-            <el-radio label="2">护照</el-radio>
-            <el-radio label="3">港澳通行证</el-radio>
-            <el-radio label="4">其他</el-radio>
+            <el-radio  label="0">身份证</el-radio>
+            <el-radio label="1">护照</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="证件号码" prop="credentialsNum">
@@ -120,8 +118,8 @@
           <el-input  v-model="ruleForm.userName" disabled></el-input>
         </el-form-item>
         <el-form-item prop="timedWakeup" label="服务唤醒" >
-          <el-checkbox true-label="1" false-label="0" v-model="ruleForm.breakfast" @change="breakfast_Edit(scope.row)">提供早餐</el-checkbox>
-          <el-checkbox true-label="2" false-label="0" v-model="ruleForm.timedWakeup" @change="timedWakeup_Edit(scope.row)" >定时叫醒</el-checkbox>
+          <el-checkbox true-label="1" false-label="0" v-model="ruleForm.breakfast">提供早餐</el-checkbox>
+          <el-checkbox true-label="2" false-label="0" v-model="ruleForm.timedWakeup" >定时叫醒</el-checkbox>
         </el-form-item>
         <el-form-item label="备注" prop="remarks">
           <el-input   v-model="ruleForm.remarks"></el-input>
@@ -166,26 +164,57 @@
           }
         }, 100)
       };
-      /*验证身份证号*/
+      /*验证身份证号和护照*/
       let checkcredentialsNum = (rule, value, callback) => {
         const credentialsNumReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-        if (!value) {
-          return callback(new Error("身份证不能为空"))
-        }
-        setTimeout(() => {
-          // Number.isInteger是es6验证数字是否为整数的方法,但是我实际用的时候输入的数字总是识别成字符串
-          // 所以在前面加了一个+实现隐式转换
-          if (!Number.isInteger(+value)) {
-            callback(new Error("请输入数字值"))
-          } else {
+        const passportNumReg = /(^[EeKkGgDdSsPpHh]\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\d{7}$)/
+        if(this.ruleForm.credentialsType==0){
+          if (!value) {
+            return callback(new Error("身份证编号不能为空"))
+          }
+          setTimeout(() => {
             if (credentialsNumReg.test(value)) {
               callback()
             } else {
-              callback(new Error("身份证号格式不正确"))
+              callback(new Error("身份证编号格式不正确"))
             }
+
+          }, 100)
+        }
+        else{
+          if (!value) {
+            return callback(new Error("护照编号不能为空"))
           }
-        }, 100)
+          setTimeout(() => {
+            if (passportNumReg.test(value)) {
+              callback()
+            } else {
+              callback(new Error("护照编号格式不正确"))
+            }
+          }, 100)
+        }
+
       };
+      /*验证身份证号*/
+      // let checkcredentialsNum = (rule, value, callback) => {
+      //   const credentialsNumReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+      //   if (!value) {
+      //     return callback(new Error("身份证不能为空"))
+      //   }
+      //   setTimeout(() => {
+      //     // Number.isInteger是es6验证数字是否为整数的方法,但是我实际用的时候输入的数字总是识别成字符串
+      //     // 所以在前面加了一个+实现隐式转换
+      //     if (!Number.isInteger(+value)) {
+      //       callback(new Error("请输入数字值"))
+      //     } else {
+      //       if (credentialsNumReg.test(value)) {
+      //         callback()
+      //       } else {
+      //         callback(new Error("身份证号格式不正确"))
+      //       }
+      //     }
+      //   }, 100)
+      // };
       return {
 
         select1: select1,
@@ -296,26 +325,26 @@
         this.ruleForm.userName=list.userName;
         this.ruleForm.userId=list.id;
       },
-      timedWakeup_Edit(row){
-        this.get("orderManage/updatetimedWakeup",(data)=>{
-          if(data>0){
-            this.$message({
-              type: 'success',
-              message: '成功唤醒服务!'
-            });
-          }
-        },{id:row.id,timedWakeup: row.timedWakeup});
-      },
-      breakfast_Edit(row){
-        this.get("orderManage/updatetimedWakeup",(data)=>{
-          if(data>0){
-            this.$message({
-              type: 'success',
-              message: '成功唤醒服务!'
-            });
-          }
-        },{id:row.id,breakfast: row.breakfast});
-      },
+      // timedWakeup_Edit(row){
+      //   this.get("orderManage/updatetimedWakeup",(data)=>{
+      //     if(data>0){
+      //       this.$message({
+      //         type: 'success',
+      //         message: '成功唤醒服务!'
+      //       });
+      //     }
+      //   },{id:row.id,timedWakeup: row.timedWakeup});
+      // },
+      // breakfast_Edit(row){
+      //   this.get("orderManage/updatetimedWakeup",(data)=>{
+      //     if(data>0){
+      //       this.$message({
+      //         type: 'success',
+      //         message: '成功唤醒服务!'
+      //       });
+      //     }
+      //   },{id:row.id,breakfast: row.breakfast});
+      // },
         handleChange(value) {
           console.log(value);
         },
@@ -354,7 +383,7 @@
               this.ruleForm.gvipPrice=val.gvipPrice;
               this.ruleForm.svipPrice=val.svipPrice
               this.ruleForm.deposit=val.normalPrice*0.5;
-              this.ruleForm.originalRoomId=val.id;
+              this.ruleForm.currentRoomId=val.id;
             }
           }
         },

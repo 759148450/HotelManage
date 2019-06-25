@@ -93,10 +93,8 @@
 <!--        </el-form-item>-->
         <el-form-item label="证件类型:" prop="credentialsType">
           <el-radio-group v-model="ruleForm.credentialsType"  disabled>
-            <el-radio  label="1">身份证</el-radio>
-            <el-radio label="2">护照</el-radio>
-            <el-radio label="3">港澳通行证</el-radio>
-            <el-radio label="4">其他</el-radio>
+            <el-radio  label="0">身份证</el-radio>
+            <el-radio label="1">护照</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="证件号码" prop="credentialsNum">
