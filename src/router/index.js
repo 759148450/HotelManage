@@ -22,6 +22,7 @@ import ReservationList from '@/components/reservation_list/list'
 import LivingList from '@/components/living_list/list'
 import Login from '@/components/login'
 import leavingList from '@/components/leaving_list/list'
+import Charts from '@/components/charts/indexcharts'
 
 Vue.use(Router);
 
@@ -38,6 +39,11 @@ const router = new Router({
       name:'index',
       component:Index,
       children:[
+        {
+          path:'/index',
+          name:'Charts',
+          component:Charts
+        },
         {
           path:'/guestType',
           name:'guestType',
