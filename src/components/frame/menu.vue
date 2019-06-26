@@ -5,6 +5,7 @@
         default-active="2"
         class="el-menu-vertical-demo"
         :router="true"
+        text-color="#fff"
         @select="handleSelect"
         style="height:100%;">
         <el-submenu index="基本信息管理" style="background-color: #42485b" v-if="user.userPower==='0'">
