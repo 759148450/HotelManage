@@ -83,9 +83,13 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <!--添加设置，只有为空状态0 的时候才能修改和删除，否则隐藏按钮-->
-          <el-button @click="edit(scope.row)" type="text" size="small" v-if="scope.row.status==0">修改</el-button>
-          <el-button type="text" size="small" v-if="scope.row.status==0" @click="del(scope.row)">删除</el-button>
-          <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
+          <el-button @click="edit(scope.row)" v-if="scope.row.status==0" size="small" type="primary" icon="el-icon-edit" circle></el-button>
+          <el-button size="small" @click="del(scope.row)" v-if="scope.row.status==0" type="danger" icon="el-icon-delete" circle></el-button>
+          <el-button @click="detail(scope.row)" size="small" type="info" icon="el-icon-document" circle></el-button>
+
+          <!--<el-button @click="edit(scope.row)" type="text" size="small" v-if="scope.row.status==0">修改</el-button>-->
+          <!--<el-button type="text" size="small" v-if="scope.row.status==0" @click="del(scope.row)">删除</el-button>-->
+          <!--<el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>-->
         </template>
       </el-table-column>
     </el-table>
