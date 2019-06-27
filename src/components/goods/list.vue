@@ -9,13 +9,13 @@
           </el-input>
           <el-select v-model="search.goodsTypeid" filterable placeholder="请选择商品类型" style="width: 200px"  @change="findData">
             <el-option label="全部" value=""></el-option>
-          <el-option
-            v-for="item in goodsTypes"
-            :key="item.id"
-            :label="item.goodsTypename"
-            :value="item.id">
-          </el-option>
-        </el-select>
+            <el-option
+              v-for="item in goodsTypes"
+              :key="item.id"
+              :label="item.goodsTypename"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-col>
 
 
@@ -52,8 +52,8 @@
         label="备注">
       </el-table-column>
       <!--<el-table-column-->
-        <!--prop="createTime"-->
-        <!--label="创建日期">-->
+      <!--prop="createTime"-->
+      <!--label="创建日期">-->
       <!--</el-table-column>-->
 
       <el-table-column label="操作">

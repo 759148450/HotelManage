@@ -23,6 +23,7 @@ import LivingList from '@/components/living_list/list'
 import Login from '@/components/login'
 import leavingList from '@/components/leaving_list/list'
 import Charts from '@/components/charts/indexcharts'
+import LogManagement from '@/components/logManagement/list'
 
 Vue.use(Router);
 
@@ -143,6 +144,11 @@ const router = new Router({
           path:'/leaving_list',
           name:'leaving_list',
           component:leavingList
+        },
+        {
+          path:'/logManagement',
+          name:'logManagement',
+          component:LogManagement
         }
       ]
     }

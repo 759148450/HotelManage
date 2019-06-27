@@ -27,7 +27,7 @@
               &nbsp;&nbsp;系统管理</p>
           </template>
           <el-menu-item index="用户管理" route="user">用户管理</el-menu-item>
-          <el-menu-item index="日志管理">日志管理</el-menu-item>
+          <el-menu-item index="日志管理" route="logManagement">日志管理</el-menu-item>
         </el-submenu>
         <el-submenu index="客房管理" style="background-color: #42485b" v-if="user.userPower==='0'">
           <template slot="title">

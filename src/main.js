@@ -16,7 +16,6 @@ Vue.prototype.axios=axios;
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.get=mypublic.get;
-
 Vue.prototype.merge=mypublic.merge;
 Vue.prototype.$layer = layer(Vue);
 Vue.prototype.reset=function(formName){
@@ -48,8 +47,8 @@ Vue.prototype.delete=function(url,id,status){
     },{id:id,active:status});
   })
 }
-
-
+//Vanilla
+axios.defaults.withCredentials = true
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
