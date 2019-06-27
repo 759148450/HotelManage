@@ -44,8 +44,10 @@
       <!--</el-table-column>-->
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" type="text" size="small" >修改</el-button>
-          <el-button type="text" size="small" @click="del(scope.row)" v-if="scope.row.counts==0">{{deltext(scope.row.active)}}</el-button>
+          <el-button type="primary" @click="edit(scope.row)" size="small" icon="el-icon-edit" circle></el-button>
+          <!--<el-button @click="edit(scope.row)" type="text" size="small" >修改</el-button>-->
+          <el-button size="small" @click="del(scope.row)" v-if="scope.row.counts==0" type="danger" icon="el-icon-delete" circle></el-button>
+          <!--<el-button type="text" size="small" @click="del(scope.row)" v-if="scope.row.counts==0">{{deltext(scope.row.active)}}</el-button>-->
         </template>
       </el-table-column>
     </el-table>
