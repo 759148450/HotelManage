@@ -5,7 +5,8 @@
         <el-input v-model="ruleForm.typeName"></el-input>
       </el-form-item>
       <el-form-item label="人数限制" prop="limitNum">
-        <el-input   v-model.number="ruleForm.limitNum" type="number"></el-input>
+        <el-input-number v-model="ruleForm.limitNum" :min="1"></el-input-number>
+        <!--<el-input   v-model.number="ruleForm.limitNum" type="number"></el-input>-->
       </el-form-item>
       <el-form-item label="备注" prop="remarks">
         <el-input type="textarea" v-model="ruleForm.remarks"></el-input>
@@ -35,9 +36,6 @@
           typeName: [
             { required: true, message: '请输入客房类型名称', trigger: 'blur' },
             { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
-          ],
-          limitNum: [
-            { required: true, type:'number', message: '输入限制人数,且只能输入数字', trigger: 'blur' }
           ]
         },
         buttonText:"创建"
