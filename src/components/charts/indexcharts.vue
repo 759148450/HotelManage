@@ -4,39 +4,41 @@
     font-size: 18px;
   }
   #chart_example1{
-    width: 400px;
+    width: 650px;
     height: 400px;
+    background-color: #ffffff;
+    padding-top: 10px;
   }
   #chart_example2{
-    width: 400px;
+    width: 500px;
     height: 400px;
+    background-color: #ffffff;
+    padding-top: 10px;
   }
   #chart_example3{
-       width: 400px;
+       width: 800px;
        height: 400px;
+       background-color: #ffffff;
+       padding-top: 10px;
      }
   #chart_example4{
-    width: 400px;
+    width: 600px;
     height: 400px;
+    background-color: #ffffff;
+    padding-top: 10px;
   }
 
 </style>
 
 <template>
   <div>
-    <table >
-      <tr>
-        <th id="chart_example1" ></th>
-        <th id="chart_example2" ></th>
-      </tr>
-      <tr>
-        <th id="chart_example3"></th>
-        <th id="chart_example4"></th>
-      </tr>
-    </table>
+    <div id="chart_example3"></div>
+    <div style="display:inline-block;margin-top: 10px">
+      <div id="chart_example1" style="display:inline-block;"></div>
+      <div id="chart_example2" style="display:inline-block;margin-left: 5px;"></div>
+    </div>
+    <div id="chart_example4" style="margin-top: 5px;"></div>
 
-<!--    <div id="chart_example"></div>-->
-<!--    <div id="chart_example2"></div>-->
   </div>
 </template>
 
@@ -123,7 +125,7 @@
             title: {
               text: '房间类型的热度',      //主标题
               textStyle:{
-                color:'#140ef2',        //颜色
+                color:'#009688',        //颜色
                 fontStyle:'normal',     //风格
                 fontWeight:'normal',    //粗细
                 fontFamily:'Microsoft yahei',   //字体
@@ -158,7 +160,7 @@
               {
                 name:'订单数量',
                 type:'bar',
-                barWidth: '40%',
+                barWidth: '4%',
                 data:datam,
                 label: {
                   normal: {
@@ -175,7 +177,7 @@
             title: {
               text: '最近一周的订单数量',      //主标题
               textStyle:{
-                color:'#31f270',        //颜色
+                color:'#009688',        //颜色
                 fontStyle:'normal',     //风格
                 fontWeight:'normal',    //粗细
                 fontFamily:'Microsoft yahei',   //字体
@@ -212,7 +214,7 @@
             },
             grid: {
               left: '3%',
-              right: '4%',
+              right: '10%',
               bottom: '10%',
               containLabel: true
             },
@@ -229,6 +231,7 @@
               {
                 name: '已预订/入住',
                 type: 'bar',
+                barWidth: '40%',
                 stack: '总数',
                 label: {
                   normal: {

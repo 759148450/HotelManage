@@ -27,7 +27,7 @@
         <Menu>
         </Menu>
       </el-aside>
-      <el-main style="background:#fff;">
+      <el-main style="background-color: #F4F4F4;">
         <MyBreadcrumb style="margin-bottom:20px;"></MyBreadcrumb>
         <router-view></router-view>
       </el-main>
@@ -42,6 +42,7 @@
     name:"index",
     data () {
       return {
+        activeIndex2: '1',
         user:[],
       }
     },
@@ -57,6 +58,9 @@
         localStorage.removeItem('islogin');
         alert("退出成功");
         this.$router.push('/');
+      },
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
       }
     },
     created(){
@@ -98,7 +102,7 @@
   }
   .header{
     padding:0;
-    /*padding-left: 3%;*/
+    padding-left: 2%;
     line-height: 60px;
     background-color:#333744;
   }
