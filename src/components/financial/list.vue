@@ -26,6 +26,8 @@
     <el-table
       :data="tableData.list"
       border
+      :summary-method="getTotalPrice"
+      show-summary
       style="width: 100%;">
       <el-table-column
         prop="id"
@@ -51,7 +53,7 @@
       </el-table-column>
       <!--设置状态，根据不同状态显示不同数据-->
       <el-table-column
-        prop="bookStatus"
+        prop="deposit"
         label="付款金额(元)">
         <template slot-scope="scope">
           <span v-if="scope.row.bookStatus==0">{{scope.row.deposit}}</span>
@@ -106,6 +108,8 @@
     name:"orderlist",
     data () {
       return {
+        deposits:"",
+        totalBills:"",
         search:{
           currentRoomName:"",
           arrivalTime:"",
@@ -120,7 +124,8 @@
           leaveTime:""
         },
         tableData:{},
-        orderForm:{}
+        orderForm:{},
+        order:[]
       }
     },
     created(){
@@ -136,16 +141,49 @@
     },
     mounted(){},
     methods:{
+      getTotalPrice(param){
+        const {columns ,data}=param;
+        const sums = [];
+        columns.forEach((column ,index) =>{
+          if (index === 0){
+            sums[index] = '总计';
+            return;
+          }
+          if (column.property === 'deposit') {
+            sums[index]=this.totalBills+this.deposits;
+          }
+          else {
+            sums[index] = '';
+          }
+
+        });
+        return sums
+      },
       getData(){
         //查询所有0、2、3、4状态的
         this.get("orderManage/financial",(data)=>{
           console.log("订单表所有信息",data);
           this.tableData=data;
+          this.order=data.list;
+          let deposits = 0;
+          this.order.forEach((order) => {
+            //遍历dcPrice这个字段，并累加
+            if(order.bookStatus===0||order.bookStatus===2){
+              deposits += order.deposit;
+            }
+          });
+          this.deposits=deposits;
         },this.queryParams);
         //查询结账（只有3退房状态才会结账）信息
         this.get("orderManage/orderForm",(data)=>{
           console.log("结账信息",data);
           this.orderForm=data;
+          let totalBills = 0;
+          this.orderForm.forEach((order) => {
+            //遍历dcPrice这个字段，并累加
+            totalBills += order.totalBill;
+          });
+          this.totalBills=totalBills;
         });
       },
 

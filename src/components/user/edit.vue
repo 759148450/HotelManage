@@ -41,6 +41,9 @@
             remarks:"",
 
           },
+        users:{
+
+        },
           rules: {
             userName: [
                 { required: true, message: '请输入会员名称', trigger: 'blur' },
@@ -76,11 +79,36 @@
         },
         submitForm(formName){
             let url="";
-            if(this.id)
-                url="user/update";
-            else
-                url="user/add";
-            this.post(formName,url,this.ruleForm);
+            if(this.id){
+              this.get("user/getAll",(data)=>{
+                this.users=data;
+                // console.log(this.ruleForm);
+                if(data.length>0){
+                  if(data[0].id!==this.id){
+                    alert("该用户已存在!");
+                  }
+                  else{
+                    url="user/update";
+                    this.post(formName,url,this.ruleForm);
+                  }
+                }
+              },{userName:this.ruleForm.userName});
+
+            }
+            else{
+              this.get("user/getAll",(data)=>{
+                this.users=data;
+                console.log(this.ruleForm);
+                if(data.length>0){
+                  alert("该用户已存在!");
+                }else{
+                  url="user/add";
+                  this.post(formName,url,this.ruleForm);
+                }
+              },{userName:this.ruleForm.userName});
+
+            }
+
         }
 
     }
