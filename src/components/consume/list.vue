@@ -139,7 +139,17 @@
         }
     },
     mounted(){},
+    filters: {
+      numFilter(value) {
+        // 截取当前数据到小数点后三位
+        let transformVal = parseFloat(value).toFixed(3)
+        let realVal = transformVal.substring(0, transformVal.length - 1)
+        // num.toFixed(3)获取的是字符串
+        return parseFloat(realVal)
+      }
+    },
     methods:{
+
        // 总计
         getTotalPrice(param){
           const {columns ,data}=param;
@@ -159,7 +169,8 @@
                   return prev;
                 }
               }, 0);
-              sums[index];
+              // this.numFilter(sums[index]);
+              parseFloat(sums[index]).toFixed(2);
             }
             else if (column.property === 'dcPrice') {
               sums[index] = values.reduce((prev, curr) => {
@@ -170,7 +181,7 @@
                   return prev ;
                 }
               }, 0);
-              sums[index];
+              parseFloat(sums[index]).toFixed(2);
             }
             else {
               sums[index] = '';

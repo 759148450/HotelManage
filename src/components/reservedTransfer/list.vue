@@ -238,14 +238,14 @@
           type: 'warning'
         }).then(() => {
           row.bookStatus=2;
-          this.get("orderManage/updateBookStutas",(data)=>{
+          this.get("orderManage/updateBookStutas1",(data)=>{
             if(data>0){
               this.$message({
                 type: 'success',
                 message: '入住成功!'
               });
             }
-          },{id:row.id,bookStatus: 2});
+          },{id:row.id,bookStatus: 2,currentRoomId:row.currentRoomId});
 
         }).catch(() => {
           this.$message({

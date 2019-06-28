@@ -137,22 +137,33 @@
       /*验证身份证号*/
       let checkcredentialsNum = (rule, value, callback) => {
         const credentialsNumReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-        if (!value) {
-          return callback(new Error("身份证不能为空"))
-        }
-        setTimeout(() => {
-          // Number.isInteger是es6验证数字是否为整数的方法,但是我实际用的时候输入的数字总是识别成字符串
-          // 所以在前面加了一个+实现隐式转换
-          if (!Number.isInteger(+value)) {
-            callback(new Error("请输入数字值"))
-          } else {
+        const passportNumReg = /(^[EeKkGgDdSsPpHh]\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\d{7}$)/
+        if(this.ruleForm.credentialsType==0){
+          if (!value) {
+            return callback(new Error("身份证编号不能为空"))
+          }
+          setTimeout(() => {
             if (credentialsNumReg.test(value)) {
               callback()
             } else {
-              callback(new Error("身份证号格式不正确"))
+              callback(new Error("身份证编号格式不正确"))
             }
+
+          }, 100)
+        }
+        else{
+          if (!value) {
+            return callback(new Error("护照编号不能为空"))
           }
-        }, 100)
+          setTimeout(() => {
+            if (passportNumReg.test(value)) {
+              callback()
+            } else {
+              callback(new Error("护照编号格式不正确"))
+            }
+          }, 100)
+        }
+
       };
       return {
         select2:[],

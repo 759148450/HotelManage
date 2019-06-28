@@ -33,10 +33,10 @@
       :data="tableData.list"
       border
       style="width: 100%;">
-<!--      <el-table-column-->
-<!--        prop="id"-->
-<!--        label="编号">-->
-<!--      </el-table-column>-->
+      <el-table-column
+        prop="id"
+        label="入住单号">
+      </el-table-column>
       <el-table-column
         prop="currentRoomName"
         label="预定房间编号">

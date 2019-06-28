@@ -34,7 +34,7 @@
       <el-table-column
         prop="userName"
         width="70"
-        label="用户名">
+        label="操作员">
       </el-table-column>
 <!--      <el-table-column-->
 <!--        prop="params.userName"-->

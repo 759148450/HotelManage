@@ -73,6 +73,9 @@
         <el-form-item label="备注" prop="remarks">
           <el-input  v-model="ruleForm.remarks" disabled></el-input>
         </el-form-item>
+        <el-form-item label="创建时间" prop="createDate">
+          <el-input  v-model="ruleForm.createDate" disabled></el-input>
+        </el-form-item>
         </el-form>
   </div>
 </template>
@@ -104,7 +107,8 @@
             roomsTypeName:"",
             remarks:"",
             userId:"",
-            userName:""
+            userName:"",
+            createDate:""
           },
         rules:{
 
