@@ -2,8 +2,20 @@
   <div>
     <div style="margin-top: 15px;">
       <el-row>
-        <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
+        <el-col :span="2"></el-col>
         <el-col :span="22">
+          <el-date-picker
+            v-model="search.time1"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择起始日期">
+          </el-date-picker>
+          <el-date-picker
+            v-model="search.time2"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择结束日期">
+          </el-date-picker>
           <el-input placeholder="用户名" v-model="search.userName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
@@ -25,7 +37,7 @@
         label="用户名">
       </el-table-column>
 <!--      <el-table-column-->
-<!--        prop="ruleForm.userName"-->
+<!--        prop="params.userName"-->
 <!--        width="70"-->
 <!--        label="操作数据">-->
 <!--      </el-table-column>-->
@@ -43,7 +55,7 @@
       </el-table-column>
       <el-table-column
         prop="createDate"
-        label="创建时间">
+        label="操作时间">
       </el-table-column>
       <!--<el-table-column-->
       <!--prop="createTime"-->
@@ -76,15 +88,20 @@
       return {
         search:{
           userName:"",
+          time1:"",
+          time2:""
         },
         queryParams:{
           pageNo:1,
           pageSize:10,
-          userName:""
+          userName:"",
+          time1:"",
+          time2:""
         },
         tableData:{
-          ruleForm:[],
-        }
+          order_data:[],
+        },
+
       }
     },
     created(){
@@ -103,7 +120,15 @@
       getData(){
         this.get("logManagement/list",(data)=>{
           this.tableData=data;
-          this.tableData.ruleForm=data.params;
+          console.log(this.tableData);
+          // this.tableData.order_data=JSON.parse(data.params);
+          // console.log(this.tableData.order_data);
+          // for (var i = 0; i < data.params.length; i++) {
+          //   //data[i]表示获得第i个json对象即JSONObject
+          //   //data[i]通过.字段名称即可获得指定字段的值
+          //   this.userNamedata[i].userName;
+          // }
+
         },this.queryParams);
       },
 //        activeformat(row, column, cellValue, index){
