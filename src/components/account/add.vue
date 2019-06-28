@@ -20,7 +20,7 @@
       </el-form-item>
       <el-input v-model="ruleForm.goodId"  type="hidden"></el-input>
       <el-form-item label="数量" prop="num">
-        <el-input v-model.number="ruleForm.num" :min="0"  size="medium" type="number"  @keyup.native="getConsumePrice"></el-input>
+        <el-input v-model.number="ruleForm.num" :min="1"  size="medium" type="number"  @keyup.native="getConsumePrice"></el-input>
       </el-form-item>
       <el-form-item label="单价" prop="price">
         <el-input v-model="ruleForm.price"  disabled></el-input>

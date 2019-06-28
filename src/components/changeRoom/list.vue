@@ -35,11 +35,11 @@
         label="现房间编号">
       </el-table-column>
 
-      <el-table-column
-        prop="bookStatus"
-        label="状态"
-        :formatter="bookStatusformat">
-      </el-table-column>
+      <!--<el-table-column-->
+        <!--prop="bookStatus"-->
+        <!--label="状态"-->
+        <!--:formatter="bookStatusformat">-->
+      <!--</el-table-column>-->
 
       <el-table-column
         prop="roomsTypeName"
@@ -77,10 +77,12 @@
       <!--      </el-table-column>-->
       <el-table-column
         prop="arrivalTime"
+        width="170"
         label="抵店时间">
       </el-table-column>
       <el-table-column
         prop="leaveTime"
+        width="170"
         label="离店时间">
       </el-table-column>
       <el-table-column
@@ -118,6 +120,7 @@
       <!--      </el-table-column>-->
       <el-table-column
         prop="createDate"
+        width="170"
         label="创建时间">
       </el-table-column>
 

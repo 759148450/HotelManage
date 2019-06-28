@@ -74,9 +74,11 @@
 <!--      </el-table-column>-->
       <el-table-column
         prop="arrivalTime"
+        width="170"
         label="抵店时间">
       </el-table-column>
       <el-table-column
+        width="170"
         prop="leaveTime"
         label="离店时间">
       </el-table-column>

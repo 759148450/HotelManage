@@ -78,10 +78,12 @@
 <!--        label="联系电话">-->
 <!--      </el-table-column>-->
       <el-table-column
+        width="170"
         prop="arrivalTime"
         label="抵店时间">
       </el-table-column>
       <el-table-column
+        width="170"
         prop="leaveTime"
         label="离店时间">
       </el-table-column>
@@ -119,6 +121,7 @@
 <!--        label="删除状态">-->
 <!--      </el-table-column>-->
       <el-table-column
+        width="170"
         prop="createDate"
         label="创建时间">
       </el-table-column>
@@ -305,7 +308,7 @@
             parent: this,//当前的vue对象
             data:{}//props
           },
-          area:['800px','1000px'],
+          area:['800px','600px'],
           title: '添加登记信息',
           shadeClose: false,
           shade :true

@@ -22,7 +22,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="标准价格" prop="normalPrice">
-        <el-input  v-model.number="ruleForm.normalPrice" :min="0"  size="medium" type="number" @keyup.native="getNormalPrice"></el-input>
+        <el-input  v-model.number="ruleForm.normalPrice" @input="oninput" :min="0"  size="medium" type="number" @keyup.native="getNormalPrice"></el-input>
       </el-form-item>
       <el-form-item label="折后价" prop="discountPrice">
         <el-input   v-model.number="ruleForm.discountPrice" :min="0"  size="medium" type="number"></el-input>
@@ -81,15 +81,15 @@
           normalPrice: [
             { required: true,type: 'number',message: '请填写标准价格,只能输入数字', trigger: 'blur' },
           ],
-          discountPrice: [
-            { required: true,type: 'number',message: '请填写折后价,只能输入数字', trigger: 'blur' },
-          ],
-          gvipPrice: [
-            { required: true,type: 'number', message: '请填写普通会员价,只能输入数字', trigger: 'blur' },
-          ],
-          svipPrice: [
-            { required: true,type: 'number', message: '请填写VIP会员价,只能输入数字', trigger: 'blur' },
-          ],
+//          discountPrice: [
+//            { required: true,type: 'number',message: '请填写折后价,只能输入数字', trigger: 'blur' },
+//          ],
+//          gvipPrice: [
+//            { required: true,type: 'number', message: '请填写普通会员价,只能输入数字', trigger: 'blur' },
+//          ],
+//          svipPrice: [
+//            { required: true,type: 'number', message: '请填写VIP会员价,只能输入数字', trigger: 'blur' },
+//          ],
         },
         buttonText:"创建"
 
@@ -114,13 +114,20 @@
 
     },
     methods:{
+      //限制只能输入两位小数
+      oninput(e) {
+        // 通过正则过滤小数点后两位
+        e.target.value = (e.target.value.match(/^\d*(\.?\d{0,2})/g)[0]) || null;
+        console.log('e',e.target.value)
+      },
       //实时价格数据监控
       getNormalPrice(){
+        //设置其他加个默认和普通加个相同
         let normalPrice = this.ruleForm.normalPrice;
         console.log(normalPrice);
-        this.ruleForm.discountPrice = normalPrice;
-        this.ruleForm.gvipPrice = normalPrice;
-        this.ruleForm.svipPrice = normalPrice;
+        this.ruleForm.discountPrice = normalPrice.toFixed(2);
+        this.ruleForm.gvipPrice = normalPrice.toFixed(2);
+        this.ruleForm.svipPrice = normalPrice.toFixed(2);
       },
       resetForm(formName){
         this.$refs[formName].resetFields();
