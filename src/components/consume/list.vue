@@ -66,11 +66,11 @@
         </el-table-column>
         <el-table-column
           prop="price"
-          label="单价">
+          label="单价(元)">
         </el-table-column>
         <el-table-column
           prop="consumePrice"
-          label="消费金额">
+          label="消费金额(元)">
         </el-table-column>
         <el-table-column
           prop="discount"
@@ -78,7 +78,7 @@
         </el-table-column>
         <el-table-column
           prop="dcPrice"
-          label="折后金额">
+          label="折后金额(元)">
         </el-table-column>
 
         <el-table-column label="操作" width="200">

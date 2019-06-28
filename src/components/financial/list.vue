@@ -52,7 +52,7 @@
       <!--设置状态，根据不同状态显示不同数据-->
       <el-table-column
         prop="bookStatus"
-        label="付款金额">
+        label="付款金额(元)">
         <template slot-scope="scope">
           <span v-if="scope.row.bookStatus==0">{{scope.row.deposit}}</span>
           <span v-if="scope.row.bookStatus==2 ">{{scope.row.deposit}}</span>

@@ -52,11 +52,13 @@
         label="入住人">
       </el-table-column>
       <el-table-column
+        width="170"
         prop="arrivalTime"
         label="抵店时间">
       </el-table-column>
       <el-table-column
         prop="leaveTime"
+        width="170"
         label="离店时间">
       </el-table-column>
       <el-table-column

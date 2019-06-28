@@ -50,7 +50,7 @@
       </el-table-column>
       <el-table-column
         prop="memberPrice"
-        label="会员价">
+        label="会员价(元)">
       </el-table-column>
       <el-table-column
         prop="remarks"

@@ -15,16 +15,16 @@
       <el-form-item label="数量" prop="num">
         <el-input v-model.number="ruleForm.num" disabled></el-input>
       </el-form-item>
-      <el-form-item label="单价" prop="price">
+      <el-form-item label="单价(元)" prop="price">
         <el-input v-model="ruleForm.price" disabled></el-input>
       </el-form-item>
-      <el-form-item label="消费金额" prop="consumePrice">
+      <el-form-item label="消费金额(元)" prop="consumePrice">
         <el-input v-model="ruleForm.consumePrice" disabled></el-input>
       </el-form-item>
       <el-form-item label="折扣率" prop="discount">
         <el-input v-model="ruleForm.discount" disabled></el-input>
       </el-form-item>
-      <el-form-item label="折后金额" prop="dcPrice">
+      <el-form-item label="折后金额(元)" prop="dcPrice">
         <el-input v-model="ruleForm.dcPrice" disabled></el-input>
       </el-form-item>
       <el-form-item label="操作员" prop="user">
