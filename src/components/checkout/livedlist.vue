@@ -40,7 +40,7 @@
       <!--</el-table-column>-->
       <el-table-column
         prop="livedPrice"
-        label="住宿费">
+        label="住宿费(元)">
       </el-table-column>
       <!--<el-table-column-->
       <!--prop="roomBill"-->
@@ -59,7 +59,7 @@
 
       <el-table-column
         prop="totalBill"
-        label="实际应收">
+        label="实际应收(元)">
       </el-table-column>
       <!--<el-table-column-->
       <!--prop="rebackDeposit"-->

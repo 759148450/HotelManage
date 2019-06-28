@@ -55,7 +55,7 @@
 <!--      </el-table-column>-->
       <el-table-column
         prop="deposit"
-        label="押金">
+        label="押金(元)">
       </el-table-column>
       <el-table-column
         prop="residents"

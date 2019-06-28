@@ -24,19 +24,19 @@
           </el-select>
 
         </el-form-item>
-        <el-form-item label="标准价" prop="normalPrice">
+        <el-form-item label="标准价(元)" prop="normalPrice">
           <el-input   v-model="ruleForm.normalPrice" disabled></el-input>
         </el-form-item>
-        <el-form-item label="折后价" prop="discountPrice">
+        <el-form-item label="折后价(元)" prop="discountPrice">
           <el-input   v-model="ruleForm.discountPrice" disabled></el-input>
         </el-form-item>
-        <el-form-item label="押金" prop="deposit">
+        <el-form-item label="押金(元)" prop="deposit">
           <el-input  v-model="ruleForm.deposit" disabled> </el-input>
         </el-form-item>
         <el-form-item label="会员编号" prop="memberId">
           <el-input  v-model="ruleForm.memberId"></el-input>
         </el-form-item>
-        <el-form-item label="会员价" prop="memberPrice">
+        <el-form-item label="会员价(元)" prop="memberPrice">
           <el-input   v-model="ruleForm.memberPrice"></el-input>
         </el-form-item>
         <el-form-item label="入住人" prop="residents">

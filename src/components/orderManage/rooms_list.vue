@@ -63,19 +63,19 @@
       </el-table-column>
       <el-table-column
         prop="normalPrice"
-        label="标准价格">
+        label="标准价格(元)">
       </el-table-column>
       <el-table-column
         prop="discountPrice"
-        label="折后价">
+        label="折后价(元)">
       </el-table-column>
       <el-table-column
         prop="gvipPrice"
-        label="普通会员价">
+        label="普通会员价(元)">
       </el-table-column>
       <el-table-column
         prop="svipPrice"
-        label="Vip会员价">
+        label="Vip会员价(元)">
       </el-table-column>
       <!--<el-table-column-->
       <!--prop="remarks"-->

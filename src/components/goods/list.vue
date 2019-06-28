@@ -41,7 +41,7 @@
       </el-table-column>
       <el-table-column
         prop="goodsPrice"
-        label="商品价格">
+        label="商品价格(元)">
       </el-table-column>
       <el-table-column
         prop="unit"

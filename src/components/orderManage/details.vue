@@ -13,13 +13,13 @@
         <el-form-item label="房间类型" prop="roomsTypeName">
           <el-input  v-model="ruleForm.roomsTypeName"  disabled></el-input>
         </el-form-item>
-        <el-form-item label="标准价" prop="normalPrice">
+        <el-form-item label="标准价(元)" prop="normalPrice">
           <el-input  v-model="ruleForm.normalPrice"  disabled></el-input>
         </el-form-item>
-        <el-form-item label="折扣价" prop="discountPrice">
+        <el-form-item label="折扣价(元)" prop="discountPrice">
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
-        <el-form-item label="押金" prop="deposit">
+        <el-form-item label="押金(元)" prop="deposit">
           <el-input  v-model="ruleForm.deposit" disabled></el-input>
         </el-form-item>
         <el-form-item label="预定人" prop="residents">
@@ -55,7 +55,7 @@
         <el-form-item label="会员编号" prop="memberId">
           <el-input  v-model="ruleForm.memberId" disabled></el-input>
         </el-form-item>
-        <el-form-item label="会员价" prop="memberPrice">
+        <el-form-item label="会员价(元)" prop="memberPrice">
           <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
         </el-form-item>
         <el-form-item label="预定状态" prop="bookStatus" v-if="ruleForm.bookStatus==0">

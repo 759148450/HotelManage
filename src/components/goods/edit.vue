@@ -9,7 +9,7 @@
             <el-option v-for="entry in goodsTypes" :label="entry.goodsTypename" :value="entry.id" :key="entry.id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="价格" prop="goodsPrice">
+        <el-form-item label="价格(元)" prop="goodsPrice">
             <el-input   v-model="ruleForm.goodsPrice"></el-input>
         </el-form-item>
         <el-form-item label="单位" prop="unit">
