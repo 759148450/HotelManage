@@ -52,11 +52,7 @@
         prop="guestType.typeName"
         label="客房类型">
       </el-table-column>
-      <el-table-column
-        prop="status"
-        label="客房状态"
-        :formatter="statusformat">
-      </el-table-column>
+
       <el-table-column
         prop="floor.floorName"
         label="楼层">
@@ -81,7 +77,15 @@
       <!--prop="remarks"-->
       <!--label="备注">-->
       <!--</el-table-column>-->
-
+      <el-table-column
+        prop="status"
+        label="客房状态">
+        <template slot-scope="scope">
+          <span v-if="scope.row.status==0 " style="color: green" >空房</span>
+          <span v-if="scope.row.status==1 " style="color: red">已预定</span>
+          <span v-if="scope.row.status==2 " style="color: orange">已入住</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <!--只有状态为0的才能预定-->
