@@ -134,6 +134,7 @@
               currentRoomName:row.currentRoomName,
               discountPrice:row.discountPrice,
               deposit:row.deposit,
+              memberId:row.memberId,//用来更新会员积分
             }//props
           },
           area:['800px','600px'],

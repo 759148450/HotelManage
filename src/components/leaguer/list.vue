@@ -55,8 +55,7 @@
         </el-table-column>
         <el-table-column
           prop="leaguerRank"
-          label="级别"
-          :formatter="grankformat">
+          label="级别">
         </el-table-column>
         <!--<el-table-column-->
           <!--prop="timeLastlive"-->
@@ -76,7 +75,7 @@
         <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit" circle></el-button>
-          <el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
+<!--          <el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>-->
           <el-button @click="detail(scope.row)" size="small" type="info" icon="el-icon-document" circle></el-button>
             <!--<el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>-->
             <!--<el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>-->
@@ -137,9 +136,9 @@
         sexformat(row, column, cellValue, index){
           return cellValue==0?"女":"男";
         },
-        grankformat(row, column, cellValue, index){
-          return cellValue==0?"普通":"VIP";
-        },
+        // grankformat(row, column, cellValue, index){
+        //   return cellValue==0?"普通":"VIP";
+        // },
         changePageNo(i){
             this.queryParams.pageNo=i;
         },

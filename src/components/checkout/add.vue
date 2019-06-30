@@ -52,7 +52,8 @@
       <el-form-item label="操作员" prop="user">
         <el-input  v-model="ruleForm.user" disabled></el-input>
       </el-form-item>
-
+      <el-input  v-model="ruleForm.memberId" type="hidden"></el-input>
+      <el-input  v-model="ruleForm.leaguerScore" type="hidden"></el-input>
       <el-form-item label="备注" prop="remarks">
         <el-input type="textarea" v-model="ruleForm.remarks"></el-input>
       </el-form-item>
@@ -67,7 +68,7 @@
 <script>
   export default {
     inject:['reload'],
-    props:["id","currentRoomId", "currentRoomName", "discountPrice", "deposit"],
+    props:["id","currentRoomId", "currentRoomName", "discountPrice", "deposit","memberId"],
     data () {
       name:"checkoutadd"
       return {
@@ -89,7 +90,9 @@
           realWages:"",
           oddChange:"",
           user:"",
-          remarks:""
+          remarks:"",
+          memberId:this.memberId,//用来更新会员积分
+          leaguerScore:"",//会员结账前积分
         },
         rules: {
           livedDays: [
@@ -116,6 +119,11 @@
         this.ruleForm.roomBill = roomBill; //返回
         console.log("店内附加消费",this.ruleForm.roomBill)
       },{liveId:this.id});
+      //查询出当前会员积分
+        this.get("leaguer/getAll",(data)=>{
+          this.ruleForm.leaguerScore=data[0].leaguerScore;
+          console.log("会员结账前积分",this.ruleForm.leaguerScore)
+        },{id:this.memberId});
     },
 
     components: {

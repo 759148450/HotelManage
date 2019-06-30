@@ -22,15 +22,15 @@
         <el-form-item label="邮箱" prop="leaguerEmail">
           <el-input   v-model="ruleForm.leaguerEmail"></el-input>
         </el-form-item>
-        <el-form-item label="积分" prop="leaguerScore">
-          <el-input   v-model.number="ruleForm.leaguerScore" size="medium" type="number" :max="99999999" ></el-input>
-        </el-form-item>
-        <el-form-item label="级别" prop="leaguerRank">
-          <el-select v-model="ruleForm.leaguerRank" placeholder="请选择级别">
-            <el-option label="普通" :value="0"></el-option>
-            <el-option label="VIP" :value="1"></el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="积分" prop="leaguerScore">-->
+<!--          <el-input   v-model.number="ruleForm.leaguerScore" size="medium" type="number" :max="99999999" ></el-input>-->
+<!--        </el-form-item>-->
+<!--        <el-form-item label="级别" prop="leaguerRank">-->
+<!--          <el-select v-model="ruleForm.leaguerRank" placeholder="请选择级别">-->
+<!--            <el-option label="普通" :value="0"></el-option>-->
+<!--            <el-option label="VIP" :value="1"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
         <el-form-item label="最后一次入住时间" prop="timeLastlive">
           <el-date-picker
             v-model="ruleForm.timeLastlive"
