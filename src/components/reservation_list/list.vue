@@ -5,6 +5,18 @@
         <el-col :span="2">
         </el-col>
         <el-col :span="22">
+          <el-date-picker
+            v-model="search.arrivalTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择起始日期">
+          </el-date-picker>
+          <el-date-picker
+            v-model="search.leaveTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择结束日期">
+          </el-date-picker>
           <el-input placeholder="请输入房间号" v-model="search.currentRoomName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
@@ -69,16 +81,20 @@
 
   export default {
     inject:['reload'],
-    name:"orderManage",
+    name:"reservation_list",
     data () {
       return {
         search:{
-          currentRoomName:""
+          currentRoomName:"",
+          arrivalTime:"",
+          leaveTime:""
         },
         queryParams:{
           pageNo:1,
           pageSize:10,
-          currentRoomName:""
+          currentRoomName:"",
+          arrivalTime:"",
+          leaveTime:""
         },
         tableData:{}
       }
@@ -97,7 +113,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/OrderAndCanacel",(data)=>{
+        this.get("orderManage/ReservationAndCanacel",(data)=>{
           this.tableData=data;
         },this.queryParams);
       },

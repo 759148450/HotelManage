@@ -67,7 +67,8 @@
         <template slot-scope="scope">
           <span v-if="scope.row.bookStatus==0 " style="color: green" >
             已预定
-            <el-button @click="house(scope.row)" type="text" size="small" >点击入住</el-button>
+            <el-button type="primary" @click="house(scope.row)" round size="mini">点击入住</el-button>
+<!--            <el-button @click="house(scope.row)" type="text" size="small" >点击入住</el-button>-->
           </span>
           <span v-if="scope.row.bookStatus==1 " style="color: red">已取消</span>
           <span v-if="scope.row.bookStatus==2 " style="color: orange">已入住</span>

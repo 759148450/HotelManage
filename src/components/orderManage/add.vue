@@ -263,7 +263,7 @@
                   this.leaguer1=data;
                   console.log(this.leaguer1);
                 },{id:this.ruleForm.memberId});
-                if(this.leaguer1.leaguerRank===0){
+                if(this.leaguer1.leaguerRank==="普通"){
                   this.ruleForm.memberPrice=this.rooms_gvipPrice;
                   this.ruleForm.deposit=this.rooms_gvipPrice*0.5;
                 }else{

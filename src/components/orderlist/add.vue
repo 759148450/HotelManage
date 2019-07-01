@@ -53,7 +53,7 @@
         <el-form-item label="会员编号" prop="memberId">
           <el-select v-model="ruleForm.memberId" filterable placeholder="请选择会员编号" style="width: 200px" @change="getMemberPrice($event)" >
             <el-option
-              v-for="item in allrole"
+              v-for="item in leaguers"
               :key="item.id"
               :label="item.id"
               :value="item.id">
@@ -356,7 +356,6 @@
           }
         },
         getList (opt) {
-
           for (var val of this.allrole) {
             if (opt===val.roomId) {
               this.ruleForm.normalPrice=val.normalPrice;
@@ -369,13 +368,12 @@
           }
         },
       getMemberPrice(ouid) {
-
         for (var val of this.leaguers) {
           if (ouid===val.id) {
             // console.log("找到会员");
             // console.log(val.id);
             //小于5000积分，普通会员，大于等于500积分vip会员
-            if(val.leaguerScore<5000){
+            if(val.leaguerRank==="普通"){
               this.ruleForm.memberPrice=this.ruleForm.gvipPrice;
             }else{
               this.ruleForm.memberPrice=this.ruleForm.svipPrice;

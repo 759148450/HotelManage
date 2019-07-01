@@ -5,9 +5,22 @@
         <el-col :span="2">
         </el-col>
         <el-col :span="22">
+          <el-date-picker
+            v-model="search.arrivalTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择起始日期">
+          </el-date-picker>
+          <el-date-picker
+            v-model="search.leaveTime"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择结束日期">
+          </el-date-picker>
           <el-input placeholder="请输入房间号" v-model="search.currentRoomName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
+
         </el-col>
       </el-row>
     </div>
@@ -18,7 +31,7 @@
       <el-table-column
         prop="id"
         width="100"
-        label="预订单号">
+        label="入住单号">
       </el-table-column>
       <el-table-column
         prop="currentRoomName"
@@ -30,7 +43,7 @@
       </el-table-column>
       <el-table-column
         prop="residents"
-        label="入住人姓名">
+        label="入住人">
       </el-table-column>
       <el-table-column
         prop="memberId"
@@ -48,6 +61,7 @@
       </el-table-column>
       <el-table-column
         prop="phone"
+        width="140"
         label="联系人电话">
       </el-table-column>
 
@@ -69,20 +83,26 @@
 
   export default {
     inject:['reload'],
-    name:"orderManage",
+    name:"living_list",
     data () {
       return {
         search:{
-          currentRoomName:""
+          currentRoomName:"",
+          arrivalTime:"",
+          leaveTime:""
         },
         queryParams:{
           pageNo:1,
           pageSize:10,
-          currentRoomName:""
+          currentRoomName:"",
+          arrivalTime:"",
+          leaveTime:""
         },
-        tableData:{}
+        tableData:{},
+        orderManages:{}
       }
     },
+
     created(){
       this.getData();
     },
@@ -97,7 +117,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/listLiving",(data)=>{
+        this.get("orderManage/getlistLived",(data)=>{
           this.tableData=data;
         },this.queryParams);
       },
@@ -109,12 +129,9 @@
         this.queryParams.pageNo=1;
         this.merge(this.search,this.queryParams);
       },
-
-
     }
   }
 </script>
-
 <style>
   .el-table .cell {
     text-align: center;
