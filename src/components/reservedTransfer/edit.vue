@@ -4,8 +4,8 @@
       <el-form-item label="入住单号" prop="id">
         <el-input  v-model="ruleForm.id" disabled></el-input>
       </el-form-item>
-      <el-form-item label="入住房间编号" prop="currentRoomId">
-        <el-input  v-model="ruleForm.currentRoomId" disabled></el-input>
+      <el-form-item label="入住房间名称" prop="currentRoomName">
+        <el-input  v-model="ruleForm.currentRoomName" disabled></el-input>
       </el-form-item>
       <el-form-item label="房间类型" prop="roomsTypeName">
         <el-input  v-model="ruleForm.roomsTypeName" disabled></el-input>

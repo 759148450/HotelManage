@@ -37,7 +37,7 @@
             type="datetime"
             value-format="yyyy-MM-dd HH:mm:ss"
             :picker-options="pickerOptions0"
-            placeholder="选择日期">
+            placeholder="选择日期" >
           </el-date-picker>
         </el-form-item>
         <el-form-item label="离店时间" prop="leaveTime">
@@ -46,7 +46,7 @@
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
           :picker-options="pickerOptions1"
-          placeholder="选择日期">
+          placeholder="选择日期" >
         </el-date-picker>
         </el-form-item>
           <el-form-item label="入住人数" >
@@ -63,7 +63,7 @@
           <el-input  v-model="ruleForm.userName" disabled></el-input>
         </el-form-item>
         <el-form-item label="会员编号" prop="memberId">
-          <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px"  >
+          <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px" >
             <el-option
               v-for="item in leaguers"
               :key="item.id"
@@ -229,8 +229,25 @@
           phone: [
             { required: true, trigger: 'blur',validator: checkPhone }//设置全局变量
           ],
+          //验证身份证
           credentialsNum: [
           { required: true, trigger: 'blur',validator: checkcredentialsNum}//设置全局变量
+          ],
+          residents: [
+            { required: true, message: '请输入预定人姓名', trigger: 'blur' },
+            { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+          ],
+          // credentialsType: [
+          //   { required: true, message: '请选择证件类型', trigger: 'blur' }
+          // ],
+          memberId: [
+            { required: true, message: '请选择会员编号', trigger: 'blur' }
+          ],
+          arrivalTime: [
+            { required: true, message: '请选择抵店时间', trigger: 'blur' }
+          ],
+          leaveTime: [
+            { required: true, message: '请选择离店时间', trigger: 'blur' }
           ],
         },
         buttonText:"创建"

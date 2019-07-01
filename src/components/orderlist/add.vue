@@ -264,7 +264,8 @@
             { required: true, trigger: 'blur',validator: checkPhone }//设置全局变量
           ],
           credentialsNum: [
-            { required: true, trigger: 'blur',validator: checkcredentialsNum }]
+            { required: true, trigger: 'blur',validator: checkcredentialsNum }],
+
 
 
         }
