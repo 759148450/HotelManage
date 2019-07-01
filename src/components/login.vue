@@ -12,12 +12,12 @@
       <div class="form__content">
         <h1>酒店管理系统</h1>
         <div class="styled-input">
-          <input type="text" class="styled-input__input" v-model="loginForm.userName" placeholder="请输入账号">
+          <input type="text" class="styled-input__input" v-model="loginForm.userName" placeholder="请输入账号" required></input>
           <!--<div class="styled-input__placeholder"> <span class="styled-input__placeholder-text">Username</span> </div>-->
           <!--<div class="styled-input__circle"></div>-->
         </div>
         <div class="styled-input">
-          <input type="text" class="styled-input__input" v-model="loginForm.userPwd"  placeholder="请输入密码">
+          <input type="password" class="styled-input__input" v-model="loginForm.userPwd" placeholder="请输入密码" required/>
           <!--<div class="styled-input__placeholder"> <span class="styled-input__placeholder-text">Password</span> </div>-->
           <!--<div class="styled-input__circle"></div>-->
         </div>
@@ -38,7 +38,15 @@
           userPwd: ''
         },
         user: {},
-        rules: {}
+        rules: {
+          userName: [
+            { required: true, message: '请输入用户名称', trigger: 'blur' },
+            { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+          ],
+          userPwd: [
+            { required: true, message: '请输入密码', trigger: 'blur' }
+          ]
+        }
       };
     },
 

@@ -15,12 +15,10 @@
         active-text-color="#ffd04b">
         <el-submenu index="2" style="float: right">
           <template slot="title">{{user.userName}}</template>
+          <el-menu-item index="2-1" @click="edit()">修改信息</el-menu-item>
           <el-menu-item index="2-1" @click="logout()">退出</el-menu-item>
         </el-submenu>
       </el-menu>
-
-
-
     </el-header>
     <el-container class="content">
       <el-aside width="200px">
@@ -38,6 +36,7 @@
 <script>
   import Menu from '@/components/frame/menu'
   import MyBreadcrumb from '@/components/frame/myBreadcrumb'
+  import EditUser from '@/components/edit'
   export default {
     name:"index",
     data () {
@@ -51,6 +50,7 @@
       loadUser(){
         var list = JSON.parse(localStorage.getItem("user") || '[]');
         this.user = list;
+        console.log(this.user);
       },
       //用户退出，销毁localStorage
       logout(){
@@ -58,6 +58,23 @@
         localStorage.removeItem('islogin');
         alert("退出成功");
         this.$router.push('/');
+      },
+      edit(){
+        this.$layer.iframe({
+          content: {
+            content: EditUser, //传递的组件对象
+            parent: this,//当前的vue对象
+            data:{id:this.user.id,
+                  userName:this.user.userName,
+                  userPwd:this.user.userPwd,
+                  remarks:this.user.remarks
+            }//props
+          },
+          area:['800px','600px'],
+          title: '修改个人信息',
+          shadeClose: false,
+          shade :true
+        });
       },
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
