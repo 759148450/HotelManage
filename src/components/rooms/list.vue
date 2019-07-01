@@ -7,7 +7,7 @@
           <el-input placeholder="请输入客房编号" v-model="search.roomId" class="input-with-select" style="width: 340px">
             <!--根据客房状态查询-->
             <el-select v-model="search.status" style="width:120px" slot="prepend" placeholder="请选择状态">
-              <el-option label="全部" value=""></el-option>
+              <el-option label="" value="">全部</el-option>
               <el-option label="空房" value="0"></el-option>
               <el-option label="已预订" value="1"></el-option>
               <el-option label="入住" value="2"></el-option>
@@ -15,6 +15,7 @@
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
           <el-select v-model="search.floorId" filterable placeholder="请选择楼层信息" style="width: 200px"  @change="findData">
+            <el-option label="" value="">全部</el-option>
             <el-option
               v-for="item in floors"
               :key="item.id"
@@ -23,6 +24,7 @@
             </el-option>
           </el-select>
           <el-select v-model="search.roomTypeid" filterable placeholder="请选择类型信息" style="width: 200px"  @change="findData">
+            <el-option label="" value="">全部</el-option>
             <el-option
               v-for="item in guestTypes"
               :key="item.id"
@@ -153,10 +155,10 @@
         this.get("rooms/list",(data)=>{
           this.tableData=data;
         },this.queryParams);
-        this.get("rooms/getAllFloor",(data)=>{
+        this.get("rooms/getUsefulAllFloor",(data)=>{
           this.floors=data;
         });
-        this.get("rooms/getAllGuestType",(data)=>{
+        this.get("rooms/getUsefulAllGuestType",(data)=>{
           this.guestTypes=data;
         });
       },

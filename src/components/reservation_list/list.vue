@@ -50,16 +50,17 @@
       </el-table-column>
       <el-table-column
         prop="arrivalTime"
-        width="200"
+        width="170"
         label="抵店时间">
       </el-table-column>
       <el-table-column
         prop="leaveTime"
-        width="200"
+        width="170"
         label="离店时间">
       </el-table-column>
       <el-table-column
         prop="phone"
+        width="170"
         label="联系人电话">
       </el-table-column>
 

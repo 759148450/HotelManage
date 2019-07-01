@@ -8,7 +8,7 @@
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
           <el-select v-model="search.goodsTypeid" filterable placeholder="请选择商品类型" style="width: 200px"  @change="findData">
-            <el-option label="全部" value=""></el-option>
+            <el-option label="" value="">全部</el-option>
             <el-option
               v-for="item in goodsTypes"
               :key="item.id"
