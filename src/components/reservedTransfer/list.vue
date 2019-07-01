@@ -246,7 +246,7 @@
                 message: '入住成功!'
               });
             }
-          },{id:row.id,bookStatus: 2,currentRoomId:row.currentRoomId});
+          },{id:row.id,bookStatus: 2,currentRoomId:row.currentRoomId,memberId:row.memberId});
 
         }).catch(() => {
           this.$message({
