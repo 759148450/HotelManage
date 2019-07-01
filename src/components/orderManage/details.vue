@@ -19,11 +19,18 @@
         <el-form-item label="折扣价(元)" prop="discountPrice">
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
-        <el-form-item label="押金(元)" prop="deposit">
-          <el-input  v-model="ruleForm.deposit" disabled></el-input>
+
+        <el-form-item label="会员编号" prop="memberId">
+          <el-input  v-model="ruleForm.memberId" disabled></el-input>
         </el-form-item>
         <el-form-item label="预定人" prop="residents">
           <el-input  v-model="ruleForm.residents" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="会员价(元)" prop="memberPrice">
+          <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="押金(元)" prop="deposit">
+          <el-input  v-model="ruleForm.deposit" disabled></el-input>
         </el-form-item>
         <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==0">
            <el-input value="身份证" disabled></el-input>
@@ -52,12 +59,7 @@
         <el-form-item label="操作人" prop="userName">
           <el-input  v-model="ruleForm.userName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="会员编号" prop="memberId">
-          <el-input  v-model="ruleForm.memberId" disabled></el-input>
-        </el-form-item>
-        <el-form-item label="会员价(元)" prop="memberPrice">
-          <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
-        </el-form-item>
+
         <el-form-item label="预定状态" prop="bookStatus" v-if="ruleForm.bookStatus==0">
             <el-input  value="已预定" disabled></el-input>
         </el-form-item>

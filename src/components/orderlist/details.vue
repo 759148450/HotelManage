@@ -13,11 +13,18 @@
       <el-form-item label="折后价(元)" prop="discountPrice">
         <el-input   v-model="ruleForm.discountPrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="押金(元)" prop="deposit">
-        <el-input  v-model="ruleForm.deposit" disabled></el-input>
+
+      <el-form-item label="会员编号" prop="memberId">
+        <el-input  v-model="ruleForm.memberId" disabled></el-input>
       </el-form-item>
       <el-form-item label="入住人" prop="residents">
         <el-input   v-model="ruleForm.residents" disabled></el-input>
+      </el-form-item>
+      <el-form-item label="会员价(元)" prop="memberPrice">
+        <el-input   v-model="ruleForm.memberPrice" disabled></el-input>
+      </el-form-item>
+      <el-form-item label="押金(元)" prop="deposit">
+        <el-input  v-model="ruleForm.deposit" disabled></el-input>
       </el-form-item>
       <el-form-item label="证件类型:" prop="credentialsType">
         <el-radio-group v-model="ruleForm.credentialsType" disabled>
@@ -57,12 +64,7 @@
       <el-form-item label="操作人" prop="userName">
         <el-input  v-model="ruleForm.userName" disabled></el-input>
       </el-form-item>
-      <el-form-item label="会员编号" prop="memberId">
-        <el-input  v-model="ruleForm.memberId" disabled></el-input>
-      </el-form-item>
-      <el-form-item label="会员价(元)" prop="memberPrice">
-        <el-input   v-model="ruleForm.memberPrice" disabled></el-input>
-      </el-form-item>
+
       <el-form-item prop="timedWakeup" label="服务唤醒" disabled>
         <el-checkbox true-label="1" false-label="0" v-model="ruleForm.breakfast" disabled>提供早餐</el-checkbox>
         <el-checkbox true-label="2" false-label="0" v-model="ruleForm.timedWakeup" disabled>定时叫醒</el-checkbox>

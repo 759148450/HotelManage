@@ -43,12 +43,8 @@
         <el-form-item label="折后价" prop="discountPrice">
           <el-input   v-model="ruleForm.discountPrice" disabled></el-input>
         </el-form-item>
-        <el-form-item label="押金" prop="deposit">
-          <el-input  v-model="ruleForm.deposit" disabled></el-input>
-        </el-form-item>
-        <el-form-item label="入住人" prop="residents">
-          <el-input   v-model="ruleForm.residents"></el-input>
-        </el-form-item>
+
+
 
         <el-form-item label="会员编号" prop="memberId">
           <el-select v-model="ruleForm.memberId" filterable placeholder="请选择会员编号" style="width: 200px" @change="getMemberPrice($event)" >
@@ -60,8 +56,14 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="入住人" prop="residents">
+          <el-input   v-model="ruleForm.residents"></el-input>
+        </el-form-item>
         <el-form-item label="会员价" prop="memberPrice" >
           <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="押金" prop="deposit">
+          <el-input  v-model="ruleForm.deposit" disabled></el-input>
         </el-form-item>
 <!--        <el-form-item label="证件类别" prop="credentialsType">-->
 <!--          <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==0">-->
@@ -265,7 +267,28 @@
           ],
           credentialsNum: [
             { required: true, trigger: 'blur',validator: checkcredentialsNum }],
-
+          residents: [
+            { required: true, message: '请输入预定人姓名', trigger: 'blur' },
+            { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+          ],
+          // credentialsType: [
+          //   { required: true, message: '请选择证件类型', trigger: 'blur' }
+          // ],
+          // roomTypeId: [
+          //   { required: true, message: '请选择房间类型', trigger: 'blur' }
+          // ],
+          currentRoomName: [
+            { required: true, message: '请选择房间编号', trigger: 'blur' }
+          ],
+          memberId: [
+            { required: true, message: '请选择会员编号', trigger: 'blur' }
+          ],
+          arrivalTime: [
+            { required: true, message: '请选择抵店时间', trigger: 'blur' }
+          ],
+          leaveTime: [
+            { required: true, message: '请选择离店时间', trigger: 'blur' }
+          ],
 
 
         }
@@ -374,6 +397,7 @@
             // console.log("找到会员");
             // console.log(val.id);
             //小于5000积分，普通会员，大于等于500积分vip会员
+            this.ruleForm.residents=val.leaguerName;
             if(val.leaguerRank==="普通"){
               this.ruleForm.memberPrice=this.ruleForm.gvipPrice;
             }else{

@@ -71,34 +71,26 @@
         <el-form-item label="折后价(元)" prop="discountPrice">
           <el-input   v-model="ruleForm.discountPrice" disabled></el-input>
         </el-form-item>
+        <el-form-item label="会员编号" prop="memberId">
+          <el-input  v-model="ruleForm.memberId" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="入住人" prop="residents">
+          <el-input   v-model="ruleForm.residents" ></el-input>
+        </el-form-item>
+        <el-form-item label="会员价(元)" prop="memberPrice">
+          <el-input   v-model="ruleForm.memberPrice" disabled></el-input>
+        </el-form-item>
         <el-form-item label="押金(元)" prop="deposit">
           <el-input  v-model="ruleForm.deposit" disabled></el-input>
         </el-form-item>
-        <el-form-item label="入住人" prop="residents">
-          <el-input   v-model="ruleForm.residents" disabled></el-input>
-        </el-form-item>
-<!--        <el-form-item label="证件类别" prop="credentialsType">-->
-<!--          <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==0">-->
-<!--            <el-input value="身份证" disabled></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="证件类型" prop="credentialsType" v-if="ruleForm.credentialsType==1">-->
-<!--            <el-input value="护照" disabled></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-select v-model="ruleForm.credentialsType" placeholder="请选择">-->
-<!--            <el-option label="居民身份证" :value="1"></el-option>-->
-<!--            <el-option label="士官证" :value="2"></el-option>-->
-<!--            <el-option label="护照" :value="3"></el-option>-->
-<!--            <el-option label="港澳通行证" :value="4"></el-option>-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
         <el-form-item label="证件类型:" prop="credentialsType">
-          <el-radio-group v-model="ruleForm.credentialsType"  disabled>
+          <el-radio-group v-model="ruleForm.credentialsType"  >
             <el-radio  label="0">身份证</el-radio>
             <el-radio label="1">护照</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="证件号码" prop="credentialsNum">
-          <el-input  v-model="ruleForm.credentialsNum" disabled></el-input>
+          <el-input  v-model="ruleForm.credentialsNum" ></el-input>
         </el-form-item>
         <el-form-item label="联系电话" prop="phone">
           <el-input   v-model="ruleForm.phone"></el-input>
@@ -131,12 +123,7 @@
         <el-form-item label="操作人" prop="userName">
           <el-input  v-model="ruleForm.userName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="会员编号" prop="memberId">
-          <el-input  v-model="ruleForm.memberId" disabled></el-input>
-        </el-form-item>
-        <el-form-item label="会员价(元)" prop="memberPrice">
-          <el-input   v-model="ruleForm.memberPrice" disabled></el-input>
-        </el-form-item>
+
 <!--        <el-form-item label="提供早餐" prop="breakfast">-->
 <!--          <el-select v-model="ruleForm.breakfast" placeholder="请选择" >-->
 <!--            <el-option label="是" :value="1"></el-option>-->
