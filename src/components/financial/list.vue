@@ -102,7 +102,7 @@
 </template>
 
 <script>
-  import DetailFinancial from '@/components/financial/detail'
+//  import DetailFinancial from '@/components/financial/detail'
   export default {
     inject:['reload'],
     name:"orderlist",
