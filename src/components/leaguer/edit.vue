@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 10px">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="会员姓名" prop="leaguerName">
             <el-input v-model="ruleForm.leaguerName"></el-input>
         </el-form-item>
@@ -31,22 +31,22 @@
 <!--            <el-option label="VIP" :value="1"></el-option>-->
 <!--          </el-select>-->
 <!--        </el-form-item>-->
-        <el-form-item label="最后一次入住时间" prop="timeLastlive">
-          <el-date-picker
-            v-model="ruleForm.timeLastlive"
-            type="datetime"
-            value-format="yyyy-MM-dd HH:mm"
-            placeholder="选择日期">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="最后一次预定时间" prop="timeLastorder">
-          <el-date-picker
-            v-model="ruleForm.timeLastorder"
-            type="datetime"
-            value-format="yyyy-MM-dd HH:mm"
-            placeholder="选择日期">
-          </el-date-picker>
-        </el-form-item>
+        <!--<el-form-item label="最后一次入住时间" prop="timeLastlive">-->
+          <!--<el-date-picker-->
+            <!--v-model="ruleForm.timeLastlive"-->
+            <!--type="datetime"-->
+            <!--value-format="yyyy-MM-dd HH:mm"-->
+            <!--placeholder="选择日期">-->
+          <!--</el-date-picker>-->
+        <!--</el-form-item>-->
+        <!--<el-form-item label="最后一次预定时间" prop="timeLastorder">-->
+          <!--<el-date-picker-->
+            <!--v-model="ruleForm.timeLastorder"-->
+            <!--type="datetime"-->
+            <!--value-format="yyyy-MM-dd HH:mm"-->
+            <!--placeholder="选择日期">-->
+          <!--</el-date-picker>-->
+        <!--</el-form-item>-->
 
         <el-form-item label="备注" prop="remarks">
           <el-input type="textarea" v-model="ruleForm.remarks"></el-input>
