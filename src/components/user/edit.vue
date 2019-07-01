@@ -46,7 +46,7 @@
         },
           rules: {
             userName: [
-                { required: true, message: '请输入会员名称', trigger: 'blur' },
+                { required: true, message: '请输入用户名称', trigger: 'blur' },
                 { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
             ],
             userPwd: [
@@ -91,6 +91,9 @@
                     url="user/update";
                     this.post(formName,url,this.ruleForm);
                   }
+                }else{
+                  url="user/update";
+                  this.post(formName,url,this.ruleForm);
                 }
               },{userName:this.ruleForm.userName});
 
