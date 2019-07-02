@@ -1,8 +1,8 @@
 <template>
   <div>
-      <div style="margin-top: 15px;">
+      <div style="margin-top: 15px;margin-bottom: 10px">
           <el-row>
-              <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
+              <el-col :span="2"><el-button style="background-color:#17B3A3;color: #fff" @click="add">添加</el-button></el-col>
               <el-col :span="22">
                 <el-input placeholder="请输入编号" v-model="search.id" class="input-with-select" style="width: 200px">
                   <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
@@ -74,12 +74,12 @@
 
         <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit">修改</el-button>
+          <!--<el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit">修改</el-button>-->
 <!--          <el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete" circle></el-button>-->
-          <el-button @click="detail(scope.row)" size="small" type="info" icon="el-icon-document">详情</el-button>
-            <!--<el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>-->
+          <!--<el-button @click="detail(scope.row)" size="small" type="info" icon="el-icon-document">详情</el-button>-->
+            <el-button @click="edit(scope.row)" style="color:#17B3A3" type="text" size="small" icon="el-icon-edit">修改</el-button>
             <!--<el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>-->
-            <!--<el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>-->
+            <el-button @click="detail(scope.row)" type="text" size="small" icon="el-icon-document">详情</el-button>
         </template>
         </el-table-column>
     </el-table>
@@ -198,5 +198,13 @@
 <style>
   .el-table .cell {
     text-align: center;
+  }
+  .el-table__header th, .el-table__header tr {
+    background-color: #17B3A3;
+    color: black;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #17B3A3;
+    color: #FFF;
   }
 </style>

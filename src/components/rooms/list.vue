@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
-        <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
+        <el-col :span="2"><el-button style="background-color: #17B3A3;color: #fff" @click="add">添加</el-button></el-col>
         <el-col :span="22">
           <el-input placeholder="请输入客房编号" v-model="search.roomId" class="input-with-select" style="width: 340px">
             <!--根据客房状态查询-->
@@ -87,13 +87,13 @@
       <el-table-column label="操作" width="280px">
         <template slot-scope="scope">
           <!--添加设置，只有为空状态0 的时候才能修改和删除，否则隐藏按钮-->
-          <el-button @click="edit(scope.row)" v-if="scope.row.status==0" size="small" type="primary" icon="el-icon-edit">修改</el-button>
-          <el-button size="small" @click="del(scope.row)" v-if="scope.row.status==0" type="danger" icon="el-icon-delete">删除</el-button>
-          <el-button @click="detail(scope.row)" size="small" type="info" icon="el-icon-document">详情</el-button>
+          <!--<el-button @click="edit(scope.row)" v-if="scope.row.status==0" size="small" type="primary" icon="el-icon-edit">修改</el-button>-->
+          <!--<el-button size="small" @click="del(scope.row)" v-if="scope.row.status==0" type="danger" icon="el-icon-delete">删除</el-button>-->
+          <!--<el-button @click="detail(scope.row)" size="small" type="info" icon="el-icon-document">详情</el-button>-->
 
-          <!--<el-button @click="edit(scope.row)" type="text" size="small" v-if="scope.row.status==0">修改</el-button>-->
-          <!--<el-button type="text" size="small" v-if="scope.row.status==0" @click="del(scope.row)">删除</el-button>-->
-          <!--<el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>-->
+          <el-button @click="edit(scope.row)" style="color:#17B3A3 " type="text" size="small" v-if="scope.row.status==0"  icon="el-icon-edit">修改</el-button>
+          <el-button type="text" size="small" style="color: red" v-if="scope.row.status==0" @click="del(scope.row)" icon="el-icon-delete">删除</el-button>
+          <el-button @click="detail(scope.row)" type="text" size="small" icon="el-icon-document">详情</el-button>
         </template>
       </el-table-column>
     </el-table>

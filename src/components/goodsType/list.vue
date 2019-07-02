@@ -2,7 +2,7 @@
   <div>
     <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
-        <el-col :span="2"><el-button style="background-color: #17B3A3;" @click="add">添加</el-button></el-col>
+        <el-col :span="2"><el-button style="background-color: #17B3A3;color: #fff" @click="add">添加</el-button></el-col>
         <el-col :span="22">
           <el-input placeholder="请输入类型名称" v-model="search.goodsTypename" class="input-with-select" style="width: 200px">
             <!--<el-select v-model="search.active" style="width:80px" slot="prepend" placeholder="请选择">-->
@@ -147,5 +147,13 @@
 <style>
   .el-table .cell {
     text-align: center;
+  }
+  .el-table__header th, .el-table__header tr {
+    background-color: #17B3A3;
+    color: black;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #17B3A3;
+    color: #FFF;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
         <el-col :span="2">
 <!--          <el-button type="primary" @click="add">添加</el-button>-->

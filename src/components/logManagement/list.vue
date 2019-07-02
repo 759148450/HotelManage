@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
         <el-col :span="2"></el-col>
         <el-col :span="22">
@@ -63,8 +63,8 @@
       <!--</el-table-column>-->
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete">删除</el-button>
-          <!--<el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>-->
+          <!--<el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete">删除</el-button>-->
+          <el-button type="text" size="small" style="color:red;" @click="del(scope.row)" icon="el-icon-delete">{{deltext(scope.row.active)}}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -180,5 +180,13 @@
 <style>
   .el-table .cell {
     text-align: center;
+  }
+  .el-table__header th, .el-table__header tr {
+    background-color: #17B3A3;
+    color: black;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #17B3A3;
+    color: #FFF;
   }
 </style>
