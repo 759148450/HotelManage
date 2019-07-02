@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
         <el-col :span="22">
           <el-date-picker
@@ -231,5 +231,13 @@
 <style>
   .el-table .cell {
     text-align: center;
+  }
+  .el-table__header th, .el-table__header tr {
+    background-color: #17B3A3;
+    color: black;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #17B3A3;
+    color: #FFF;
   }
 </style>

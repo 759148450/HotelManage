@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
         <el-col :span="22">
           <el-input placeholder="请输入入住单号" v-model="search.id" class="input-with-select" style="width: 200px">
@@ -172,5 +172,13 @@
 <style>
   .el-table .cell {
     text-align: center;
+  }
+  .el-table__header th, .el-table__header tr {
+    background-color: #17B3A3;
+    color: black;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #17B3A3;
+    color: #FFF;
   }
 </style>
