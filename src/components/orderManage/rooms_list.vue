@@ -134,7 +134,7 @@
           floorId:"",
           roomTypeid:"",
           normalPrice:"",
-          status:"",
+          status:0,
           price1:"",
           price2:"",
         },

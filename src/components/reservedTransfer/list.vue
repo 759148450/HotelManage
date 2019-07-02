@@ -157,7 +157,7 @@
           currentRoomName:"",
           residents:"",
           roomsTypeName:"",
-          roomTypeid:""
+          roomTypeid:"",
         },
         tableData:{},
         floors:{},
