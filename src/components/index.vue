@@ -19,6 +19,8 @@
           <el-menu-item index="2-1" @click="logout()">退出</el-menu-item>
         </el-submenu>
       </el-menu>
+      <img src="../assets/census.png" @click="home()"
+           style="width: 26px;height: 26px;display:inline-block; cursor: pointer;vertical-align:middle;float:right; margin-top:15px;margin-right:10px"/>
     </el-header>
     <el-container class="content">
       <el-aside width="200px">
@@ -58,6 +60,10 @@
         localStorage.removeItem('islogin');
         alert("退出成功");
         this.$router.push('/');
+      },
+      //跳转首页
+      home(){
+        this.$router.push({ path:'/index'  })
       },
       edit(){
         this.$layer.iframe({
