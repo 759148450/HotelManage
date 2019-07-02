@@ -166,11 +166,10 @@
                 if (!isNaN(value)) {
                   return prev + curr;
                 } else {
-                  return prev.toFixed;
+                  return prev;
                 }
               }, 0);
-              // Number(sums[index].toFixed(2));
-              parseFloat(sums[index].toFixed(2));
+              sums[index]
             }
             else if (column.property === 'dcPrice') {
               sums[index] = values.reduce((prev, curr) => {
@@ -181,15 +180,14 @@
                   return prev;
                 }
               }, 0);
-              parseFloat(sums[index].toFixed(2));
-              // parseFloat(sums[index]).toFixed(2);
+              sums[index]
             }
             else {
               sums[index] = '';
             }
 
           });
-          return sums
+          return [sums[0], "","","","", sums[5].toFixed(2), "", sums[7].toFixed(2),""]
         },
 
         getData(){

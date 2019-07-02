@@ -28,7 +28,7 @@
       <el-form-item label="消费金额(元)" prop="consumePrice">
         <el-input v-model="ruleForm.consumePrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="折扣率" prop="discount">
+      <el-form-item label="折扣率(%)" prop="discount">
         <el-input v-model="ruleForm.discount" :min="1" :max="10" size="medium"  @keyup.native="getDcPrice"></el-input>
       </el-form-item>
       <el-form-item label="折后金额(元)" prop="dcPrice">
