@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
-        <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
+        <el-col :span="2"><el-button style="background-color: #17B3A3;" @click="add">添加</el-button></el-col>
         <el-col :span="22">
           <el-input placeholder="请输入类型名称" v-model="search.goodsTypename" class="input-with-select" style="width: 200px">
             <!--<el-select v-model="search.active" style="width:80px" slot="prepend" placeholder="请选择">-->
@@ -44,10 +44,10 @@
       <!--</el-table-column>-->
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" @click="edit(scope.row)" size="small" icon="el-icon-edit">修改</el-button>
-          <!--<el-button @click="edit(scope.row)" type="text" size="small" >修改</el-button>-->
-          <el-button size="small" @click="del(scope.row)" v-if="scope.row.counts==0" type="danger" icon="el-icon-delete">删除</el-button>
-          <!--<el-button type="text" size="small" @click="del(scope.row)" v-if="scope.row.counts==0">{{deltext(scope.row.active)}}</el-button>-->
+          <!--<el-button type="primary" @click="edit(scope.row)" size="small" icon="el-icon-edit">修改</el-button>-->
+          <el-button @click="edit(scope.row)" style="color:#17B3A3" type="text" size="small" icon="el-icon-edit">修改</el-button>
+          <!--<el-button size="small" @click="del(scope.row)" v-if="scope.row.counts==0" type="danger" icon="el-icon-delete">删除</el-button>-->
+          <el-button type="text" size="small" style="color:red" @click="del(scope.row)" v-if="scope.row.counts==0" icon="el-icon-delete">{{deltext(scope.row.active)}}</el-button>
         </template>
       </el-table-column>
     </el-table>

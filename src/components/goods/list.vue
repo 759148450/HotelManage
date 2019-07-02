@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div style="margin-top: 15px;">
+    <div style="margin-top: 15px;margin-bottom: 10px">
       <el-row>
-        <el-col :span="2"><el-button type="primary" @click="add">添加</el-button></el-col>
+        <el-col :span="2"><el-button style="background-color: #17B3A3;" @click="add">添加</el-button></el-col>
         <el-col :span="22">
           <el-input placeholder="请输入商品名称" v-model="search.goodsName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
@@ -58,10 +58,10 @@
 
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit">修改</el-button>
-          <!--<el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>-->
-          <el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete">删除</el-button>
-          <!--<el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>-->
+          <!--<el-button @click="edit(scope.row)" size="small" type="primary" icon="el-icon-edit">修改</el-button>-->
+          <el-button @click="edit(scope.row)" type="text" style="color:#17B3A3" size="small" icon="el-icon-edit">修改</el-button>
+          <!--<el-button size="small" @click="del(scope.row)" type="danger" icon="el-icon-delete">删除</el-button>-->
+          <el-button type="text" size="small" @click="del(scope.row)" style="color:red" icon="el-icon-delete">{{deltext(scope.row.active)}}</el-button>
         </template>
       </el-table-column>
     </el-table>

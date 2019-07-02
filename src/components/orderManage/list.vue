@@ -38,6 +38,7 @@
         label="入住单号">
       </el-table-column>
       <el-table-column
+        width="150"
         prop="currentRoomName"
         label="预定房间编号">
       </el-table-column>

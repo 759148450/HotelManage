@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 10px">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px"  class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px"  class="demo-ruleForm">
         <el-form-item label="预定编号" prop="id">
            <el-input  v-model="ruleForm.id" disabled></el-input>
         </el-form-item>
