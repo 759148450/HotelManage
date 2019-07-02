@@ -10,7 +10,7 @@
     padding-top: 10px;
   }
   #chart_example2{
-    width: 500px;
+    width: 570px;
     height: 400px;
     background-color: #ffffff;
     padding-top: 10px;
@@ -32,7 +32,33 @@
 
 <template>
   <div>
-    <div id="chart_example3"></div>
+    <div style="display:inline-block;margin-top: 10px">
+      <div id="chart_example3" style="display:inline-block;"></div>
+      <div style="display:inline-block;background-color: #fff;margin-top:0px;padding: 10px;width: 400px;height: 400px;overflow-y: auto">
+        <el-select v-model="search.roomTypeid" filterable placeholder="请选择类型信息" style="width: 200px"  @change="findData">
+          <el-option label="" value="">全部</el-option>
+          <el-option
+            v-for="item in guestTypes"
+            :key="item.id"
+            :label="item.typeName"
+            :value="item.id">
+          </el-option>
+        </el-select>
+        <el-table
+          :data="tableData"
+          border
+          style="width: 100%;">
+          <el-table-column
+            prop="roomId"
+            label="房间号">
+          </el-table-column>
+          <el-table-column
+            prop="guestType.typeName"
+            label="客房类型">
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
     <div style="display:inline-block;margin-top: 10px">
       <div id="chart_example1" style="display:inline-block;"></div>
       <div id="chart_example2" style="display:inline-block;margin-left: 5px;"></div>
@@ -48,15 +74,38 @@
   export default {
     data () {
       return {
+        search:{
+          roomTypeid:""
+        },
+        tableData:{},
+        guestTypes:{}
       }
     },
     mounted() {},
-    watch: {},
+    watch: {
+      search:{
+        handler:function(){
+          this.getData();
+        },
+        deep:true
+      }
+    },
     created(){
       this.getData();
     },
     methods:{
+      findData(){
+        this.getData();
+      },
       getData(){
+        //房间信息
+        this.get("rooms/getAll",(data)=>{
+          this.tableData=data;
+        },this.search);
+        this.get("rooms/getUsefulAllGuestType",(data)=>{
+          this.guestTypes=data;
+        });
+        //统计图
         this.get("orderManage/findDataForStatistics",(data)=>{
           let i=0;
           console.log(data);
@@ -319,4 +368,9 @@
     }
   }
 </script>
+<style>
+  .el-table .cell {
+    text-align: center;
+  }
+</style>
 
