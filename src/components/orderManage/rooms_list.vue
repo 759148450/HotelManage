@@ -12,7 +12,7 @@
             <el-option label="已预订" value="1"></el-option>
             <el-option label="入住" value="2"></el-option>
           </el-select>
-          <el-input placeholder="请输入客房号" v-model="search.roomId" class="input-with-select" style="width: 340px">
+          <el-input placeholder="请输入客房号" v-model="search.roomId" class="input-with-select" style="width: 180px">
             <!--根据客房状态查询-->
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
@@ -34,7 +34,10 @@
               :value="item.id">
             </el-option>
           </el-select>
-          <el-input placeholder="请输入标准价格" v-model="search.normalPrice" class="input-with-select" style="width: 200px">
+          <el-input placeholder="起始标准价格" v-model="search.price1" class="input-with-select" style="width: 130px">
+<!--            <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>-->
+          </el-input>—
+          <el-input placeholder="结束标准价格" v-model="search.price2" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
         </el-col>
@@ -119,7 +122,9 @@
           roomId:"",
           roomTypeid:"",
           normalPrice:"",
-          status:""
+          status:"",
+          price1:"",
+          price2:"",
         },
         queryParams:{
           pageNo:1,
@@ -130,6 +135,8 @@
           roomTypeid:"",
           normalPrice:"",
           status:"",
+          price1:"",
+          price2:"",
         },
         tableData:{},
         floors:{},

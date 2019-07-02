@@ -32,7 +32,10 @@
               :value="item.id">
             </el-option>
           </el-select>
-          <el-input placeholder="请输入价格" v-model="search.normalPrice" class="input-with-select" style="width: 200px">
+          <el-input placeholder="起始标准价格" v-model="search.price1" class="input-with-select" style="width: 130px">
+            <!--            <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>-->
+          </el-input>—
+          <el-input placeholder="结束标准价格" v-model="search.price2" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
         </el-col>
@@ -121,7 +124,9 @@
           floorId:"",
           roomTypeid:"",
           normalPrice:"",
-          status:""
+          status:"",
+          price1:"",
+          price2:"",
         },
         queryParams:{
           pageNo:1,
@@ -131,7 +136,9 @@
           floorId:"",
           roomTypeid:"",
           normalPrice:"",
-          status:""
+          status:"",
+          price1:"",
+          price2:"",
         },
         tableData:{},
         floors:{},
