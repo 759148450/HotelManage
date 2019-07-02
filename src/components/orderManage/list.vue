@@ -10,8 +10,8 @@
             <el-option label="" value="">全部</el-option>
             <el-option  label="已预定" value="0">已预定</el-option>
             <el-option  label="已取消" value="1">已取消</el-option>
-            <el-option  label="已入住" value="2">已入住</el-option>
-            <el-option  label="已退房" value="3">已退房</el-option>
+<!--            <el-option  label="已入住" value="2">已入住</el-option>-->
+<!--            <el-option  label="已退房" value="3">已退房</el-option>-->
           </el-select>
           <el-input placeholder="请输入预定编号" v-model="search.id" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
@@ -184,7 +184,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/list",(data)=>{
+        this.get("orderManage/OrderAndCanacel",(data)=>{
           this.tableData=data;
         },this.queryParams);
         this.get("rooms/getAllGuestType",(data)=>{
