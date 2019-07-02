@@ -7,7 +7,7 @@
         </el-col>
         <el-col :span="22">
           <el-select v-model="search.bookStatus" filterable placeholder="请选择预定状态" style="width: 200px"  @change="findData">
-            <el-option label="" value="">全部</el-option>
+            <el-option label="全部" value="5">全部</el-option>
             <el-option  label="已预定" value="0">已预定</el-option>
             <el-option  label="已取消" value="1">已取消</el-option>
 <!--            <el-option  label="已入住" value="2">已入住</el-option>-->
@@ -161,10 +161,10 @@
           pageNo:1,
           pageSize:10,
           id:"",
-          bookStatus:"",
           residents:"",
           roomsTypeName:"",
-          currentRoomName:""
+          currentRoomName:"",
+          bookStatus:0,
         },
         tableData:{},
         guestTypes:{}
@@ -184,7 +184,7 @@
     mounted(){},
     methods:{
       getData(){
-        this.get("orderManage/OrderAndCanacel",(data)=>{
+        this.get("orderManage/list",(data)=>{
           this.tableData=data;
         },this.queryParams);
         this.get("rooms/getAllGuestType",(data)=>{

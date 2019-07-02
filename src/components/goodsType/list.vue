@@ -48,6 +48,7 @@
           <el-button @click="edit(scope.row)" style="color:#17B3A3" type="text" size="small" icon="el-icon-edit">修改</el-button>
           <!--<el-button size="small" @click="del(scope.row)" v-if="scope.row.counts==0" type="danger" icon="el-icon-delete">删除</el-button>-->
           <el-button type="text" size="small" style="color:red" @click="del(scope.row)" v-if="scope.row.counts==0" icon="el-icon-delete">{{deltext(scope.row.active)}}</el-button>
+          <el-button type="text" size="small" style="color:gray" @click="del(scope.row)" v-if="scope.row.counts!=0" icon="el-icon-delete" disabled>{{deltext(scope.row.active)}}</el-button>
         </template>
       </el-table-column>
     </el-table>
