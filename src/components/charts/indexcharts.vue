@@ -75,7 +75,8 @@
     data () {
       return {
         search:{
-          roomTypeid:""
+          roomTypeid:"",
+          status:0
         },
         tableData:{},
         guestTypes:{}
