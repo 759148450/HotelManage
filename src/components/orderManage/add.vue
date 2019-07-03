@@ -27,7 +27,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="预定人" prop="residents">
-          <el-input  v-model="ruleForm.residents" ></el-input>
+          <el-input  v-model="ruleForm.residents" placeholder="根据会员编号自动获取" disabled></el-input>
         </el-form-item>
         <el-form-item label="会员价" prop="memberPrice" >
           <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
@@ -250,10 +250,10 @@
           { required: true, trigger: 'blur',validator: checkcredentialsNum}//设置全局变量
           ],
           //预定人
-          residents: [
-            { required: true, message: '请输入预定人姓名', trigger: 'blur' },
-            { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
-          ],
+          // residents: [
+          //   { required: true, message: '请输入预定人姓名', trigger: 'blur' },
+          //   { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' }
+          // ],
           // credentialsType: [
           //   { required: true, message: '请选择证件类型', trigger: 'blur' }
           // ],

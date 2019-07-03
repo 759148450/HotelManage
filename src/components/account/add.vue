@@ -122,11 +122,11 @@
         //   实现计算
         let consumePrice = this.ruleForm.num * this.ruleForm.price;
         console.log(consumePrice);
-        this.ruleForm.consumePrice = consumePrice;
+        this.ruleForm.consumePrice = consumePrice.toFixed(2);
       },
       getDcPrice(){
         let dcPrice =(this.ruleForm.discount/100) * this.ruleForm.consumePrice;
-        this.ruleForm.dcPrice = dcPrice;
+        this.ruleForm.dcPrice = dcPrice.toFixed(2);
       },
       //关联查询不同订单号对应的房间号
       getRoomId (prov) {
