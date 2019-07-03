@@ -296,8 +296,8 @@
                 this.get("leaguer/getOne",(data)=>{
                   this.leaguer1=data;
                   console.log(this.leaguer1);
+                  this.ruleForm.residents=this.leaguer1.leaguerName;
                 },{id:this.ruleForm.memberId});
-                this.ruleForm.residents=this.leaguer1.leaguerName;
                 if(this.leaguer1.leaguerRank==="普通"){
                   this.ruleForm.memberPrice=this.rooms_gvipPrice;
                   this.ruleForm.deposit=this.rooms_gvipPrice*0.5;
