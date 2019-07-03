@@ -116,7 +116,7 @@
           //遍历dcPrice这个字段，并累加
           roomBill += consume.dcPrice;
         });
-        this.ruleForm.roomBill = roomBill; //返回
+        this.ruleForm.roomBill = roomBill.toFixed(2); //返回
         console.log("店内附加消费",this.ruleForm.roomBill)
       },{liveId:this.id});
       //查询出当前会员积分
