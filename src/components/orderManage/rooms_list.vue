@@ -7,7 +7,7 @@
         </el-col>
         <el-col :span="22">
           <el-select v-model="search.status" filterable placeholder="请选择预定状态" style="width: 200px"  @change="findData">
-            <el-option label="" value="">全部</el-option>
+            <el-option label="全部" value="">全部</el-option>
             <el-option label="空房" value="0"></el-option>
             <el-option label="已预订" value="1"></el-option>
             <el-option label="入住" value="2"></el-option>
@@ -93,6 +93,7 @@
         <template slot-scope="scope">
           <!--只有状态为0的才能预定-->
           <el-button @click="edit(scope.row)" type="text" size="small" v-if="scope.row.status==0">预定</el-button>
+          <el-button @click="edit(scope.row)" type="text" style="color: gray" size="small" v-if="scope.row.status!=0" disabled>预定</el-button>
           <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
         </template>
       </el-table-column>
