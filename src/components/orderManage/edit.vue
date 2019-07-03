@@ -16,11 +16,17 @@
         <el-form-item label="折扣价(元)" prop="discountPrice">
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
-        <el-form-item label="押金(元)" prop="deposit">
-          <el-input   v-model.number="ruleForm.deposit" size="medium" type="number" :max="99999999" disabled ></el-input>
+        <el-form-item label="会员编号" prop="memberId">
+          <el-input  v-model="ruleForm.memberId"  disabled></el-input>
         </el-form-item>
         <el-form-item label="预定人" prop="residents">
-            <el-input  v-model="ruleForm.residents"></el-input>
+            <el-input  v-model="ruleForm.residents" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="会员价" prop="memberPrice">
+          <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="押金(元)" prop="deposit">
+          <el-input   v-model.number="ruleForm.deposit" size="medium" type="number" :max="99999999" disabled ></el-input>
         </el-form-item>
         <el-form-item label="证件类型:" prop="credentialsType">
           <el-radio-group v-model="ruleForm.credentialsType">
@@ -61,20 +67,7 @@
         <el-form-item label="操作人" prop="userName">
           <el-input  v-model="ruleForm.userName" disabled></el-input>
         </el-form-item>
-        <el-form-item label="会员编号" prop="memberId">
-          <el-input  v-model="ruleForm.remarks"  disabled></el-input>
-<!--          <el-select v-model="ruleForm.memberId" filterable placeholder="请选择预定会员编号" style="width: 200px"  >-->
-<!--            <el-option-->
-<!--              v-for="item in leaguers"-->
-<!--              :key="item.id"-->
-<!--              :label="item.id"-->
-<!--              :value="item.id">-->
-<!--            </el-option>-->
-<!--          </el-select>-->
-        </el-form-item>
-        <el-form-item label="会员价" prop="memberPrice">
-          <el-input  v-model="ruleForm.memberPrice" disabled></el-input>
-        </el-form-item>
+
         <el-form-item label="备注" prop="remarks">
             <el-input  v-model="ruleForm.remarks"></el-input>
         </el-form-item>

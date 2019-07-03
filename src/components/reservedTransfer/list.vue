@@ -95,7 +95,6 @@
           <el-button @click="detail(scope.row)" type="text" size="small" icon="el-icon-document">详情</el-button>
           <el-button @click="edit(scope.row)" style="color:#17B3A3 " type="text" size="small" v-if="scope.row.bookStatus==0"  icon="el-icon-edit">修改</el-button>
           <el-button @click="edit(scope.row)" style="color:gray " type="text" size="small" v-if="scope.row.bookStatus!=0"  icon="el-icon-edit" disabled>修改</el-button>
-
         </template>
       </el-table-column>
     </el-table>

@@ -19,7 +19,6 @@
         <el-form-item label="折扣价(元)" prop="discountPrice">
           <el-input  v-model="ruleForm.discountPrice"  disabled></el-input>
         </el-form-item>
-
         <el-form-item label="会员编号" prop="memberId">
           <el-input  v-model="ruleForm.memberId" disabled></el-input>
         </el-form-item>
