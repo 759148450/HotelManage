@@ -223,6 +223,7 @@
                 type: 'success',
                 message: '入住成功!'
               });
+              this.getData();
             }
           },{id:row.id,bookStatus: 2,currentRoomId:row.currentRoomId,memberId:row.memberId});
 
