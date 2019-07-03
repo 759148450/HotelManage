@@ -267,7 +267,6 @@
               });
             }
           },{id:row.id,bookStatus: 1,currentRoomId:row.currentRoomId});
-
         }).catch(() => {
           this.$message({
             type: 'info',

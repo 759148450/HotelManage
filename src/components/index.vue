@@ -56,10 +56,19 @@
       },
       //用户退出，销毁localStorage
       logout(){
-        localStorage.removeItem('user');
-        localStorage.removeItem('islogin');
-        alert("退出成功");
-        this.$router.push('/');
+            this.get("user/logout",(data)=>{
+              if(data>0){
+                this.$message({
+                  type: 'success',
+                  message: '退出成功!'
+                });
+                localStorage.removeItem('user');
+                localStorage.removeItem('islogin');
+                alert("退出成功");
+                this.$router.push('/');
+              }
+            });
+
       },
       //跳转首页
       home(){
