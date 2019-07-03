@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 15px;">
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="房间号" prop="roomId">
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="130px" class="demo-ruleForm">
+      <el-form-item label="房间号" prop="roomId" >
         <el-input  v-model="ruleForm.roomId" disabled></el-input>
       </el-form-item>
       <el-form-item label="客房类型" prop="roomTypeid">
@@ -17,16 +17,16 @@
           <el-option v-for="entry in floors" :label="entry.floorName" :value="entry.id" :key="entry.id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="标准价格" prop="normalPrice">
+      <el-form-item label="标准价格(元)" prop="normalPrice">
         <el-input   v-model="ruleForm.normalPrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="折后价" prop="discountPrice">
+      <el-form-item label="折后价(元)" prop="discountPrice">
         <el-input   v-model="ruleForm.discountPrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="普通会员价" prop="gvipPrice">
+      <el-form-item label="普通会员价(元)" prop="gvipPrice">
         <el-input   v-model="ruleForm.gvipPrice" disabled></el-input>
       </el-form-item>
-      <el-form-item label="Vip会员价" prop="svipPrice">
+      <el-form-item label="Vip会员价(元)" prop="svipPrice">
         <el-input   v-model="ruleForm.svipPrice" disabled></el-input>
       </el-form-item>
       <el-form-item label="备注" prop="remarks">
