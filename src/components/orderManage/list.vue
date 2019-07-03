@@ -111,6 +111,7 @@
           <span v-if="scope.row.bookStatus==1 " style="color: red">已取消</span>
           <span v-if="scope.row.bookStatus==2 " style="color: orange">已入住</span>
           <span v-if="scope.row.bookStatus==3 " style="color: gray">已退房</span>
+          <span v-if="scope.row.bookStatus==4 " style="color: orangered">已换房</span>
         </template>
       </el-table-column>
 <!--      <el-table-column-->

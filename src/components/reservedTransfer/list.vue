@@ -1,20 +1,26 @@
 <template>
 
   <div>
-    <div style="margin-top: 15px;margin-bottom: 10px">
+    <div style="margin-top: 15px;">
       <el-row>
         <el-col :span="22">
+          <el-select v-model="search.bookStatus" filterable placeholder="请选择预定状态" style="width: 200px"  @change="findData">
+            <el-option label="全部" value="6" >全部</el-option>
+            <el-option  label="已预定" value="0">已预定</el-option>
+            <el-option  label="已取消" value="1">已取消</el-option>
+            <el-option  label="已入住" value="2">已入住</el-option>
+            <!--            <el-option  label="已退房" value="3">已退房</el-option>-->
+          </el-select>
           <el-input placeholder="请输入预定单号" v-model="search.id" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
           </el-input>
-
           <!--<el-select v-model="search.roomsTypeName" filterable placeholder="请选择类型信息" style="width: 200px"  @change="findData">-->
-            <!--<el-option-->
-              <!--v-for="item in guestTypes"-->
-              <!--:key="item.id"-->
-              <!--:label="item.typeName"-->
-              <!--:value="item.id">-->
-            <!--</el-option>-->
+          <!--<el-option-->
+          <!--v-for="item in guestTypes"-->
+          <!--:key="item.id"-->
+          <!--:label="item.typeName"-->
+          <!--:value="item.id">-->
+          <!--</el-option>-->
           <!--</el-select>-->
           <el-input placeholder="请输入客房类型名称" v-model="search.roomsTypeName" class="input-with-select" style="width: 200px">
             <el-button slot="append" icon="el-icon-search" @click="findData"></el-button>
@@ -37,12 +43,12 @@
       style="width: 100%;">
       <el-table-column
         prop="id"
-        label="入住单号">
+        label="预定单号">
       </el-table-column>
       <el-table-column
-      prop="currentRoomName"
-      label="房间编号">
-    </el-table-column>
+        prop="currentRoomName"
+        label="房间编号">
+      </el-table-column>
       <el-table-column
         prop="roomsTypeName"
         label="客房类型">
@@ -63,57 +69,33 @@
       </el-table-column>
       <el-table-column
         prop="bookStatus"
-        label="登记入住">
+        label="登记入住"
+        width="100">
         <template slot-scope="scope">
           <span v-if="scope.row.bookStatus==0 " style="color: green" >
             已预定
             <el-button type="primary" @click="house(scope.row)" round size="mini">点击入住</el-button>
-<!--            <el-button @click="house(scope.row)" type="text" size="small" >点击入住</el-button>-->
           </span>
           <span v-if="scope.row.bookStatus==1 " style="color: red">已取消</span>
           <span v-if="scope.row.bookStatus==2 " style="color: orange">已入住</span>
           <span v-if="scope.row.bookStatus==3 " style="color: gray">已退房</span>
-          <span v-if="scope.row.bookStatus==4 " style="color: cadetblue">已换房</span>
+          <span v-if="scope.row.bookStatus==4 " style="color: orangered">已换房</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="timedWakeup" label="服务唤醒" width="100" >
+        <template slot-scope="scope">
+          <el-checkbox true-label="1" false-label="0" v-model="scope.row.breakfast" @change="breakfast_Edit(scope.row)">提供早餐</el-checkbox>
+          <el-checkbox true-label="2" false-label="0" v-model="scope.row.timedWakeup" @change="timedWakeup_Edit(scope.row)" >定时叫醒</el-checkbox>
         </template>
       </el-table-column>
 
 
-      <!--<el-table-column-->
-      <!--prop="timedWakeup"-->
-      <!--label="定时叫醒">-->
-        <!--<template slot-scope="scope">-->
-          <!--<span v-if="scope.row.timedWakeup==0 " style="color: green" >-->
-            <!--未预定-->
-            <!--<el-button  @click="clock(scope.row)" type="text" size="small" >唤醒服务</el-button>-->
-          <!--</span>-->
-          <!--<span v-if="scope.row.timedWakeup==1 " style="color: orange">-->
-            <!--已唤醒-->
-             <!--<el-button @click="unclock(scope.row)" type="text" size="small" >取消服务</el-button>-->
-          <!--</span>-->
-        <!--</template>-->
-      <!--</el-table-column>-->
-
-
-        <el-table-column prop="timedWakeup" label="服务唤醒" >
-          <template slot-scope="scope">
-            <el-checkbox true-label="1" false-label="0" v-model="scope.row.breakfast" @change="breakfast_Edit(scope.row)">提供早餐</el-checkbox>
-            <el-checkbox true-label="2" false-label="0" v-model="scope.row.timedWakeup" @change="timedWakeup_Edit(scope.row)" >定时叫醒</el-checkbox>
-          </template>
-        </el-table-column>
-
-        <!--<el-table-column prop="timedWakeup" label="服务唤醒">-->
-          <!--<el-checkbox-group v-model="timedWakeup">-->
-            <!--<el-checkbox label="提供早餐" :value="0">提供早餐</el-checkbox>-->
-            <!--<el-checkbox label="定时叫醒" :value="1">定时叫醒</el-checkbox>-->
-          <!--</el-checkbox-group>-->
-
-      <!--</el-table-column>-->
-<!--</template>-->
-      <el-table-column label="操作" width="200">
+      <el-table-column label="操作" width="180">
         <template slot-scope="scope">
-          <el-button @click="detail(scope.row)" type="text" size="small">详情</el-button>
-          <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button>
-          <!--<el-button type="text" size="small" @click="del(scope.row)">{{deltext(scope.row.active)}}</el-button>-->
+          <el-button @click="detail(scope.row)" type="text" size="small" icon="el-icon-document">详情</el-button>
+          <el-button @click="edit(scope.row)" style="color:#17B3A3 " type="text" size="small" v-if="scope.row.bookStatus==0"  icon="el-icon-edit">修改</el-button>
+          <el-button @click="edit(scope.row)" style="color:gray " type="text" size="small" v-if="scope.row.bookStatus!=0"  icon="el-icon-edit" disabled>修改</el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -145,6 +127,7 @@
           residents:"",
           roomsTypeName:"",
           roomTypeid:"",
+          bookStatus:"",
 
         },
 
@@ -158,6 +141,7 @@
           residents:"",
           roomsTypeName:"",
           roomTypeid:"",
+          bookStatus:6,
         },
         tableData:{},
         floors:{},
@@ -226,12 +210,7 @@
         });
       },
 
-      // del(row){
-      //   this.delete("orderManage/del",row.id,row.active);
-      // },
-      // deltext(active){
-      //   return active==1?"删除":"恢复"
-      // },
+
       house(row){
         this.$confirm('确定要入住吗?', '提示', {
           confirmButtonText: '确定',
@@ -256,11 +235,7 @@
         });
       },
 
-       // if(scope.row.timedWakeup==0){
-       //   this.$message({
-       //     type: 'success',
-       //     message: 'qqq!'
-       // },
+
       timedWakeup_Edit(row){
         this.get("orderManage/updatetimedWakeup",(data)=>{
           if(data>0){
@@ -297,64 +272,6 @@
         },{id:row.id,breakfast: row.breakfast});
       },
 
-
-      // checkList(row){
-      //   this.$confirm('确定要唤醒服务吗?', '提示', {
-      //     confirmButtonText: '确定',
-      //     cancelButtonText: '取消',
-      //     type: 'warning'
-      //   }).then(() => {
-      //     row.timedWakeup=1;
-      //     this.get("orderManage/updateTimedWakeup",(data)=>{
-      //       if(data>0){
-      //         this.$message({
-      //           type: 'success',
-      //           message: '唤醒成功!'
-      //         });
-      //       }
-      //     },{id:row.id,timedWakeup: 1});
-      //
-      //   }).catch(() => {
-      //     this.$message({
-      //       type: 'info',
-      //       message: '在预定中'
-      //     });
-      //   });
-      // },
-      // // unclock(row){
-      //   this.$confirm('确定要取消服务吗?', '提示', {
-      //     confirmButtonText: '确定',
-      //     cancelButtonText: '取消',
-      //     type: 'warning'
-      //   }).then(() => {
-      //     row.timedWakeup=0;
-      //     this.get("orderManage/updateTimedWakeup",(data)=>{
-      //       if(data>0){
-      //         this.$message({
-      //           type: 'success',
-      //           message: '唤醒成功!'
-      //         });
-      //       }
-      //     },{id:row.id,timedWakeup: 0});
-      //
-      //   }).catch(() => {
-      //     this.$message({
-      //       type: 'info',
-      //       message: '在预定中'
-      //     });
-      //   });
-      // },
-      // export default {
-      //   data() {
-      //     return {
-      //       checked1: false,
-      //       checked2: true
-      //     };
-      //   }
-      // },
-
-
-
     }
   }
 </script>
@@ -362,13 +279,5 @@
 <style>
   .el-table .cell {
     text-align: center;
-  }
-  .el-table__header th, .el-table__header tr {
-    background-color: #17B3A3;
-    color: black;
-  }
-  .el-pagination.is-background .el-pager li:not(.disabled).active {
-    background-color: #17B3A3;
-    color: #FFF;
   }
 </style>
