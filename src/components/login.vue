@@ -66,9 +66,9 @@
             data: params
           }).then(res => {
             this.user = res.data;
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.userName === this.loginForm.userName) {
-              console.log(res.data);
+              // console.log(res.data);
               this.$router.push('/index');
               localStorage.setItem('user', JSON.stringify(res.data));
               localStorage.setItem('islogin', '1');
@@ -78,7 +78,7 @@
             }
           }).catch(error => {
             alert('账号或密码错误');
-            console.log(error);
+            // console.log(error);
           });
         }
       }
